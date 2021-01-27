@@ -1,11 +1,13 @@
 import React from "react";
 import AssetList from './AssetsList';
 import AssetSearchForm from './AssetSearchForm';
+import AppBar from '@material-ui/core/AppBar';
 
 export default function RenterMainPage(props) {
 
 	return (
 		<>
+		{/* <AppBar position="static"></AppBar> */}
 			<div className={'navBar'}>
 				<div className={'navBarInsideWhite'}>
 					<h1>InstaRent</h1>
@@ -17,10 +19,12 @@ export default function RenterMainPage(props) {
 					<li><a href="#">PROFILE</a></li>
 				</ul>
 			</div>
-			<div className="background">
-				<AssetSearchForm/>
+			<div className="wrapper">
+				<div className="background">
+					<AssetSearchForm/>
+				</div>
 			</div>
-				{/* <AssetList assets={ props.assets }></AssetList>      */}
+				<AssetList assets={ props.assets }></AssetList>     
 		</>
 	);
 }

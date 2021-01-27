@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,18 +6,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
     card: {
-        maxWidth: 200,
-        margin: '5px',
-        flexGrow:0,
-        flexShrink:0,
-        flexBasis: 'calc(50% - 10px)',
-        flexFlow: 'row',
+        maxWidth: 300,
+        flexWrap: 'wrap',
+        margin: '5%',
     },
     
 });
@@ -25,6 +24,15 @@ const useStyles = makeStyles({
 
 export default function Asset (props) {
     const classes = useStyles();
+
+    const { onDelete, index, children, onChange } = props;
+
+    const [editing, setEditing] = useState(false);
+
+    const edit = () => setEditing(true);
+
+    const deleteAsset = () => onDelete(index);
+
 
     return (
         <Card className={classes.card}>
@@ -48,11 +56,13 @@ export default function Asset (props) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Fab size="small" color="primary">
-                    <ThumbUpIcon></ThumbUpIcon>
+                <Fab size="small" color="primary" onClick={edit}>
+                    {/* <ThumbUpIcon></ThumbUpIcon> */}
+                    <EditIcon></EditIcon>
                 </Fab>
-                <Fab size="small" color="primary">
-                    <CloseIcon></CloseIcon>
+                <Fab size="small" color="primary" onClick={deleteAsset}>
+                    {/* <CloseIcon></CloseIcon> */}
+                    <DeleteIcon></DeleteIcon>
                 </Fab>
             </CardActions>
         </Card> 

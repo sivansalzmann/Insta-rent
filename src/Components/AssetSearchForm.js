@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { Button } from '@material-ui/core';
+import SingleBedIcon from '@material-ui/icons/SingleBed';
+import { Checkbox } from '@material-ui/core';
 
 export default function AssetSearchForm(props) {
 
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
-    const [rooms, setRooms] = useState("");
     const [date, setDate] = useState("");
 
     useEffect(() => {
         if (props.initialData) {
             setCountry(props.initialData.country);
             setCity(props.initialData.city);
-            setRooms(props.initialData.rooms);
             setDate(props.initialData.date);
         }
     }, [props.initialData]);
@@ -23,10 +22,7 @@ export default function AssetSearchForm(props) {
         let errors = [];
         if (!moment(date, "DD.MM.YYYY").isValid())
             errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
-        else if (moment().isAfter(moment(date, 'DD.MM.YYYY'))) {
-            errors.push("Invalid date, please insert a valid date later then today.")
-        }
-        if (country === "" || city === "" || rooms === "" )
+        if (country == "" || city == "" )
             errors.push("All fields are requierd, please make sure all fields are filled.")
 
         if (errors.length > 0)
@@ -40,26 +36,20 @@ export default function AssetSearchForm(props) {
     const onSubmit = () => {
 
         if (formDataIsValid()) {
-            props.submit({ country, city, rooms,date });
+            props.submit({ country, city, date });
             setCountry("");
             setCity("");
-            setRooms("");
             setDate("");
         }
     }
     
     return (
-        <div className={ 'assetForm' }>
-            <h1>Apartments for Rent</h1>
-            <h3>Search apartments by neighborhood, price, amenity, and more</h3>
+        <div className={ 'assetSearchForm' }>
             <form noValidate autoComplete="off">
-                <input type="date" className={ 'input' } name="date" onChange={ (event) => setDate(event.target.value) } value={ date } placeholder="Date: DD.MM.YYYY" />
-                <input type="text" className={ 'input' } name="country" onChange={ (event) => setCountry(event.target.value) } value={ country } placeholder="Country" />
-                <input type="text" className={ 'input' } name="city" onChange={ (event) => setCity(event.target.value) } value={ city } placeholder="City" />
-                <input type="select" className={ 'input' } name="rooms" onChange={ (event) => setRooms(event.target.value) } value={ rooms } placeholder="Number of rooms" />
-                <Button variant="contained" className={ 'button' } onClick={ onSubmit }>
-                    search
-                </Button>
+                <input type="text" style={{borderRadius: "20px 0px 0px 20px",borderLeft: "1px red"}} name="date" onChange={ (event) => setDate(event.target.value) } value={ date } placeholder="Arrival date" />
+                <input type="text" name="country" onChange={ (event) => setCity(event.target.value) } value={ country } placeholder="Country" /> 
+                <input type="text" name="city" onChange={ (event) => setCity(event.target.value) } value={ city } placeholder="City" /> 
+                <input type="submit" value={"search"} style={{borderRadius: "0px 20px 20px 0px"}} onClick={ onSubmit }/>
             </form>
         </div>
     )

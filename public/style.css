@@ -2,72 +2,121 @@
     margin: 0;
     padding: 0;
 }
-
 .background {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('./Media/cover\ 1.png'); 
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.homePageContainer{
+    /* margin-left: 15%; */
+}
+.navBarHomePage {
     display: flex;
-    background-color: #F7F9F9;
-
+    flex-direction: row;
 }
-
-.navBar {
-    display: flex;
-    background-color:  #273746;
-}
-
-.navBar ul {
-    list-style-type: none;
-    margin-top: 6%;
-}
-
-.navBar li {
-    display: inline;
-    margin: 25%;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.navBar li a{
-    color: white;
-    text-decoration: none;
-}
-
-.navBar .navBarInsideWhite {
-    width: 30%;
-    background-color: white;
-}
-
-.navBar .navBarInsideWhite h1{
+.navBarHomePage h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
     color: #5D6D7E;
-    font-family: 'Imbue', serif;
-    padding: 8%;
-    margin-left: 40%;
-    font-size: 320%;
-}
-
-.assetForm h1 {
     font-size: 70px;
-    margin: 2%;
+    margin-left: 3%;
 }
-
-.assetForm h3 {
+.navBarHomePage h2 {
+    font-family: 'Lato';
     font-size: 20px;
-    margin: 2%;
-}
-
-form {
-    margin: 0; 
-    padding: 0;
-    border-radius: 25px;
-  border: 0.5px solid black;
-}
-
-.assetForm {
-    margin: 20%;
-    display:flex;
-    flex-direction: column;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+    margin-left: 68%;
     margin-top: 5%;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
-
-.input{
-    display: inline;
+.navBarHomePage h2 a {
+    text-decoration: none;
+    color: black;
+}
+.choiseRenterOwner {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4%;
+    margin-left: 35%;
+    font-family: 'Lato';
+    font-weight: bold;
+    font-size: 18px;
+}
+.choiseRenterOwner a{
+    text-decoration: none;
+    color: black;
+}
+.choiseRenterOwner li {
+    display:inline;      
+    margin-left: 50px;
+}
+.headLineHomePage {
+    font-family: 'Lato';
+    font-size: 70px;
+    margin-top: 2%;
+    margin-left: 22%;
+}
+.pHomePage {
+    font-family: 'Lato';
+    font-size: 30px;
+    margin-top: 2%;
+    margin-left: 17%;
+}
+.assetSearchForm {
+    margin-top: 3%;
+    margin-left: 15%;
+}
+.assetSearchForm input {
+    height: 65px;
+    width: 250px;
+    border: none;
+    font-family: 'Lato';
+    font-weight: bold;
+    font-size: 15px;
+}
+.assetSearchForm input[type=submit] {
+    height: 65px;
+    width: 100px;
+    background-color: white;
+    font-size: 15px;
+    border: none;
+}
+.signInContainer {
+    background-color: white;
+    width: 40%;
+    height: 75%;
+    border-radius: 20px;
+    margin-top: 1%;
+    margin-left: 30%;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato';
+}
+.signInContainer h1 {
+    margin-left: 30%;
+    margin-top: 3%;
+    font-size: 50px;
+}
+.loginWithSocial {
+    margin-top: 3%;
+    display: flex;
+    margin-left: 1%;
+}
+.loginWithSocial div {
+    width: 40%;
+    border-bottom: 1px solid gray;
+}
+.loginWithSocial p {
+    font-size: 10px;
+    font-weight: bold;
+    margin-top: 1%;
+}
+.signInContainer p {
+    font-size: 15px;
 }

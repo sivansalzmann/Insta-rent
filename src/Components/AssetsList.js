@@ -32,10 +32,25 @@ export default function AssetList() {
         return setAssets(loadAssets);
     }, []);
 
+    const update = (newAsset, i) => {
+        setAssets(prevState => prevState.map(data => data.id !== i ? data : { ...data, asset: newAsset }));
+    };
+
+    const deleteAsset = (id) => {
+        console.log(id);
+        setAssets(prevState => prevState.filter(asset => asset.id !== id));
+    };
+
+    const nextID = (assets = []) => {
+        let max = assets.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id , 0);
+        return ++max;
+    }
+
     const eachItem = (asset,i) => {
         return (
             <Asset
-                key = {asset.id}
+                key={i} 
+                index={asset.id}
                 id = {asset.id}
                 city = {asset.city}
                 street = {asset.street}
@@ -55,11 +70,12 @@ export default function AssetList() {
                 want = {asset.want}
                 ownerId = {asset.ownerId}
                 renterId = {asset.renterId}
+                onChange={update} onDelete={deleteAsset}
             /> 
         )
     }
     return (
-        <div style= {{display: 'flex',flexDirection: 'row',justifyContent: 'space-between', overflowX: 'scroll', overflowY: 'hidden'}}>
+        <div className={'assetList'}>
             { assets.map(eachItem) }             
         </div>
     )
