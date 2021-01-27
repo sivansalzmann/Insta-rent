@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import ThumbUpIcon from '@material-ui/icons/ThumbUp';
-import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
-import Fab from '@material-ui/core/Fab';
-import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const useStyles = makeStyles({
     card: {
         maxWidth: 300,
-        flexWrap: 'wrap',
-        margin: '5%',
+        margin: '2%',
     },
     
 });
@@ -41,30 +35,25 @@ export default function Asset (props) {
                 component="img"
                 alt="Contemplative Reptile"
                 height="140"
-                image="https://image.freepik.com/free-photo/river-foggy-mountains-landscape_1204-511.jpg"
+                image="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F1026205392%2F960x0.jpg%3Ffit%3Dscale"
                 title="Contemplative Reptile"
                 />
+                <FavoriteBorderIcon fontSize="large" style={{margin:"5%"}}/>
                 <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">  
-                    {props.price}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                    {props.city}
-                    {props.country}
-                    {props.zip}
+                    <Typography component="h5" style={{fontFamily: 'Lato'}}>  
+                        {props.description}
+                    </Typography>
+                    <Typography color="textSecondary" component="subtitle2" style={{fontFamily: 'Lato',fontWeight: 'bold'}}>
+                        {props.country}
+                    </Typography>
+                    <Typography variant="h6" component="h6" style={{fontFamily: 'Lato',fontWeight: 'bold'}}>
+                        {props.price} / per month
+                    </Typography>
+                    <Typography variant="h5" component="h5" style={{fontFamily: 'Lato',fontWeight: 'bold'}}>
+                    Avilable from {props.avilability} 
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
-                <Fab size="small" color="primary" onClick={edit}>
-                    {/* <ThumbUpIcon></ThumbUpIcon> */}
-                    <EditIcon></EditIcon>
-                </Fab>
-                <Fab size="small" color="primary" onClick={deleteAsset}>
-                    {/* <CloseIcon></CloseIcon> */}
-                    <DeleteIcon></DeleteIcon>
-                </Fab>
-            </CardActions>
         </Card> 
     );
 }

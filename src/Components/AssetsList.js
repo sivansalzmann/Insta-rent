@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Asset from './Asset';
 import AssetsData from '../Data/AssetsData.json';
-
+import Grid from '@material-ui/core/Grid';
 
 export default function AssetList() {
 
@@ -75,9 +75,14 @@ export default function AssetList() {
         )
     }
     return (
-        <div className={'assetList'}>
-            { assets.map(eachItem) }             
-        </div>
+        <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        >
+            { assets.map(eachItem) } 
+        </Grid>
     )
 
 }
