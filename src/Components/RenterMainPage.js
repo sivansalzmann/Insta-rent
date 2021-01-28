@@ -10,11 +10,11 @@ export default function RenterMainPage(props) {
 	return (
 		<div className={"renterMainPage"}>
 			<div className={"navBar"}>
-				<h1>InstaRent</h1>
+				<h1><a href="#">InstaRent</a></h1>
 				<ul>
-					<li>HOME</li>
-					<li>APPERTMANTS</li>
-					<li>PROFILE</li>
+					<li><a href="#">HOME</a></li>
+					<li><a href="#">APPERTMANTS</a></li>
+					<li><a href="#">PROFILE</a></li>
 				</ul>
 			</div>
 			<div className={"renterMainPageContainer"}>

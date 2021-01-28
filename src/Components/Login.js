@@ -6,12 +6,7 @@ export default function Login (props) {
     return (
       <div className={'background'}>
         <div className={'navBarHomePage'}>
-                <h1>InstaRent</h1>
-                {/* <ul>
-                    <li>HOME PAGE</li>
-                    <li>ASSETS</li>
-                    <li>LOGIN/SIGN UP</li>
-                </ul> */}
+            <h1><a href="#">InstaRent</a></h1>
             </div>
             <div className={"signInContainer"}>
               <h1>SIGN IN</h1>

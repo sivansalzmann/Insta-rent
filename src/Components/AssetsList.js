@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Asset from './Asset';
+import AssetCard from './AssetCard';
 import AssetsData from '../Data/AssetsData.json';
 import Grid from '@material-ui/core/Grid';
 
@@ -32,23 +32,28 @@ export default function AssetList() {
         return setAssets(loadAssets);
     }, []);
 
-    const update = (newAsset, i) => {
-        setAssets(prevState => prevState.map(data => data.id !== i ? data : { ...data, asset: newAsset }));
-    };
+    // const update = (newAsset, i) => {
+    //     setAssets(prevState => prevState.map(data => data.id !== i ? data : { ...data, asset: newAsset }));
+    // };
 
-    const deleteAsset = (id) => {
-        console.log(id);
-        setAssets(prevState => prevState.filter(asset => asset.id !== id));
-    };
+    // const deleteAsset = (id) => {
+    //     setAssets(prevState => prevState.filter(asset => asset.id !== id));
+    // };
 
-    const nextID = (assets = []) => {
-        let max = assets.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id , 0);
-        return ++max;
-    }
+    // const showAsset = (id) => {
+    //     setAssets(prevState => prevState.filter(data => data.id ));
+    //     console.log(id);
+    // }
+
+    // const nextID = (assets = []) => {
+    //     let max = assets.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id , 0);
+    //     return ++max;
+    // }
+
 
     const eachItem = (asset,i) => {
         return (
-            <Asset
+            <AssetCard
                 key={i} 
                 index={asset.id}
                 id = {asset.id}
@@ -70,10 +75,11 @@ export default function AssetList() {
                 want = {asset.want}
                 ownerId = {asset.ownerId}
                 renterId = {asset.renterId}
-                onChange={update} onDelete={deleteAsset}
+                // onChange={update} onDelete={deleteAsset} onShow={showAsset}
             /> 
         )
     }
+
     return (
         <Grid
         container

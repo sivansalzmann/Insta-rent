@@ -20,23 +20,14 @@ const useStyles = makeStyles({
 });
 
 
-export default function Asset (props) {
+export default function AssetCard (props) {
 
     const classes = useStyles();
 
-    const { onDelete, onShow, index, children, onChange } = props;
-
-    const [editing, setEditing] = useState(false);
-
-    const edit = () => setEditing(true);
-
-    const deleteAsset = () => onDelete(index);
-
-    const showAsset = () => onShow(index);
 
     return (
         <Card className={classes.card}>
-            <CardActionArea onClick={showAsset}>
+            <CardActionArea>
                 <CardMedia
                 component="img"
                 alt="Contemplative Reptile"
@@ -60,14 +51,14 @@ export default function Asset (props) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            {/* <CardActions>
                 <Button size="small" color="primary" onClick={edit}>
                 EDIT
                 </Button>
                 <Button size="small" color="primary" onClick={deleteAsset}>
                 DELETE
                 </Button>
-            </CardActions>
+            </CardActions> */}
         </Card> 
     );
 }

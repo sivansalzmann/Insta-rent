@@ -6,7 +6,7 @@ export default function HomePageRenter() {
     return (
 		<div className={'background'}>
 			<div className={'navBarHomePage'}>
-                <h1>InstaRent</h1>
+                <h1><a href="#">InstaRent</a></h1>
                 <h2><a href="/Login">SIGN IN/SIGN UP</a></h2>
             </div>
             <div className={"homePageContainer"}>
