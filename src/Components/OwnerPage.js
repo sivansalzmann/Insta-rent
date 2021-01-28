@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import react, { Component } from "react";
 import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
 

@@ -7,5 +7,6 @@ ReactDOM.render(
     <Router>
         <ReactRouter/>
     </Router>,
+
     document.getElementById('root')
 );
