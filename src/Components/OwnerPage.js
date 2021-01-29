@@ -68,7 +68,7 @@ class OwnerPage extends Component {
 	}
 
 	onAddAsset(data) {
-		console.log(data);
+		
 	}
 
 	render() {

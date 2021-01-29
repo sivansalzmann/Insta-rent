@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
+import {Link} from 'react-router-dom';
 
-const AssetAddForm = (props) =>  {
+const AssetAddForm = (props) => {
 
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
@@ -56,7 +57,7 @@ const AssetAddForm = (props) =>  {
     const onSubmit = () => {
 
         if (formDataIsValid()) {
-            props.submit({ country, city, neighborhood, street, zip, squareFeet, rooms, condition, parking, elevator, petsAllowed, price, avilability, description });
+            props.location.submit({ country, city, neighborhood, street, zip, squareFeet, rooms, condition, parking, elevator, petsAllowed, price, avilability, description });
             // setCountry("");
             // setCity("");
             // setNeighborhood("");
@@ -143,9 +144,12 @@ const AssetAddForm = (props) =>  {
                         <input type="textarea" name="description" onChange={(event) => setDescription(event.target.value)} value={description} rows="4" cols="50" placeholder="Enter Description here" />
                     </div>
                 </div>
-                <Button variant="contained" className={'button'} onClick={onSubmit}>
-                    Add
+                <Link to={{ pathname: "/OwnerPage" }}>
+                    <Button variant="contained" className={'button'} onClick={onSubmit}>
+                        Add
                 </Button>
+                </Link>
+
             </form>
         </div>
     )
