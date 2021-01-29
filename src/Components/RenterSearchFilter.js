@@ -2,7 +2,7 @@ import AssetList from './AssetsList';
 // import AssetSearchForm from './AssetSearchForm';
 import ListIcon from '@material-ui/icons/List';
 import RoomIcon from '@material-ui/icons/Room';
-import SearchIcon from '@material-ui/icons/Search';
+import FilterAssets from './FilterAssets';
 
 export default function RenterSearchFilter(props) {
 
@@ -26,7 +26,7 @@ export default function RenterSearchFilter(props) {
 						<li>Map</li>
 					</ul>
 					<ul style={{marginLeft: "200px"}}>
-						<li><SearchIcon fontSize="large" /> </li>
+						<li><FilterAssets /> </li>
 						<li>Filter</li>
 						<li style={{marginLeft: "200px"}}>Sort by</li>
 						<li style={{marginLeft: "20px"}}>
@@ -38,7 +38,7 @@ export default function RenterSearchFilter(props) {
 						</li>
 					</ul>
 				</div>
-				<AssetList/>
+				<AssetList />
 			</div>
 		</div>
 	);

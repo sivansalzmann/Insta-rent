@@ -2,17 +2,17 @@ import { Component } from 'react';
 // import AssetsData from '../Data/AssetsData.json';
 import AssetSearchForm from './AssetSearchForm';
 
-const App = (props) => {
+class App extends Component {
 
-    // constructor() {
-    // 	super()
-    // 	this.state = {
-    // 		// items: AssetsData.items,
-    // 		editing: false,
-    // 		itemToEdit: null,
-    //     }
+    constructor() {
+		super()
+		this.state = {
+			// items: AssetsData.items,
+			editing: false,
+			itemToEdit: null,
+        }
 
-    // }
+    }
 
     // const [assets,setAssets] = useState([]);
 
@@ -77,10 +77,9 @@ const App = (props) => {
     //     return ++max;
     // };
 
-    // render() {
-    return (
-        <>
-            <div className={'background'}>
+    render() {
+        return (
+                    <div className={'background'}>
                 <div className={'navBarHomePage'}>
                     <h1><a href="/">InstaRent</a></h1>
                     <h2><a href="/Login">SIGN IN/SIGN UP</a></h2>
@@ -88,21 +87,19 @@ const App = (props) => {
                 <div className={"homePageContainer"}>
                     <div className={"choiseRenterOwner"}>
                         <ul>
-                            <li><a href="/HomePageRenter" style={{ textDecoration: 'underline' }}>I'm a Renter</a></li>
+                            <li><a href="/HomePageRenter" style={{textDecoration: 'underline'}}>I'm a Renter</a></li>
                             <li><a href="/">I'm a owner</a></li>
                         </ul>
                     </div>
                     <h1 className={"headLineHomePage"}>Looking for apartment</h1>
-                    <p className={"pHomePage"}>Search apartments by neighborhood, price, amenity, and more</p>
+                    <p className={"pHomePage"}>Search apartments by neighborhood, price, amenity, and more</p>	 
                     <AssetSearchForm data={this.data} />
                 </div>
             </div>
-        </>
-    )
-    // }
+            )
+    }
 
 
 }
 
 export default App;
-
