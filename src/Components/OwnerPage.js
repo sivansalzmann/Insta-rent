@@ -1,6 +1,7 @@
 import react, { Component } from "react";
 import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
+import AssetAddForm from './AssetAddForm'
 
 
 class OwnerPage extends Component {
@@ -76,6 +77,7 @@ class OwnerPage extends Component {
 						<li><a href="#">PROFILE</a></li>
 					</ul>
 				</div>
+				
 				<AssetList/>
 			</div>
 			</>
