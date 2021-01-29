@@ -2,32 +2,24 @@ import react, { Component } from "react";
 import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
 import AssetAddForm from './AssetAddForm'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-class OwnerPage extends Component {
-	constructor() {
-		super()
-		this.state = {
-			items: AssetsData.items,
-			editing: false,
-			itemToEdit: null,
-		}
-		this.delete = this.delete.bind(this);
-		this.editItem = this.editItem.bind(this);
-		this.showAsset = this.showAsset.bind(this);
-		// this.add = this.add.bind(this);
-		this.nextId = this.nextId.bind(this);
-		this.onAddAsset = this.onAddAsset.bind(this);
-	}
+const OwnerPage = (props) => {
+	const [items, setItems] = useState(AssetsData.items);
+	const [editing, setEditing] = useState(false);
+	const [itemToEdit, setItemToEdit] = useState(null);
 
-	delete(target) {
+
+
+
+	const deleteOwner = (target) => {
 		this.setState(prevState => ({
 			items: prevState.items.filter(item => item.id !== target)
 		}))
 	}
 
-	editItem(id) {
+	const editItem = (id) => {
 		const item = this.state.items.filter(item => item.id === id)[0];
 		this.setState(() => ({
 			editing: true,
@@ -35,7 +27,7 @@ class OwnerPage extends Component {
 		}));
 	}
 
-	showAsset(id) {
+	const showAsset = (id) => {
 		const item = this.state.items.filter(item => item.id === id)[0];
 		console.log(item);
 	}
@@ -62,40 +54,39 @@ class OwnerPage extends Component {
 	// 	}));
 	// }
 
-	nextId(items = []) {
+	const nextId = (items = []) => {
 		let max = items.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id, 0);
 		return ++max;
 	}
 
-	onAddAsset(data) {
-		
+	const onAddAsset = (data) => {
+		console.log(data)
 	}
 
-	render() {
-		return (
-			<>
-				<div className={"renterMainPage"}>
-					<div className={"navBar"}>
-						<h1><a href="#">InstaRent</a></h1>
-						<ul>
-							<li><a href="#">HOME</a></li>
-							<li><a href="#">APPERTMANTS</a></li>
-							<li><a href="#">PROFILE</a></li>
-						</ul>
-					</div>
-					<div>
-						<Link to={{ pathname: "/AssetAddForm", submit: this.onAddAsset }}>
-							<button className="plus">
-								Plus
-					</button>
-						</Link>
-					</div>
-
-					<AssetList />
+	return (
+		<>
+			<div className={"renterMainPage"}>
+				<div className={"navBar"}>
+					<h1><a href="#">InstaRent</a></h1>
+					<ul>
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">APPERTMANTS</a></li>
+						<li><a href="#">PROFILE</a></li>
+					</ul>
 				</div>
-			</>
-		)
-	}
+				<div>
+					<Link to={{ pathname: "/AssetAddForm", submit: this.onAddAsset }}>
+						<button className="plus">
+							Plus
+					</button>
+					</Link>
+				</div>
+
+				<AssetList />
+			</div>
+		</>
+	)
+
 
 
 }
