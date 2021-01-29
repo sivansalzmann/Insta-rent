@@ -1,6 +1,5 @@
 import React, {useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -16,7 +15,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-
+import AssetList from './AssetsList';
   
 const FilterAssets = (props) => {
     const [open, setOpen] = useState(false);
@@ -27,17 +26,19 @@ const FilterAssets = (props) => {
     const [elevator, setElevator] = useState("");
     const [pets, setPets] = useState("");
     const [price, setPrice] = useState("");
+    const [assetsList,setAssetList] = useState([]);
+
       
 
     const filter = () => {
-        // const classes = useStyles();
 
-        const filterBy = { SquareFeet: squareFeet };
-
-        fetch(`https://instarent-1st.herokuapp.com/api/assets?SquareFeet=176`)
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?SquareFeet=${squareFeet}&Condition=${condition},&Price=${price}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
             .then(response => response.json())
-            .then(result => console.log(result))
-            // .then(result => {closePopUp()})
+            .then(result => {
+                closePopUp()
+                setAssetList(result)
+                console.log(assetsList)
+            })
         };
 
         const openPopUp = () => {
@@ -62,23 +63,47 @@ const FilterAssets = (props) => {
                             <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} name="parking" color="primary" value = {parking} />} label="Parking"/>
                             <FormControlLabel control={<Checkbox onChange={e => setElevator(e.target.value)} name="elevator" color="primary" value = {elevator} />} label="Elevator"/>
                             <FormControlLabel control={<Checkbox onChange={e => setPets(e.target.value)} name="pets" color="primary" value = {pets} />} label="Pets"/>
-                            <FormControl > 
-                        <InputLabel htmlFor="age-native-simple">Rooms</InputLabel>
-                        <Select native value={rooms} onChange={e => setRooms(e.target.value)}>
-                            <option aria-label="None" value="Rooms" />
-                            <option value={1}>1-2</option>
-                            <option value={2}>2-3</option>
-                            <option value={3}>3-4</option>
-                            <option value={3}>4-5</option>
-                            <option value={3}>5+</option>
-                            </Select>
-                        </FormControl>
+                            <div><FormControl > <InputLabel htmlFor="age-native-simple">Rooms</InputLabel>
+                                <Select native value={rooms} onChange={e => setRooms(e.target.value)}>
+                                    <option aria-label="None" value="Rooms" />
+                                    <option >1</option>
+                                    <option >2</option>
+                                    <option >3</option>
+                                    <option >4</option>
+                                    <option >5</option>
+                                    <option >6</option>
+                                    <option >7</option>
+                                    <option >8</option>
+                                    <option >9</option>
+                                    <option >10</option>
+                                </Select>
+                            </FormControl></div>
+                            <div><FormControl > <InputLabel htmlFor="age-native-simple">Condition</InputLabel>
+                                <Select native value={condition} onChange={e => setCondition(e.target.value)}>
+                                    <option aria-label="None" value="Rooms" />
+                                    <option >Great</option>
+                                    <option>Good</option>
+                                    <option>Bad</option>
+                                </Select>
+                            </FormControl></div>
+                            <div><FormControl ><InputLabel htmlFor="age-native-simple">Minimum price in $</InputLabel>
+                                <Select native value={price} onChange={e => setPrice(e.target.value)}>
+                                    <option aria-label="None" value="Price" />
+                                    <option >1000</option>
+                                    <option>2000</option>
+                                    <option>3000</option>
+                                    <option>4000</option>
+                                    <option>5000</option>
+                                    <option>7000</option>
+                                    <option>8000</option>
+                                </Select>
+                            </FormControl></div>
                         </DialogContent>
                         <DialogActions>
-                            <Button className="buttonOK" variant="contained" color="Primary" onClick={filter} >
+                            <Button variant="contained" color="Primary" onClick={filter} >
                                 FILTER
                             </Button>
-                            <Button className="buttonCANCEL" variant="contained" color="Primary" onClick={closePopUp}>
+                            <Button variant="contained" color="Primary" onClick={closePopUp}>
                                 CANCEL
                         </Button>
                         </DialogActions>

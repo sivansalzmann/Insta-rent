@@ -25,7 +25,7 @@ export default function AssetSearchForm(props) {
                     <input type="button" value={"search"} style={{borderRadius: "0px 20px 20px 0px"}} onClick={onSubmit} />
                 </form>
                 {/* <Link to={{ pathname: "/RenterSearchFilter" }} > */}
-                    <AssetList assets={assetsList} />
+                    {/* <AssetList assets={assetsList} /> */}
                 {/* </Link> */}
             </div>
         )

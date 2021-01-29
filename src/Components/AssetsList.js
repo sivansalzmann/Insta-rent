@@ -6,17 +6,17 @@ export default function AssetList(props) {
 
     const [assetsList, setAssetList] = useState([]);
 
-    // useEffect(() => {
-    //     // const assets = props.eachItem()
-    //     // if (assets === "undefined") {
-    //         fetch(`https://instarent-1st.herokuapp.com/api/assets`)
-    //             .then(response => response.json())
-    //             .then(result => setAssetList(result))
-    //     // }
-    //     // else {
-    //     //     setAssetList(assets)
-    //     // }
-    // }, [])
+    useEffect(() => {
+        // const assets = props.eachItem()
+        // if (assets === "undefined") {
+            fetch(`https://instarent-1st.herokuapp.com/api/assets`)
+                .then(response => response.json())
+                .then(result => setAssetList(result))
+        // }
+        // else {
+        //     setAssetList(assets)
+        // }
+    }, [])
 
     const eachItem = (item) => {
         return (
@@ -28,8 +28,8 @@ export default function AssetList(props) {
 
     return (
         <Grid container direction="row" justify="center" alignItems="center">
-            { props.assets.map(eachItem) }
-            {/* { assetsList.map(eachItem) } */}
+            {/* { props.assets.map(eachItem) } */}
+            { assetsList.map(eachItem) }
         </Grid>
     )
 

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import AssetList from './AssetsList';
 // import AssetSearchForm from './AssetSearchForm';
 import ListIcon from '@material-ui/icons/List';
@@ -5,6 +6,8 @@ import RoomIcon from '@material-ui/icons/Room';
 import FilterAssets from './FilterAssets';
 
 export default function RenterSearchFilter(props) {
+
+	const [assetsList, setAssetList] = useState([]);
 
 	return (
 		<div className={"renterMainPage"}>
