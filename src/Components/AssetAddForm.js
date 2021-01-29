@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
 
-export default function AssetAddForm(props) {
+const AssetAddForm = (props) =>  {
 
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
@@ -151,3 +151,4 @@ export default function AssetAddForm(props) {
     )
 
 }
+export default AssetAddForm

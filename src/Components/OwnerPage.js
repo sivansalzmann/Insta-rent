@@ -2,6 +2,7 @@ import react, { Component } from "react";
 import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
 import AssetAddForm from './AssetAddForm'
+import {Link} from 'react-router-dom';
 
 
 class OwnerPage extends Component {
@@ -17,6 +18,7 @@ class OwnerPage extends Component {
 		this.showAsset = this.showAsset.bind(this);
 		// this.add = this.add.bind(this);
 		this.nextId = this.nextId.bind(this);
+		this.onAddAsset = this.onAddAsset.bind(this);
 	}
 
 	delete(target) {
@@ -65,21 +67,32 @@ class OwnerPage extends Component {
 		return ++max;
 	}
 
+	onAddAsset(data) {
+		console.log(data);
+	}
+
 	render() {
 		return (
 			<>
-			<div className={"renterMainPage"}>
-				<div className={"navBar"}>
-					<h1><a href="#">InstaRent</a></h1>
-					<ul>
-						<li><a href="#">HOME</a></li>
-						<li><a href="#">APPERTMANTS</a></li>
-						<li><a href="#">PROFILE</a></li>
-					</ul>
+				<div className={"renterMainPage"}>
+					<div className={"navBar"}>
+						<h1><a href="#">InstaRent</a></h1>
+						<ul>
+							<li><a href="#">HOME</a></li>
+							<li><a href="#">APPERTMANTS</a></li>
+							<li><a href="#">PROFILE</a></li>
+						</ul>
+					</div>
+					<div>
+						<Link to={{ pathname: "/AssetAddForm", submit: this.onAddAsset }}>
+							<button className="plus">
+								Plus
+					</button>
+						</Link>
+					</div>
+
+					<AssetList />
 				</div>
-				
-				<AssetList/>
-			</div>
 			</>
 		)
 	}
