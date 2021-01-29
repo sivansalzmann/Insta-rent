@@ -11,3 +11,64 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.assetForm {
+  background-color:#E5E5E5;
+  height: 100%;
+  width: 80%;
+  
+}
+.assetForm h1 {
+  color: #6C6F72;
+  font-family: 'Oswald';
+}
+form {
+  background-color: blue;
+  display: flex;
+  flex-flow: row nowrap;
+}
+/* .assetForm input {
+  width: 50%;
+  height: 50%;
+  margin: 1%;
+  justify-content: space-around;
+} */
+.assetForm label{
+  font-family: 'Oswald';
+  color: #1B1C1D;
+  font-weight: bold;
+}
+.extras {
+  align-items: center;
+  background-color: lightcoral;
+}
+.check{
+  font-size: 60%;
+}
+.formRight {
+ background-color: lawngreen;
+}
+.formLeft {
+  width: 50%;
+  height: 100%;
+  background-color: purple;
+ }
+
+ .formLeft .wide {
+   display: flex;
+   flex-flow: column nowrap;
+ }
+ .zsr {
+   display: flex;
+   flex-flow: row nowrap;
+ }
+ .zsr div {
+  width: 50%;
+ }
