@@ -9,7 +9,7 @@ export default function AssetList(props) {
     useEffect(() => {
         // const assets = props.eachItem()
         // if (assets === "undefined") {
-            fetch(`http://localhost:3000/api/assets`)
+            fetch(`https://instarent-1st.herokuapp.com/api/assets`)
                 .then(response => response.json())
                 .then(result => setAssetList(result))
         // }

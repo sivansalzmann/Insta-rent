@@ -10,7 +10,7 @@ export default function AssetSearchForm(props) {
 
 
     const onSubmit = () => {
-        fetch(`http://localhost:3000/api/assets?City=${city}&Country=${country}&Avilability=${date}`)
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?City=${city}&Country=${country}&Avilability=${date}`)
             .then(response => response.json())
             .then(result => setAssetList(result))
     }
