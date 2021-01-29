@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Button } from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const AssetAddForm = (props) => {
 
@@ -114,7 +114,11 @@ const AssetAddForm = (props) => {
                 <div className="formRight">
                     <div className="condition">
                         <label>Condition</label>
-                        <input type="select" name="condition" onChange={(event) => setCondition(event.target.value)} value={condition} placeholder="Condition" />
+                        <select type="select" name="condition" onChange={(event) => setCondition(event.target.value)} value={condition} placeholder="Condition" >
+                            <option value="Great">Great</option>
+                            <option value="Good">Good</option>
+                            <option value="Bad">Bad</option>
+                        </select>
                     </div>
                     <div className="extras">
                         <label>Extras</label>
@@ -123,11 +127,11 @@ const AssetAddForm = (props) => {
                             <label className="check">Parking</label>
                         </div>
                         <div className="elevator">
-                            <input type="checkbox" name="elevator" onChange={(event) => setElevator(event.target.value)}  value={true} />
+                            <input type="checkbox" name="elevator" onChange={(event) => setElevator(event.target.value)} value={true} />
                             <label className="check">Elevator</label>
                         </div>
                         <div className="petsAllowed">
-                            <input type="checkbox" name="petsAllowed" onChange={(event) => setPetsAllowed(event.target.value)}  value={true} />
+                            <input type="checkbox" name="petsAllowed" onChange={(event) => setPetsAllowed(event.target.value)} value={true} />
                             <label className="check" >Pets Allowed</label>
                         </div>
                     </div>

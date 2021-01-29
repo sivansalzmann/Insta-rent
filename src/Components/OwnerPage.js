@@ -1,4 +1,4 @@
-import react, { Component } from "react";
+import react, { useState } from "react";
 import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
 import AssetAddForm from './AssetAddForm'
@@ -13,24 +13,24 @@ const OwnerPage = (props) => {
 
 
 
-	const deleteOwner = (target) => {
-		this.setState(prevState => ({
-			items: prevState.items.filter(item => item.id !== target)
-		}))
-	}
+	// const deleteOwner = (target) => {
+	// 	setItems(prevState => ({
+	// 		items: prevState.items.filter(item => item.id !== target)
+	// 	}))
+	// }
 
-	const editItem = (id) => {
-		const item = this.state.items.filter(item => item.id === id)[0];
-		this.setState(() => ({
-			editing: true,
-			itemToEdit: item
-		}));
-	}
+	// const editItem = (id) => {
+	// 	const item = this.state.items.filter(item => item.id === id)[0];
+	// 	setEditing(() => ({
+	// 		editing: true,
+	// 		itemToEdit: item
+	// 	}));
+	// }
 
-	const showAsset = (id) => {
-		const item = this.state.items.filter(item => item.id === id)[0];
-		console.log(item);
-	}
+	// const showAsset = (id) => {
+	// 	const item = this.state.items.filter(item => item.id === id)[0];
+	// 	console.log(item);
+	// }
 
 	// add(item) {
 	// 	this.setState(prevState => ({
