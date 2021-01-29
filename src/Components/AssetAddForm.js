@@ -119,15 +119,15 @@ const AssetAddForm = (props) => {
                     <div className="extras">
                         <label>Extras</label>
                         <div className="parking">
-                            <input type="checkbox" name="parking" onChange={(event) => setParking(event.target.value)} value={parking} />
+                            <input type="checkbox" name="parking" onChange={(event) => setParking(event.target.value)} value={true} />
                             <label className="check">Parking</label>
                         </div>
                         <div className="elevator">
-                            <input type="checkbox" name="elevator" onChange={(event) => setElevator(event.target.value)} value={elevator} />
+                            <input type="checkbox" name="elevator" onChange={(event) => setElevator(event.target.value)}  value={true} />
                             <label className="check">Elevator</label>
                         </div>
                         <div className="petsAllowed">
-                            <input type="checkbox" name="petsAllowed" onChange={(event) => setPetsAllowed(event.target.value)} value={petsAllowed} />
+                            <input type="checkbox" name="petsAllowed" onChange={(event) => setPetsAllowed(event.target.value)}  value={true} />
                             <label className="check" >Pets Allowed</label>
                         </div>
                     </div>
