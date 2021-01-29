@@ -15,15 +15,18 @@ a {
     text-decoration: none;
     color: black;
 }
+#root {
+    font-family: 'Lato';
+}
 .homePageContainer{
-    /* margin-left: 15%; */
+    font-family: 'Lato';
 }
 .navBarHomePage {
     display: flex;
     flex-direction: row;
 }
 .navBarHomePage h1 a{
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Lato';
     font-weight: bold;
     color: #5D6D7E;
     font-size: 70px;
@@ -35,7 +38,7 @@ a {
     font-weight: bold;
     color: black;
     font-size: 15px;
-    margin-left: 68%;
+    margin-left: 65%;
     margin-top: 5%;
     font-weight: bold;
 }
@@ -47,10 +50,11 @@ a {
     display: flex;
     flex-direction: row;
     margin-top: 4%;
-    margin-left: 35%;
+    margin-left: 16%;
     font-family: 'Lato';
     font-weight: bold;
-    font-size: 18px;
+    font-size: 40px;
+    font-weight: bold;
 }
 .choiseRenterOwner a{
     text-decoration: none;
@@ -61,35 +65,14 @@ a {
     margin-left: 50px;
 }
 .headLineHomePage {
-    font-family: 'Lato';
     font-size: 70px;
     margin-top: 2%;
     margin-left: 22%;
 }
 .pHomePage {
-    font-family: 'Lato';
     font-size: 30px;
     margin-top: 2%;
     margin-left: 17%;
-}
-.assetSearchForm {
-    margin-top: 3%;
-    margin-left: 15%;
-}
-.assetSearchForm input {
-    height: 65px;
-    width: 250px;
-    border: none;
-    font-family: 'Lato';
-    font-weight: bold;
-    font-size: 15px;
-}
-.assetSearchForm input[type=submit] {
-    height: 65px;
-    width: 100px;
-    background-color: white;
-    font-size: 15px;
-    border: none;
 }
 .signInContainer {
     background-color: white;
@@ -125,7 +108,7 @@ a {
     font-size: 15px;
 }
 .renterMainPage {
-    background-color: #E5E5E5;;
+    background-color: #E5E5E5;
 }
 .navBar {
     width: 100%;
@@ -134,7 +117,6 @@ a {
     top: 0;
     right: 0;
     display: flex;
-    font-family: 'Oswald', sans-serif;
     font-weight: bold;
 }
 .navBar h1 a{
@@ -144,7 +126,6 @@ a {
 }
 .navBar ul {
     list-style-type: none;
-    margin-left: 10%;
     margin-top: 5%;
     font-size: 20px;
 }
@@ -154,14 +135,13 @@ a {
 }
 .renterMainPageContainer {
     display: flex;
-    font-family: 'Oswald', sans-serif;
     font-weight: bold;
     flex-direction: column;
 }
 .renterMainPageContainer p {
-    margin-left: 45%;
+    margin-left: 25%;
     margin-top: 5%;
-    font-size: 30px;
+    font-size: 50px;
     color: #5D6D7E;
 }
 .assetList {

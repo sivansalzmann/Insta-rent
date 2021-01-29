@@ -4,19 +4,22 @@ import AssetList from './AssetsList';
 import ListIcon from '@material-ui/icons/List';
 import RoomIcon from '@material-ui/icons/Room';
 import FilterAssets from './FilterAssets';
+import AssetSearchForm from './AssetSearchForm';
+import { Link } from 'react-router-dom';
 
-export default function RenterSearchFilter(props) {
 
-	const [assetsList, setAssetList] = useState([]);
+export default function RenterSearch(props) {
+
+    console.log(props.location.assets)
 
 	return (
 		<div className={"renterMainPage"}>
 			<div className={"navBar"}>
 				<h1><a href="/">InstaRent</a></h1>
 				<ul>
-					<li><a href="/">HOME</a></li>
-					<li><a href="/">APPERTMANTS</a></li>
-					<li><a href="/">PROFILE</a></li>
+					<li><Link to={{ pathname: "/"}}>HOME</Link></li>
+					<li><Link to={{ pathname: "/"}}>APPERTMANTS</Link></li>
+					<li><Link to={{ pathname: "/"}}>PROFILE</Link></li>
 				</ul>
 			</div>
 			<div className={"renterMainPageContainer"}>
@@ -41,8 +44,9 @@ export default function RenterSearchFilter(props) {
 						</li>
 					</ul>
 				</div>
-				<AssetList />
 			</div>
+							<AssetSearchForm />
+
 		</div>
 	);
 }

@@ -15,7 +15,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import AssetList from './AssetsList';
+import AssetList from '../AssetsList';
   
 const FilterAssets = (props) => {
     const [open, setOpen] = useState(false);
@@ -28,16 +28,14 @@ const FilterAssets = (props) => {
     const [price, setPrice] = useState("");
     const [assetsList,setAssetList] = useState([]);
 
-      
-
     const filter = () => {
 
-        fetch(`https://instarent-1st.herokuapp.com/api/assets?SquareFeet=${squareFeet}&Condition=${condition},&Price=${price}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?Country=${props.country}&City=${props.city}&Avilability=${props.date}&SquareFeet=${squareFeet}&Condition=${condition},&Price=${price}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
             .then(response => response.json())
             .then(result => {
                 closePopUp()
                 setAssetList(result)
-                console.log(assetsList)
+                console.log(props.city)
             })
         };
 
@@ -52,9 +50,9 @@ const FilterAssets = (props) => {
 
         return (
             <div className="popup">
-                <div className="newTask">
-                    <Button onClick={openPopUp}>
-                        <SearchIcon fontSize="large" />
+                <div>
+                    <Button variant="outlined" color="primary" onClick={openPopUp} className={"filterBut"}>
+                        Advanced search
                     </Button>
                     <Dialog open={open} onClose={closePopUp} aria-labelledby="form-dialog-title">
                         <DialogTitle >Filter assets</DialogTitle>
@@ -109,6 +107,8 @@ const FilterAssets = (props) => {
                         </DialogActions>
                     </Dialog>
                 </div>
+                <AssetList assetsList={assetsList}/>
+
             </div>
         )
     
