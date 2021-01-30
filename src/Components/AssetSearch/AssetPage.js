@@ -13,7 +13,7 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import StreetviewIcon from '@material-ui/icons/Streetview';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import './search.css';
-import img from './Media/house.jpg';
+import imgAsset from './Media/house.jpg';
 
 
 const userId = '5'; //change to login
@@ -64,7 +64,7 @@ export default function AssetPage(props) {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -113,7 +113,7 @@ export default function AssetPage(props) {
             {props.item.Description}
           </Typography>
           <Typography gutterBottom style={{fontFamily: 'Lato',fontWeight:'bold'}}>
-            <img src={img} style={{width:'300px',height:'200px'}}/>
+            <img src={imgAsset} alt="Asset" style={{width:'300px',height:'200px'}}/>
           </Typography>
           </div>
           <Typography gutterBottom style={{fontFamily: 'Lato'}}>
