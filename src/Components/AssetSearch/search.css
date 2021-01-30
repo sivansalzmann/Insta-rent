@@ -26,3 +26,16 @@ Button.filterBut {
     margin-left: 41%;
     margin-top: 2%;
 }
+
+.rowDetlails {
+    display: flex;
+    justify-content: space-around;
+}
+.rowDeacImg {
+    display: flex;
+}
+.buttonsAssets{
+    display: flex;
+    flex-direction: row;
+    
+}

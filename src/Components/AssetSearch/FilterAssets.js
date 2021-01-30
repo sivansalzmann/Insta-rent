@@ -108,7 +108,6 @@ const FilterAssets = (props) => {
                     </Dialog>
                 </div>
                 <AssetList assetsList={assetsList}/>
-
             </div>
         )
     

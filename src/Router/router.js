@@ -5,7 +5,7 @@ import RenterSearch from "../Components/RenterSearch";
 // import Signup from '../Components/Register/SignUp';
 import OwnerPage from '../Components/OwnerPage';
 import App from '../Components/App';
-import AssetPage from '../Components/AssetPage'
+// import AssetPage from '../Components/AssetPage'
 // import AssetCard from '../Components/AssetCard'
 // import AssetList from '../Components/AssetList_1';
 import AssetAddForm from '../Components/AssetAddForm';
@@ -18,7 +18,7 @@ const ReactRouter = () => {
             <Route exact path="/" component={App}/>
             {/* <Route exact path="/Login" component={Login}/> */}
             <Route exact path="/RenterSearch" component={RenterSearch}/>
-            <Route exact path="/AssetPage" component={AssetPage}/> 
+            {/* <Route exact path="/AssetPage" component={AssetPage}/>  */}
             {/* <Route path="/signup" component={Signup} /> */}
             <Route path="/OwnerPage" component={OwnerPage} />
             {/* <Route path="/AssetCard" component={AssetCard} /> */}

@@ -9,6 +9,7 @@ import FilterAssets from './FilterAssets';
 import TextField from '@material-ui/core/TextField';
 import './search.css';
 
+
 export default function AssetSearchForm(props) {
     const [date, setDate] = useState("");
     const [country, setCountry] = useState("");
@@ -24,7 +25,8 @@ export default function AssetSearchForm(props) {
 
 
     const onSubmit = () => {
-        fetch(`https://instarent-1st.herokuapp.com/api/assets?City=${city}&Country=${country}&Availability=${date}SquareFeet=${squareFeet}&Condition=${condition},&Price=${price}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)            .then(response => response.json())
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?City=${city}&Country=${country}&Availability=${date}SquareFeet=${squareFeet}&Condition=${condition},&Price=${price}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)           
+             .then(response => response.json())
             .then(result => {
             setAssetList(result)}
         )
