@@ -2,7 +2,7 @@ import OwnerAssetCard from './OwnerAssetCard';
 import Grid from '@material-ui/core/Grid';
 
 export default function OwnerAssetList(props) {
-
+   
     const eachItem = (item) => {
         return (
             <OwnerAssetCard key={item.id} id={item.id} item={item}> 

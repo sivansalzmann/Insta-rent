@@ -1,10 +1,10 @@
 import react, { useState, useEffect } from "react";
 // import AssetsData from '../Data/AssetsData.json';
 import OwnerAssetsList from './OwnerAssetsList';
+import RenterList from './RenterList';
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 const ownerId = 9;
 const OwnerPage = (props) => {
@@ -12,20 +12,21 @@ const OwnerPage = (props) => {
 	const [editing, setEditing] = useState(false);
 	const [itemToEdit, setItemToEdit] = useState(null);
 	// const [ownerId,setOwnerId] = useState("");
-	const [ownerAssetsList,setOwnerAssetsList] = useState([]);
-	const [forRentList,setForRentList] = useState([]);
+	const [ownerAssetsList, setOwnerAssetsList] = useState([]);
+	const [renterNumb, setRenterNumb] = useState([]);
 
 	useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
-            .then(response => response.json())
-			.then(result => {setForRentList(result)})
+		fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
+			.then(response => response.json())
 			.then(result => {
-				setOwnerAssetsList(result)})
-					
+				setRenterNumb(result)
+				setOwnerAssetsList(result)
+			})
+
 	}, [])
 
 
-	
+
 
 	// const deleteOwner = (target) => {
 	// 	setItems(prevState => ({
@@ -81,31 +82,24 @@ const OwnerPage = (props) => {
 		<>
 			<div className={"renterMainPage"}>
 				<div className={"navBar"}>
-					<h1><Link to={{ pathname: "/"}}>InstaRent</Link></h1>
+					<h1><Link to={{ pathname: "/" }}>InstaRent</Link></h1>
 					<ul>
-						<li><Link to={{ pathname: "/"}}>HOME</Link></li>
-						<li><Link to={{ pathname: "/"}}>APPERTMANTS</Link></li>
-						<li><Link to={{ pathname: "/"}}>PROFILE</Link></li>
+						<li><Link to={{ pathname: "/" }}>HOME</Link></li>
+						<li><Link to={{ pathname: "/" }}>APPERTMANTS</Link></li>
+						<li><Link to={{ pathname: "/" }}>PROFILE</Link></li>
 					</ul>
 				</div>
 				<div className="wrapper">
 					<h1>Youe Assets</h1>
 					<Link to={{ pathname: "/AssetAddForm", submit: onAddAsset }}>
-						<button className="plus">
-							Plus
-					</button>
+						<AddCircleIcon className="plus" />
 					</Link>
 					<OwnerAssetsList ownerAssetsList={ownerAssetsList} />
 					<h1>Your assets in proccess</h1>
-					<div className="inProList">
-						{forRentList.Phone}
-						<MessageOutlinedIcon/>
-						<EditOutlinedIcon/>
-						<DeleteOutlineIcon/>
-					</div>
+					<RenterList renterNumb={renterNumb} />
 				</div>
 
-				
+
 			</div>
 		</>
 	)

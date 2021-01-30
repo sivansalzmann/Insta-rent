@@ -12,6 +12,7 @@ import AssetAddForm from '../Components/Owner/AssetAddForm';
 // import FilterAssets from '../Components/FilterAssets';
 import Chat from '../Components/Chat/Chat';
 import Renter from '../Components/Renter/RenterPage';
+import OwnerAssetsList from '../Components/Owner/OwnerAssetsList';
 
 const ReactRouter = () => {
     return (
@@ -24,6 +25,7 @@ const ReactRouter = () => {
             <Route path="/OwnerPage" component={OwnerPage} />
             {/* <Route path="/AssetCard" component={AssetCard} /> */}
             <Route exact path="/AssetAddForm" component={AssetAddForm}/>
+            <Route exact path="/OwnerAssetsList" component={OwnerAssetsList}/>
             <Route exact path="/Chat" component={Chat}/>
             {/* <Route exact path ="/FilterAssets" component={FilterAssets} /> */}
             <Route exact path ="/Renter" component={Renter} />
