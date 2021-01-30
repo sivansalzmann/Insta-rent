@@ -1,6 +1,6 @@
 import react, { useState, useEffect } from "react";
 // import AssetsData from '../Data/AssetsData.json';
-import AssetList from './AssetsList';
+import OwnerAssetsList from './OwnerAssetsList';
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -12,14 +12,18 @@ const OwnerPage = (props) => {
 	const [editing, setEditing] = useState(false);
 	const [itemToEdit, setItemToEdit] = useState(null);
 	// const [ownerId,setOwnerId] = useState("");
-	const [assetsList,setAssetList] = useState([]);
+	const [ownerAssetsList,setOwnerAssetsList] = useState([]);
+	const [forRentList,setForRentList] = useState([]);
 
 	useEffect(() => {
         fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
             .then(response => response.json())
-            .then(result => {
-                setAssetList(result)})
-    }, [])
+			.then(result => {setForRentList(result)})
+			.then(result => {
+				setOwnerAssetsList(result)})
+					
+	}, [])
+
 
 	
 
@@ -69,9 +73,9 @@ const OwnerPage = (props) => {
 	// 	return ++max;
 	// }
 
-	// const onAddAsset = (data) => {
-	// 	console.log(data)
-	// }
+	const onAddAsset = (data) => {
+		console.log(data)
+	}
 
 	return (
 		<>
@@ -91,9 +95,10 @@ const OwnerPage = (props) => {
 							Plus
 					</button>
 					</Link>
-					<AssetList assetsList={assetsList} />
+					<OwnerAssetsList ownerAssetsList={ownerAssetsList} />
 					<h1>Your assets in proccess</h1>
 					<div className="inProList">
+						{forRentList.Phone}
 						<MessageOutlinedIcon/>
 						<EditOutlinedIcon/>
 						<DeleteOutlineIcon/>
