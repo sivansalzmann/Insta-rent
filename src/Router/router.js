@@ -1,16 +1,17 @@
 // import react from 'react';
 import {Route} from 'react-router-dom';
-import RenterSearch from "../Components/RenterSearch";
+import RenterSearch from "../Components/Renter/RenterSearch";
 // import Login from '../Components/Register/Login';
 // import Signup from '../Components/Register/SignUp';
-import OwnerPage from '../Components/OwnerPage';
-import App from '../Components/App';
+import OwnerPage from '../Components/Owner/OwnerPage';
+import App from '../Components/HomePage/App';
 // import AssetPage from '../Components/AssetPage'
 // import AssetCard from '../Components/AssetCard'
 // import AssetList from '../Components/AssetList_1';
-import AssetAddForm from '../Components/AssetAddForm';
+import AssetAddForm from '../Components/Owner/AssetAddForm';
 // import FilterAssets from '../Components/FilterAssets';
-import chat from '../Components/Chat/Chat';
+import Chat from '../Components/Chat/Chat';
+import Renter from '../Components/Renter/RenterPage';
 
 const ReactRouter = () => {
     return (
@@ -23,8 +24,9 @@ const ReactRouter = () => {
             <Route path="/OwnerPage" component={OwnerPage} />
             {/* <Route path="/AssetCard" component={AssetCard} /> */}
             <Route exact path="/AssetAddForm" component={AssetAddForm}/>
-            <Route exact path="/chat" component={chat}/>
+            <Route exact path="/Chat" component={Chat}/>
             {/* <Route exact path ="/FilterAssets" component={FilterAssets} /> */}
+            <Route exact path ="/Renter" component={Renter} />
 
         </>
     )

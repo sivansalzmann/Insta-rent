@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.renterMainPage{
+    background-color: #F8F8F8;
+}
+.renterPageContainer {
+    display: flex;
+    flex-direction: row;
+}
+.personalDeatils{
+    background-color: #FFFFFF;
+    width: 30%;
+    height: 80%;
+    margin-left: 5%;
+    margin-top: 3%;
+
+}
+.personalDeatils img {
+    width: 40%;
+    height: 40%;
+    margin-left: 30%;
+    margin-top: 5%;
+}
+.personalDeatils h1{
+    margin-left: 20%;
+    margin-top: 2%;
+}
+.personalDeatils h3{
+    margin-left: 18%;
+    margin-top: 2%;
+}
+.personalDeatils .line{
+    width: 80%;
+    background-color: gray;
+    margin-left: 10%;
+    height: 1px;
+    margin-top: 3%;
+}
+.personalDeatils p{
+    font-weight: bold;
+    margin-left: 10%;
+    margin-top: 4%;
+    color: #5D6D7E;
+    font-size: 25px;
+}
+.personalDeatils span{
+    margin-left: 10%;
+    margin-top: 4%;
+    font-size: 20px;
+}
+.personalDeatils Button {
+    margin-left: 40%;
+    margin-top: 10%;
+}
+.containerRenter{
+    width: 60%;
+    height: 80%;
+    margin-left: 5%;
+    margin-top: 3%;
+
+}
+.currentContainer {
+    display: flex;
+    flex-direction: row;
+}
+.curStatus{
+    width: 40%;
+    height: 20%;
+    background-color: #FFFFFF;
+    margin-right: 2%;
+}
+.curStatus h1{
+    color: #5D6D7E;
+    margin: 5%;
+}
+.curStatus p{
+    margin: 5%;
+    font-size: 20px;
+}
+.curBud{
+    width: 35%;
+    height: 20%;
+    background-color: #FFFFFF;
+}
+.curBud h1{
+    color: #5D6D7E;
+    margin: 5%;
+}
+.curBud p{
+    margin: 5%;
+    font-size: 20px;
+    margin-bottom: 15%;
+}
+.litMenu {
+    width:77%;
+    height: 10%;
+    margin-top: 3%;
+    border: 0.1px solid #670BFF;
+    display: flex;
+    flex-direction: row;
+}
+.litMenu Button{
+    margin-top: 1%;
+    margin-left: 7%;
+    margin-bottom: 1%;
+}
+.progress {
+    width: 77%;
+    height: 50%;
+    background-color: #FFFFFF;
+    margin-top: 3%;
+}
+.progress h1{
+    margin: 3%;
+}
+.progress Button {
+    height: 40%;
+    width: 30%;
+    margin: 1%;
+}

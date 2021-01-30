@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useState } from 'react';
-import AssetList from '../AssetsList';
+import AssetList from '../HomePage/AssetsList';
 import FilterAssets from './FilterAssets';
 import TextField from '@material-ui/core/TextField';
 import './search.css';
