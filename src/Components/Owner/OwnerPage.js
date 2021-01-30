@@ -1,7 +1,6 @@
-import react, { useState, useEffect } from "react";
-// import AssetsData from '../Data/AssetsData.json';
-import OwnerAssetsList from './OwnerAssetsList';
-import RenterList from './RenterList';
+
+import React, {useEffect, useState} from 'react';
+import AssetList from '../HomePage/AssetsList';
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
