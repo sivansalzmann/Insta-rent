@@ -4,6 +4,8 @@ import AssetList from '../HomePage/AssetsList';
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import OwnerAssetsList from './OwnerAssetsList';
+import RenterList from './RenterList';
 
 const ownerId = 9;
 const OwnerPage = (props) => {
