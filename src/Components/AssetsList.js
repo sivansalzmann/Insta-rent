@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import AssetCard from './AssetCard';
 import Grid from '@material-ui/core/Grid';
 

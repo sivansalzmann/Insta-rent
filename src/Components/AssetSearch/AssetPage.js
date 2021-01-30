@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,7 +13,10 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import StreetviewIcon from '@material-ui/icons/Streetview';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import './search.css';
-import img from './Media/house.jpg';
+import imgAsset from './Media/house.jpg';
+
+
+const userId = '5'; //change to login
 
 const styles = (theme) => ({
   root: {
@@ -45,7 +48,6 @@ const DialogTitle = withStyles(styles)((props) => {
 const DialogContent = withStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
-    fontFamily: 'Lato',
   },
 }))(MuiDialogContent);
 
@@ -57,20 +59,42 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function AssetPage(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCloseOwner = () => {
-    setOpen(false);
-  };
-  const handleClickWishList =() => {
 
-  };
+  const handleCloseOwner = () => {
+    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`
+        , {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({RenterId: userId}),
+        })
+          .then(response => response.json())
+          .then(result => {
+              setOpen(false);
+              alert("The owner will contact with you soon as possible")
+          })
+   };
+  const handleClickWishList = () => { 
+        fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}` //chage to update array
+        , {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({RenterId: userId}),
+        })
+          .then(response => response.json())
+          .then(result => {
+            alert("The asset added to your wish list!")
+          })
+
+    };
 
   return (
     <div>
@@ -89,7 +113,7 @@ export default function AssetPage(props) {
             {props.item.Description}
           </Typography>
           <Typography gutterBottom style={{fontFamily: 'Lato',fontWeight:'bold'}}>
-            <img src={img} style={{width:'300px',height:'200px'}}/>
+            <img src={imgAsset} alt="Asset" style={{width:'300px',height:'200px'}}/>
           </Typography>
           </div>
           <Typography gutterBottom style={{fontFamily: 'Lato'}}>
@@ -116,7 +140,7 @@ export default function AssetPage(props) {
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleCloseOwner} color="primary">
-            Contect with owner
+          Contect with owner
           </Button>
           <Button autoFocus onClick={handleClose} color="primary">
             Close

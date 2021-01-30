@@ -1,7 +1,6 @@
 import react, { useState, useEffect } from "react";
 // import AssetsData from '../Data/AssetsData.json';
 import AssetList from './AssetsList';
-import AssetAddForm from './AssetAddForm'
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -65,24 +64,24 @@ const OwnerPage = (props) => {
 	// 	}));
 	// }
 
-	const nextId = (items = []) => {
-		let max = items.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id, 0);
-		return ++max;
-	}
+	// const nextId = (items = []) => {
+	// 	let max = items.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id, 0);
+	// 	return ++max;
+	// }
 
-	const onAddAsset = (data) => {
-		console.log(data)
-	}
+	// const onAddAsset = (data) => {
+	// 	console.log(data)
+	// }
 
 	return (
 		<>
 			<div className={"renterMainPage"}>
 				<div className={"navBar"}>
-					<h1><a href="#">InstaRent</a></h1>
+					<h1><Link to={{ pathname: "/"}}>InstaRent</Link></h1>
 					<ul>
-						<li><a href="#">HOME</a></li>
-						<li><a href="#">APPERTMANTS</a></li>
-						<li><a href="#">PROFILE</a></li>
+						<li><Link to={{ pathname: "/"}}>HOME</Link></li>
+						<li><Link to={{ pathname: "/"}}>APPERTMANTS</Link></li>
+						<li><Link to={{ pathname: "/"}}>PROFILE</Link></li>
 					</ul>
 				</div>
 				<div className="wrapper">
