@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function App(props) {
-
+  
     return (
         <div className={'background'}>
             <div className={'navBarHomePage'}>
                 <h1><a href="/">InstaRent</a></h1>
-                <h2><a href="/Login">SIGN IN/SIGN UP</a></h2>
+                <h2><Link to={{ pathname:"/Renter"}}>RENTER PROFILE</Link></h2>
             </div>
             <div className={"homePageContainer"}>
                 <h1 className={"headLineHomePage"}>Looking for apartment?</h1>

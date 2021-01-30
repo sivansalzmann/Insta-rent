@@ -14,6 +14,7 @@ import Chat from '../Components/Chat/Chat';
 import Renter from '../Components/Renter/RenterPage';
 import OwnerAssetsList from '../Components/Owner/OwnerAssetsList';
 
+
 const ReactRouter = () => {
     return (
         <>
@@ -29,7 +30,6 @@ const ReactRouter = () => {
             <Route exact path="/Chat" component={Chat}/>
             {/* <Route exact path ="/FilterAssets" component={FilterAssets} /> */}
             <Route exact path ="/Renter" component={Renter} />
-
         </>
     )
 }
