@@ -4,21 +4,36 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 const AssetAddForm = (props) => {
-
-//     const [country, setCountry] = useState("");
-//     const [city, setCity] = useState("");
-//     const [neighborhood, setNeighborhood] = useState("");
-//     const [street, setStreet] = useState("");
-//     const [zip, setZip] = useState("");
-//     const [squareFeet, setSquareFeet] = useState("");
-//     const [rooms, setRooms] = useState("");
-//     const [condition, setCondition] = useState("");
-//     const [parking, setParking] = useState("");
-//     const [elevator, setElevator] = useState("");
-//     const [petsAllowed, setPetsAllowed] = useState("");
-//     const [price, setPrice] = useState("");
-//     const [avilability, setAvilability] = useState("");
-//     const [description, setDescription] = useState("");
+    
+    
+    
+    // const addNewAsset = () => {
+    //     const body = {
+    //         	OwnerId: OwnerId,
+    //         asset: asset
+    //     }
+    //     fetch(`https://instarent-1st.herokuapp.com/api/assets`),
+    //         {headers: {'Content-Type': 'application/json'}, method: 'POST', body: JSON.stringify(body)})
+    //         .then(response => response.json())
+    //         .then(result => {
+    //             setAsset(result)
+    //             setInputMessage('')
+    //         })
+    // }
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
+    const [neighborhood, setNeighborhood] = useState("");
+    const [street, setStreet] = useState("");
+    const [zip, setZip] = useState("");
+    const [squareFeet, setSquareFeet] = useState("");
+    const [rooms, setRooms] = useState("");
+    const [condition, setCondition] = useState("");
+    const [parking, setParking] = useState("");
+    const [elevator, setElevator] = useState("");
+    const [petsAllowed, setPetsAllowed] = useState("");
+    const [price, setPrice] = useState("");
+    const [avilability, setAvilability] = useState("");
+    const [description, setDescription] = useState("");
 
 //     // useEffect(() => {
 //     //     if (props.initialData) {
@@ -40,40 +55,40 @@ const AssetAddForm = (props) => {
 //     //     }
 //     // }, [props.initialData]);
 
-//     const formDataIsValid = () => {
+    const formDataIsValid = () => {
 
-//         let errors = [];
-//         if (country === "" || city === "" || neighborhood === "" || street === "" || zip === "" || rooms === "" || squareFeet === "" || price === "" || description === "")
-//             errors.push("All fields are requierd, please make sure all fields are filled.")
+        let errors = [];
+        if (country === "" || city === "" || neighborhood === "" || street === "" || zip === "" || rooms === "" || squareFeet === "" || price === "" || description === "")
+            errors.push("All fields are requierd, please make sure all fields are filled.")
 
-//         if (errors.length > 0)
-//             alert(errors)
-//         else
-//             return true
+        if (errors.length > 0)
+            alert(errors)
+        else
+            return true
 
 
-//     }
+    }
 
-//     const onSubmit = () => {
+    const onSubmit = () => {
 
-//         if (formDataIsValid()) {
-//             props.location.submit({ country, city, neighborhood, street, zip, squareFeet, rooms, condition, parking, elevator, petsAllowed, price, avilability, description });
-//             // setCountry("");
-//             // setCity("");
-//             // setNeighborhood("");
-//             // setStreet("");
-//             // setZip("");
-//             // setSquareFeet("");
-//             // setRooms("");
-//             // setCondition("");
-//             // setParking("");
-//             // setElevator("");
-//             // setPetsAllowed("");
-//             // setPrice("");
-//             // setAvilability("");
-//             // setDescription("");
-//         }
-//     }
+        if (formDataIsValid()) {
+            props.location.submit({ country, city, neighborhood, street, zip, squareFeet, rooms, condition, parking, elevator, petsAllowed, price, avilability, description });
+            setCountry("");
+            setCity("");
+            setNeighborhood("");
+            setStreet("");
+            setZip("");
+            setSquareFeet("");
+            setRooms("");
+            setCondition("");
+            setParking("");
+            setElevator("");
+            setPetsAllowed("");
+            setPrice("");
+            setAvilability("");
+            setDescription("");
+        }
+    }
 
     return (
         <div className={'assetForm'}>
