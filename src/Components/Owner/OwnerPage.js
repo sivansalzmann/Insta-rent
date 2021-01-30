@@ -1,14 +1,25 @@
 import AssetList from '../HomePage/AssetsList';
 import { Link } from 'react-router-dom';
+import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
-
+const ownerId = 9;
 const OwnerPage = (props) => {
 	// const [items, setItems] = useState(AssetsData.items);
-	// const [editing, setEditing] = useState(false);
-	// const [itemToEdit, setItemToEdit] = useState(null);
+	const [editing, setEditing] = useState(false);
+	const [itemToEdit, setItemToEdit] = useState(null);
+	// const [ownerId,setOwnerId] = useState("");
+	const [assetsList,setAssetList] = useState([]);
 
+	useEffect(() => {
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
+            .then(response => response.json())
+            .then(result => {
+                setAssetList(result)})
+    }, [])
 
-
+	
 
 	// const deleteOwner = (target) => {
 	// 	setItems(prevState => ({
@@ -71,15 +82,23 @@ const OwnerPage = (props) => {
 						<li><Link to={{ pathname: "/"}}>PROFILE</Link></li>
 					</ul>
 				</div>
-				<div>
-					<Link to={{ pathname: "/AssetAddForm", submit: this.onAddAsset }}>
+				<div className="wrapper">
+					<h1>Youe Assets</h1>
+					<Link to={{ pathname: "/AssetAddForm", submit: onAddAsset }}>
 						<button className="plus">
 							Plus
 					</button>
 					</Link>
+					<AssetList assetsList={assetsList} />
+					<h1>Your assets in proccess</h1>
+					<div className="inProList">
+						<MessageOutlinedIcon/>
+						<EditOutlinedIcon/>
+						<DeleteOutlineIcon/>
+					</div>
 				</div>
 
-				<AssetList />
+				
 			</div>
 		</>
 	)
