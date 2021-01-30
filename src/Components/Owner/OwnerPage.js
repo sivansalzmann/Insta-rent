@@ -1,4 +1,4 @@
-import AssetList from './AssetsList';
+import AssetList from '../HomePage/AssetsList';
 import { Link } from 'react-router-dom';
 
 

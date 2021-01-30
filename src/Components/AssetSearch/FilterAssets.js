@@ -10,7 +10,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import AssetList from '../AssetsList';
+import AssetList from '../HomePage/AssetsList';
   
 const FilterAssets = (props) => {
     const [open, setOpen] = useState(false);
