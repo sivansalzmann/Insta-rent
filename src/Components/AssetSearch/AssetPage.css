@@ -1,0 +1,35 @@
+
+.rowDetlails {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5%;
+    margin-left: -5%;
+
+}
+.rowDetlails div {
+    margin-left: -4%;
+
+}
+.rowDeacImg {
+    display: flex;
+    margin-top: 2%;
+    margin-left: -5%;
+}
+.rowDeacImg span {
+    margin-right: 2%;
+}
+.rowDeacImg img {
+    width: 60%;
+    height: 40%;
+}
+.buttonsAssets{
+    display: flex;
+    flex-direction: row;
+    
+}
+.moreDeatils {
+    display: flex;
+    margin-top:4%;
+    margin-left: -5%;
+
+}

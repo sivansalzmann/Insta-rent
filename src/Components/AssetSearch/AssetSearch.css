@@ -1,7 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
 .assetSearchForm form{
     margin-left: 35%;
     margin-top: 3%;
@@ -27,15 +23,3 @@ Button.filterBut {
     margin-top: 2%;
 }
 
-.rowDetlails {
-    display: flex;
-    justify-content: space-around;
-}
-.rowDeacImg {
-    display: flex;
-}
-.buttonsAssets{
-    display: flex;
-    flex-direction: row;
-    
-}

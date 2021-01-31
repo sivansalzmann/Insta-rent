@@ -11,7 +11,7 @@ export default function AssetList(props) {
         )
     }
     return (
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction="row" justify="center" alignItems="center" style={{marginBottom:"2%"}}>
             { props.assetsList.map(eachItem) }
         </Grid>
     )

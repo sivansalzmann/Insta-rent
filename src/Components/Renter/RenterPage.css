@@ -4,6 +4,7 @@
 }
 .renterMainPage{
     background-color: #F8F8F8;
+    
 }
 .renterPageContainer {
     display: flex;
@@ -14,8 +15,7 @@
     width: 30%;
     height: 80%;
     margin-left: 10%;
-    margin-top: 3%;
-    
+    margin-top: 3%;  
 }
 .personalDeatils img {
     width: 40%;

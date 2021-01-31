@@ -13,9 +13,7 @@ const useStyles = makeStyles({
     
 });
 
-
 export default function AssetCard (props) {
-
     const classes = useStyles();
     return (
         <Card className={classes.card}>
@@ -36,8 +34,6 @@ export default function AssetCard (props) {
             </CardContent>
             <AssetPage item={props.item}/>
         </Card> 
-        
-
     );
 }
 

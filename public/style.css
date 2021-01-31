@@ -2,79 +2,15 @@
     margin: 0;
     padding: 0;
 }
-.background {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: url('./Media/cover\ 1.png'); 
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
 a {
     text-decoration: none;
-    color: black;
+    /* color: black; */
 }
 #root {
     font-family: 'Lato';
 }
-.homePageContainer{
-    font-family: 'Lato';
-}
-.navBarHomePage {
-    display: flex;
-    flex-direction: row;
-}
-.navBarHomePage h1 a{
-    font-family: 'Lato';
-    font-weight: bold;
-    color: #5D6D7E;
-    font-size: 70px;
-    margin-left: 3%;
-}
-.navBarHomePage h2 {
-    font-family: 'Lato';
-    font-size: 20px;
-    font-weight: bold;
-    color: black;
-    font-size: 15px;
-    margin-left: 65%;
-    margin-top: 5%;
-    font-weight: bold;
-}
-.navBarHomePage h2 a {
-    text-decoration: none;
-    color: black;
-}
-.choiseRenterOwner {
-    display: flex;
-    flex-direction: row;
-    margin-top: 4%;
-    margin-left: 16%;
-    font-family: 'Lato';
-    font-weight: bold;
-    font-size: 40px;
-    font-weight: bold;
-}
-.choiseRenterOwner a{
-    text-decoration: none;
-    color: black;
-}
-.choiseRenterOwner li {
-    display:inline;      
-    margin-left: 50px;
-}
-.headLineHomePage {
-    font-size: 70px;
-    margin-top: 2%;
-    margin-left: 22%;
-}
-.pHomePage {
-    font-size: 30px;
-    margin-top: 2%;
-    margin-left: 17%;
-}
-.signInContainer {
+
+/* .signInContainer {
     background-color: white;
     width: 40%;
     height: 75%;
@@ -133,17 +69,6 @@ a {
     display:inline;
     margin-left: 50%;
 }
-.renterMainPageContainer {
-    display: flex;
-    font-weight: bold;
-    flex-direction: column;
-}
-.renterMainPageContainer p {
-    margin-left: 25%;
-    margin-top: 5%;
-    font-size: 50px;
-    color: #5D6D7E;
-}
 .assetList {
     flex-direction: row;
     margin-top: 5%;
@@ -165,4 +90,4 @@ a {
 }
 .navBarAssets li {
     display:inline;
-}
+} */

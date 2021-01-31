@@ -1,14 +1,20 @@
+Button.filterBut {
+    margin-left: 43%;
+    margin-top: 2%;
+    width: 10%;
+    height: 30%; 
+}
 .popup {
     background-color: #EDF5FF;
-    width: 30%;
-    margin: 5% auto;
+    width: 25%;
+    margin: 10% auto;
     border-radius: 10px;
     padding: 1%;
     outline: none;
     font-family: 'Lato';
 }
 
-.popup .title {
+/* .popup .title {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -24,16 +30,18 @@
 
 .popup .deatils {
     padding-top: 5%;
-    padding-left: 1%;
-    width: 85%;
+    padding-left: 2%;
+    width: 80%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     margin: 0 auto;
 }
+
 .popup .deatils p {
     padding-top: 5%;
 }
+
 .popup .divBtn {
     padding-top: 10%;
     width: 100%;
@@ -51,4 +59,4 @@
     font-weight: 300;
     font-size: 110%;
     padding: 1% 3%;
-}
+} */

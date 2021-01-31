@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
-import './Renter.css';
+import './RenterPage.css';
 import profileImg from './Media/profile.png'
 import { Button } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
@@ -19,6 +18,8 @@ import AssetCard from '../HomePage/AssetCard';
 import PopUp from '../All/PopUp';
 import TextField from '@material-ui/core/TextField';
 import Contract from './Contract';
+import Footer from '../All/Footer';
+import NavBar from '../All/NavBar';
 
 const userId = '3';
 
@@ -153,14 +154,7 @@ export default function RenterPage(props) {
 
     return (
 		<div className={"renterMainPage"}>
-			<div className={"navBar"}>
-				<h1><Link to={{ pathname: "/"}}>InstaRent</Link></h1>
-				<ul>
-					<li><Link to={{ pathname: "/"}}>HOME</Link></li>
-					<li><Link to={{ pathname: "/"}}>APPERTMANTS</Link></li>
-					<li><Link to={{ pathname: "/"}}>PROFILE</Link></li>
-				</ul>
-			</div>
+			<NavBar/>
 			<div className={"renterPageContainer"}>
         <div className={"personalDeatils"}>
             <img src={profileImg} alt="profile" />
@@ -243,6 +237,7 @@ export default function RenterPage(props) {
         <TextField label="JobTitle" value={JobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
         <TextField label="Budget" value={Budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
     </PopUp>
+    <Footer />
 	</div>
 	);
 

@@ -1,0 +1,26 @@
+.navBar {
+    width: 100%;
+    height: 100px;
+    background-color: #3f51b5;
+    top: 0;
+    right: 0;
+    display: flex;
+    font-weight: bold;
+    flex-direction: row;
+
+}
+.navBar h1 a {
+    color:  #F8F8F8;
+    font-size: 70px;
+    margin-left: 5%;    
+}
+.navBar a {
+    list-style-type: none;
+    font-size: 150%;
+    margin-left: 8%;
+    margin-top: 2%;
+}
+.navBar a{
+    color:  #F8F8F8;
+    justify-content: space-between;
+}
