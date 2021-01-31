@@ -67,4 +67,6 @@ a{
 .buttons a {
     margin-left: 5%;
 }
-
+.buttons button:hover {
+    text-decoration: underline;
+}

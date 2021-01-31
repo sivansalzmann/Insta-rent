@@ -1,9 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
-
-
-
 import './App.css';
 
 const userId = '3';
@@ -17,7 +13,6 @@ export default function App(props) {
             .then(response => response.json())
             .then(result => {
               setWantedAsset(result)
-              console.log(result)
             })
     }, [])
   
