@@ -1,5 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+
+
+
 import './App.css';
 
 const userId = '3';
@@ -7,7 +11,6 @@ const userId = '3';
 export default function App(props) {
 
     const [wantedAsset,setWantedAsset] = useState("");
-    const [renter, setRenter] = useState([]);
 
     useEffect(() => {
         fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${userId}`)
@@ -19,20 +22,31 @@ export default function App(props) {
     }, [])
   
     return (
-        <div className={'background'}>
-            <div className={'navBarHomePage'}>
-                <h1><a href="/">InstaRent</a></h1>
-                <h2><Link to={{ pathname:"/Renter",wantedAsset:wantedAsset}}>RENTER PROFILE</Link></h2>
-            </div>
-            <div className={"homePageContainer"}>
-                <h1 className={"headLineHomePage"}>Looking for apartment?</h1>
-                <p className={"pHomePage"}>Search apartments by neighborhood, price, amenity, and more</p>
-                <div className={"choiseRenterOwner"}>
-                    <ul>
-                        <li><Link to={{ pathname: "/RenterSearch"}}>I want to rent asset</Link></li>
-                        <li><Link to={{ pathname: "/OwnerPage"}}>I want to post asset</Link></li>
-                    </ul>
-                </div>	 
+        <div>
+            <div className={"background"}> 
+                <div className={'navBarHomePage'}>
+                    <h1><a href="/">InstaRent</a></h1>
+                    <div className={"options"}>
+                        <h3><Link to={{ pathname: '/'}}>Home</Link></h3>
+                        <h3><Link to={{ pathname: '/'}}>About</Link></h3>
+                        <h3><Link to={{ pathname: '/'}}>Search</Link></h3>
+                        <h3><Link to={{ pathname: '/'}}>Start</Link></h3>
+                    </div>
+                </div>
+                <div className={"homePageContainer"}>
+                    <div className={"pictures"}></div>
+                    <div className={"explain"}>
+                        <h1>Looking for apartment?</h1>
+                        <p> 
+                            Lorem Ipsum is simply dummy text of the  printing and typesetting industry. \n
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        </p>
+                    </div>
+                    <div className={"buttons"}>
+                        <Link to={{ pathname: "/RenterSearch"}}><button type={"submit"}>I want to rent asset</button></Link>
+                        <Link to={{ pathname: "/OwnerPage"}}><button type={"submit"}>I want to post asset</button></Link>
+                    </div>
+                </div>
             </div>
         </div>
     )
