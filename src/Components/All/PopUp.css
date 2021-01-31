@@ -47,8 +47,13 @@
     background-color:  #670BFF;
     border: none;
     border-radius: 5px;
-    color: #EDF5FF;
-    font-weight: 300;
-    font-size: 110%;
     padding: 1% 3%;
+    width: 250px;
 }
+
+.popup .okBtn p{
+    color: white;
+    font-size: 110%;
+    
+}
+

@@ -23,3 +23,10 @@ Button.filterBut {
     margin-top: 2%;
 }
 
+.checkboxs{
+    display: flex;
+}
+.inputs {
+    display: flex;
+    flex-direction: row;
+}

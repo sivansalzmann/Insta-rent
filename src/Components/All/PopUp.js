@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './PopUp.css';
 import {ButtonBase, Modal} from "@material-ui/core";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
@@ -8,7 +8,7 @@ const PopUp = (props) => {
     const wantAsset = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p style={{width: '200px'}}>CONTACT OWNER</p>
+                <p>CONTACT OWNER</p>
             </ButtonBase>
         )
     }
@@ -17,7 +17,7 @@ const PopUp = (props) => {
     const okBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p style={{width: '30px'}}>OK</p>
+                <p>OK</p>
             </ButtonBase>
         )
     }

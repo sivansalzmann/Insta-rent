@@ -8,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import './AssetSearch.css';
+import './AssetSearchForm.css';
 
 
 export default function AssetSearchForm(props) {
@@ -45,51 +45,56 @@ export default function AssetSearchForm(props) {
                     <div><TextField className="input" label="date" size="large" onChange={ (event) => setDate(event.target.value) } value={ date } name="date"/></div>
                     <div><Button variant="contained" color="primary" onClick={onSubmit} value="search" >search</Button> </div>
                 </form>
-                <Button variant="outlined" color="primary" onClick={() => setOpenEdit(true)} className={"filterBut"}>
+                <Button variant="outlined" color="primary" onClick={() => setOpenEdit(true)} className={"filterBut"} style={{marginBottom:'2%'}}>
                     Advanced search
                 </Button>
                 <PopUp onSubmit={onSubmit} title={"Filter assets"} open={openEdit} closePopup={() => setOpenEdit(false)}>
                     <TextField autoFocus margin="dense" label="Square feet" type="Name" onChange={e => setSquareFeet(e.target.value)} value={squareFeet} fullWidth/>
-                    <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} name="parking" color="primary" value = {parking} />} label="Parking"/>
-                    <FormControlLabel control={<Checkbox onChange={e => setElevator(e.target.value)} name="elevator" color="primary" value = {elevator} />} label="Elevator"/>
-                    <FormControlLabel control={<Checkbox onChange={e => setPets(e.target.value)} name="pets" color="primary" value = {pets} />} label="Pets"/>
-                    <FormControl > 
-                    <InputLabel htmlFor="age-native-simple">Rooms</InputLabel>
-                    <Select native value={rooms} onChange={e => setRooms(e.target.value)}>
-                        <option aria-label="None" value="Rooms" />
-                        <option >1</option>
-                        <option >2</option>
-                        <option >3</option>
-                        <option >4</option>
-                        <option >5</option>
-                        <option >6</option>
-                        <option >7</option>
-                        <option >8</option>
-                        <option >9</option>
-                        <option >10</option>
-                    </Select>
-                </FormControl>
-                <FormControl > <InputLabel htmlFor="age-native-simple">Condition</InputLabel>
-                    <Select native value={condition} onChange={e => setCondition(e.target.value)}>
-                        <option aria-label="None" value="Rooms" />
-                        <option >Great</option>
-                        <option>Good</option>
-                        <option>Bad</option>
-                    </Select>
-                </FormControl>
-                <FormControl >
-                    <InputLabel htmlFor="age-native-simple">Minimum price in $</InputLabel>
-                    <Select native value={price} onChange={e => setPrice(e.target.value)}>
-                        <option aria-label="None" value="Price" />
-                        <option >1000</option>
-                        <option>2000</option>
-                        <option>3000</option>
-                        <option>4000</option>
-                        <option>5000</option>
-                        <option>7000</option>
-                        <option>8000</option>
-                    </Select>
-                </FormControl>
+                    <div className={"checkboxs"}>
+                        <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} name="parking" color="primary" value = {true} />} label="Parking"/>
+                        <FormControlLabel control={<Checkbox onChange={e => setElevator(e.target.value)} name="elevator" color="primary" value = {true} />} label="Elevator"/>
+                        <FormControlLabel control={<Checkbox onChange={e => setPets(e.target.value)} name="pets" color="primary" value = {true} />} label="Pets"/>
+                    </div>
+                    <div className={"inputs"}>
+                        <FormControl style={{margin:"5%",width:"50%"}}> 
+                            <InputLabel htmlFor="age-native-simple">Rooms</InputLabel>
+                            <Select native value={rooms} onChange={e => setRooms(e.target.value)}>
+                                <option aria-label="None" value="Rooms" />
+                                <option >1</option>
+                                <option >2</option>
+                                <option >3</option>
+                                <option >4</option>
+                                <option >5</option>
+                                <option >6</option>
+                                <option >7</option>
+                                <option >8</option>
+                                <option >9</option>
+                                <option >10</option>
+                            </Select>
+                    </FormControl>
+                    <FormControl style={{margin:"5%",width:"50%"}} > 
+                        <InputLabel htmlFor="age-native-simple">Condition</InputLabel>
+                            <Select native value={condition} onChange={e => setCondition(e.target.value)}>
+                                <option aria-label="None" value="Rooms" />
+                                <option >Great</option>
+                                <option>Good</option>
+                                <option>Bad</option>
+                            </Select>
+                    </FormControl>
+                    <FormControl style={{margin:"5%",width:"50%"}}>
+                        <InputLabel htmlFor="age-native-simple">Minimum price in $</InputLabel>
+                        <Select native value={price} onChange={e => setPrice(e.target.value)}>
+                            <option aria-label="None" value="Price" />
+                            <option >1000</option>
+                            <option>2000</option>
+                            <option>3000</option>
+                            <option>4000</option>
+                            <option>5000</option>
+                            <option>7000</option>
+                            <option>8000</option>
+                        </Select>
+                    </FormControl>
+                </div>
             </PopUp>
             <AssetList assetsList={assetsList}/>
         </div>

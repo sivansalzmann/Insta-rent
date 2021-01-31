@@ -1,6 +1,6 @@
 // import react from 'react';
 import {Route} from 'react-router-dom';
-import RenterSearch from "../Components/Renter/RenterSearch";
+import RenterSearch from "../Components/AssetSearch/RenterSearch";
 // import Login from '../Components/Register/Login';
 // import Signup from '../Components/Register/SignUp';
 import OwnerPage from '../Components/Owner/OwnerPage';

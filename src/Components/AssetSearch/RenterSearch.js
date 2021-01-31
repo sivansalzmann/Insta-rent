@@ -1,4 +1,4 @@
-import AssetSearchForm from '../AssetSearch/AssetSearchForm';
+import AssetSearchForm from './AssetSearchForm';
 import NavBar from '../All/NavBar';
 import Footer from '../All/Footer';
 import './RenterSearch.css';
@@ -7,9 +7,7 @@ export default function RenterSearch(props) {
 	return (
 		<div className={"renterMainPage"}>
 			<NavBar />
-			<div className={"renterMainPageContainer"}>
-				<p>FIND YOUR NEXT ASSET</p>
-			</div>
+			<p className="renterMainPgeHeadline">FIND YOUR NEXT ASSET</p>
 			<AssetSearchForm />
 			<Footer />
 		</div>
