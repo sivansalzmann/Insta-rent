@@ -96,9 +96,8 @@ export default function AssetSearchForm(props) {
                     </FormControl>
                 </div>
             </PopUp>
-            <AssetList assetsList={assetsList}/>
+            <AssetList assetsList={assetsList} />
         </div>
-
     )
 }
 

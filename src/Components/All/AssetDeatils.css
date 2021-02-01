@@ -1,0 +1,44 @@
+
+.rowDetlails {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5%;
+}
+.rowDetlails div {
+    margin: 4%;
+}
+.rowDetlails div p{
+    margin-left: 3%;
+}
+.rowDeacImg {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-left: -5%;
+}
+.rowDeacImg span {
+    margin-right: 2%;
+}
+.image {
+    display: flex;
+    margin-top: 5%;
+}
+.image img {
+    width: 100%;
+    height: 40%;
+}
+.buttonsAssets{
+    display: flex;
+    flex-direction: row;
+    
+}
+.moreDeatils {
+    display: flex;
+    margin-top:4%;
+
+}
+.moreDeatils span {
+    font-weight: bold;
+    font-size: 150%;
+    margin-left: 25%;
+}

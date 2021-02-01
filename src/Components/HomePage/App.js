@@ -22,10 +22,9 @@ export default function App(props) {
                 <div className={'navBarHomePage'}>
                     <h1><a href="/">InstaRent</a></h1>
                     <div className={"options"}>
-                        <h3><Link to={{ pathname: '/'}}>Home</Link></h3>
                         <h3><Link to={{ pathname: '/'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/'}}>Search</Link></h3>
-                        <h3><Link to={{ pathname: '/'}}>Start</Link></h3>
+                        <h3><Link to={{ pathname: '/Renter', wantedAsset:wantedAsset}}>SignIn</Link></h3>
                     </div>
                 </div>
                 <div className={"homePageContainer"}>
@@ -38,8 +37,8 @@ export default function App(props) {
                         </p>
                     </div>
                     <div className={"buttons"}>
-                        <Link to={{ pathname: "/RenterSearch"}}><button type={"submit"}>I want to rent asset</button></Link>
-                        <Link to={{ pathname: "/OwnerPage"}}><button type={"submit"}>I want to post asset</button></Link>
+                        <Link to={{ pathname: "/RenterSearch"}}><button type={"submit"}><p>I want to rent asset</p></button></Link>
+                        <Link to={{ pathname: "/OwnerPage"}}><button type={"submit"}><p>I want to post asset</p></button></Link>
                     </div>
                 </div>
             </div>

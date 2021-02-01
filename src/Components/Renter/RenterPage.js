@@ -14,18 +14,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
-import AspectRatioIcon from '@material-ui/icons/AspectRatio';
-import LocationCityIcon from '@material-ui/icons/LocationCity';
-import StreetviewIcon from '@material-ui/icons/Streetview';
-import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
-import imgAsset from './Media/house.jpg';
-import AssetPage from '../AssetSearch/AssetPage';
 import PopUp from '../All/PopUp';
 import TextField from '@material-ui/core/TextField';
 import Contract from './Contract';
 import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
 import Message from '../All/Message';
+import AssetDeatils from '../All/AssetDeatils';
 
 const userId = '3';
 
@@ -183,28 +178,7 @@ export default function RenterPage(props) {
         <TextField label="Budget" value={Budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
     </PopUp>
     <PopUp onSubmit={() => setOpen(false)} WantAsset={false} title={props.location.wantedAsset[0].Country} open={open} closePopup={() => setOpen(false)}>
-    <div className={"rowDeacImg"}>
-      <span>
-        <h3>{props.location.wantedAsset[0].City}</h3>
-        {props.location.wantedAsset[0].Description}
-      </span>
-      <img src={imgAsset} alt="Asset"/>
-    </div>
-      <div className={"rowDetlails"}>
-        <StreetviewIcon/>
-        {props.location.wantedAsset[0].Street}
-        <ConfirmationNumberIcon/>
-        {props.location.wantedAsset[0].Zip}
-        <LocationCityIcon/>
-        {props.location.wantedAsset[0].Neighborhood}
-        <AspectRatioIcon/>
-        {props.location.wantedAsset[0].SquareFeet} m^2
-      </div>
-      <div className={"moreDeatils"}>
-        <span>The condition is {props.location.wantedAsset[0].Condition}</span>
-        <span>${props.location.wantedAsset[0].Price}/month (include charges)</span>
-        <span>Avaliable from {props.location.wantedAsset[0].Avilability}</span>
-      </div>
+      <AssetDeatils item={props.location.wantedAsset[0]} />
     </PopUp>
     <Footer/>
 	</div>

@@ -19,7 +19,7 @@ export default function AssetCard (props) {
         <Card className={classes.card}>
             <CardMedia component="img" height="140" image="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F1026205392%2F960x0.jpg%3Ffit%3Dscale" title="Referrals"/>
             <CardContent>
-                <Typography component="h5" style={{fontFamily: 'Lato'}}>
+                <Typography component="h5" style={{fontFamily: 'Lato',overflow: 'hidden',webkitLineClamp: '2',textOverflow: 'ellipsis'}}>
                     {props.item.Description}
                 </Typography>
                 <Typography color="textSecondary" component="subtitle2" style={{fontFamily: 'Lato',fontWeight: 'bold'}}>
