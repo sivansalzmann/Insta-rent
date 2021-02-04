@@ -5,10 +5,10 @@ import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
 const PopUp = (props) => {
 
-    const wantAsset = () => {
+    const sendBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p>CONTACT OWNER</p>
+                <p>SEND</p>
             </ButtonBase>
         )
     }
@@ -18,6 +18,14 @@ const PopUp = (props) => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
                 <p>OK</p>
+            </ButtonBase>
+        )
+    }
+
+    const contactOwnerBtn = () => {
+        return (
+            <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
+                <p>CONTECT OWNER</p>
             </ButtonBase>
         )
     }
@@ -37,7 +45,7 @@ const PopUp = (props) => {
                     {props.children}
                 </div>
                 <div className={'divBtn'}>
-                    {props.WantAsset ? wantAsset() : okBtn()}
+                    {props.sendBtn ? sendBtn() : okBtn()}
                 </div>
             </div>
         )

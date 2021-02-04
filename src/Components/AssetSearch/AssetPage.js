@@ -10,17 +10,16 @@ const userId = '5'; //change to login
 export default function AssetPage(props) {
   const [open, setOpen] = useState(false);
 
-  const handleOwner = () => {
-    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`
-        , {
+  const wantIt = () => {
+    const body={RenterId: userId}
+    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({RenterId: userId}),
+            body: JSON.stringify(body),
         })
           .then(response => response.json())
-          .then(result => {
-              setOpen(false);
-              alert("The owner will contact with you soon as possible")
+          .then(result => { //add message
+              // alert("The owner will contact with you soon as possible")
           })
    };
 
@@ -28,9 +27,9 @@ export default function AssetPage(props) {
     <div>
       <div className={"buttonsAssets"}>
         <Button variant="outlined" color="primary" onClick={() => setOpen(true)} style={{margin:'2%'}}>Show deatils</Button>
-        <Button variant="outlined" color="primary" style={{margin:'2%'}}>Places around</Button>
+        <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={wantIt()}>I wnat this asset</Button>
       </div>
-        <PopUp onSubmit={handleOwner} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)}>
+        <PopUp onSubmit={() => setOpen(false)} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)}>
             <AssetDeatils item={props.item} />
         </PopUp>
     </div>

@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function Message() {
+const Message = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -42,7 +42,7 @@ export default function Message() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} color="primary" onClick={props.onSubmit}>
             Send
           </Button>
         </DialogActions>
@@ -50,3 +50,5 @@ export default function Message() {
     </>
   );
 }
+
+export default Message;

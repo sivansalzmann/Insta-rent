@@ -14,7 +14,7 @@ export default function App(props) {
             .then(result => {
               setWantedAsset(result)
             })
-    }, [])
+    }, [wantedAsset])
   
     return (
         <div>

@@ -57,10 +57,16 @@ export default function RenterPage(props) {
 
     const [openEdit,setOpenEdit] = useState(false);
     const [open, setOpen] = useState(false);
+    const [openMessage, setOpenMessage] = useState(false);
+    const [renterMessages, setRenterMessages] = useState("");
     const [user,setUser] = useState("");
+    const [renterDeatils,setRenterDeatils] = useState("");
+    const [renterDeatilsId,setRenterDeatilsId] = useState("");
     const [value, setValue] = useState(0);
-    const [JobTitle,setJob] = useState("");
-    const [Budget,setBudget] = useState("");
+    const [jobTitle,setJob] = useState("");
+    const [budget,setBudget] = useState("");
+    const [message,setMessage] = useState("");
+    const [timestamp,setTimestamp] = useState("");
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -71,7 +77,8 @@ export default function RenterPage(props) {
     };
 
     useEffect(() => {
-      fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+      // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+        fetch(`http://localhost:3000/api/users/${userId}`)
           .then(response => response.json())
           .then(result =>  {
              setUser(result)
@@ -79,10 +86,33 @@ export default function RenterPage(props) {
           
   }, [user])
 
+  useEffect(() => {
+    // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+      fetch(`http://localhost:3000/api/renterDeatils/${userId}`)
+        .then(response => response.json())
+        .then(result =>  {
+          setRenterDeatils(result)
+          setRenterDeatilsId(result.id)
+        })
+        
+    }, [renterDeatils])
+
+    useEffect(() => {
+      // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+        fetch(`http://localhost:3000/api/messages?RenterId=${userId}`)
+          .then(response => response.json())
+          .then(result =>  {
+            setRenterMessages(result)
+            // console.log(result)
+          })
+          
+      }, [renterMessages])
+
     const editUser = () => {
-        const body = { JobTitle: JobTitle,Budget:Budget };
-        console.log(body)
-        fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}`, {
+        const body = { JobTitle: jobTitle,Budget:budget};
+        console.log(body);
+        // fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}`, {
+        fetch(`http://localhost:3000/api/renterDeatils/${renterDeatils.id}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -90,11 +120,30 @@ export default function RenterPage(props) {
           .then(response => response.json())
           .then(result => {
               setOpenEdit(false);
-              setUser(result)
+              setRenterDeatils(result)
               setJob("")
               setBudget("")
           });
       }
+
+    const addMessage = () => {
+      let today = new Date();
+      setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+      const body = { Message: message , RenterId:userId, OwnerId:0,Timestamp:timestamp};
+      console.log(body)
+      // fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
+        fetch(`http://localhost:3000/api/messages` ,{
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+      })
+        .then(response => response.json())
+        .then(result => {
+            setOpenMessage(false)
+            setMessage(result)
+            setMessage("")
+        });
+    }
 
     return (
 		<div className={"renterMainPage"}>
@@ -103,25 +152,25 @@ export default function RenterPage(props) {
         <div className={"personalDeatils"}>
             <img src={profileImg} alt="profile" />
             <h1>{user.FirstName} {user.LastName}</h1>
-            <h3>{user.JobTitle}</h3>
+            <h3>{renterDeatils.JobTitle}</h3>
             <div className={"line"}></div>
             <p>Gender</p>
             <span>{user.Gender}</span>
             <p>Age</p>
-            <span>blabla</span>
+            <span>{user.Age}</span>
             <p>Country</p>
-            <span>blabla</span>
-            <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>Edit</Button></div>
+            <span>{user.Country}</span>
+            <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>Edit</Button></div>        
         </div>
       <div className={"containerRenter"}>
           <div className={"currentContainer"}>
               <div className={"curStatus"}>
                   <h1>Current status</h1>
-                  <p>Looking for rent appetmant in NYC</p>
+                  <p>Looking for rent appetmant in {renterDeatils.FavoriteCountry} </p>
               </div>
               <div className={"curBud"}>
                   <h1>Cuurent budget</h1>
-                  <p>{user.Budget}</p>
+                  <p>{renterDeatils.Budget} $</p>
               </div>
           </div>
           <div className={"progress"}>
@@ -129,7 +178,7 @@ export default function RenterPage(props) {
                 <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label="In progress" {...a11yProps(0)} />
                 <Tab label="Asset place deatils" {...a11yProps(1)}  />
-                <Tab label="Chat with my owner" {...a11yProps(2)} disabled  />
+                <Tab label="Chat with my owner" {...a11yProps(2)}  />
                 </Tabs>
             </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}onChangeIndex={handleChangeIndex}>
@@ -148,7 +197,10 @@ export default function RenterPage(props) {
                         <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
                         <StepContent>
                         <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
-                            <Message />
+                            <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
+                            <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+                                <TextField label="Message" value={message} onChange={e => setMessage(e.target.value)} fullWidth required/>
+                            </PopUp>
                             <Contract/>
                         </StepContent>
                     </Step>
@@ -167,19 +219,24 @@ export default function RenterPage(props) {
               From google api
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              Chat
+              {/* {console.log(renterMessages)}
+              {
+                renterMessages.forEach((item) => {
+                  console.log(item)
+                })
+              } */}
             </TabPanel>
           </SwipeableViews>
         </div> 
       </div>
     </div>
-    <PopUp onSubmit={editUser} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)}>
-        <TextField label="JobTitle" value={JobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
-        <TextField label="Budget" value={Budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
+    <PopUp onSubmit={editUser} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
+        <TextField label="JobTitle" value={jobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
+        <TextField label="Budget" value={budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
     </PopUp>
-    <PopUp onSubmit={() => setOpen(false)} WantAsset={false} title={props.location.wantedAsset[0].Country} open={open} closePopup={() => setOpen(false)}>
+    {/* <PopUp onSubmit={() => setOpen(false)} wantAssetBtn={false} title={props.location.wantedAsset[0].Country} open={open} closePopup={() => setOpen(false)} sendBtn={false}>
       <AssetDeatils item={props.location.wantedAsset[0]} />
-    </PopUp>
+    </PopUp> */}
     <Footer/>
 	</div>
 	);
