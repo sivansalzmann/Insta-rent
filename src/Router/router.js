@@ -1,8 +1,8 @@
 // import react from 'react';
 import {Route} from 'react-router-dom';
 import RenterSearch from "../Components/AssetSearch/RenterSearch";
-// import Login from '../Components/Register/Login';
-// import Signup from '../Components/Register/SignUp';
+import SignIn from '../Components/Register/SignIn';
+import Signup from '../Components/Register/SignUp';
 import OwnerPage from '../Components/Owner/OwnerPage';
 import App from '../Components/HomePage/App';
 // import AssetPage from '../Components/AssetPage'
@@ -18,10 +18,10 @@ const ReactRouter = () => {
     return (
         <>
             <Route exact path="/" component={App}/>
-            {/* <Route exact path="/Login" component={Login}/> */}
+            <Route exact path="/SignIn" component={SignIn}/>
             <Route exact path="/RenterSearch" component={RenterSearch}/>
             {/* <Route exact path="/AssetPage" component={AssetPage}/>  */}
-            {/* <Route path="/signup" component={Signup} /> */}
+            <Route path="/signup" component={Signup} />
             <Route path="/OwnerPage" component={OwnerPage} />
             {/* <Route path="/AssetCard" component={AssetCard} /> */}
             <Route exact path="/AssetAddForm" component={AssetAddForm}/>

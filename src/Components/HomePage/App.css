@@ -35,6 +35,7 @@ a{
     height: 60%;
     position: absolute;;
     margin-left: 50%;
+    background-repeat: no-repeat;
 }
 .explain {
     display: flex;
