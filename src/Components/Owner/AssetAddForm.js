@@ -98,7 +98,6 @@ const AssetAddForm = (props) => {
             Neighborhood: neighborhood,
             Rooms: rooms,
             SquareFeet: squareFeet,
-            Floors: floors,
             Parking: parking,
             Elevator: elevator,
             PetsAllowed: petsAllowed,
@@ -106,7 +105,7 @@ const AssetAddForm = (props) => {
             Price: price,
             Avilability: avilability,
             Description: description,
-            OwnerId: {ownerId},
+            // OwnerId: {ownerId},
             }),
 			headers: {'Content-Type': 'application/json'},
 	})
