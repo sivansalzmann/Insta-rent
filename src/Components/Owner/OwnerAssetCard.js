@@ -34,8 +34,8 @@ export default function OwnerAssetCard(props) {
                 <Typography variant="h5" component="h5" style={{ fontFamily: 'Lato', fontWeight: 'bold' }}>
                     Avilable from {props.item.Avilability}
                 </Typography>
-                <EditOutlinedIcon />
-                <DeleteOutlineIcon />
+                <EditOutlinedIcon onClick={() => props.onClickEdit(props.item.id)}/>
+                <DeleteOutlineIcon onClick={() => props.onClickDelete(props.item.id)} />
             </CardContent>
         </Card>
 

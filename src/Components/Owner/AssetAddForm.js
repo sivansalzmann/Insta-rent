@@ -88,6 +88,32 @@ const AssetAddForm = (props) => {
             setAvilability("");
             setDescription("");
         }
+        fetch(`https://instarent-1st.herokuapp.com/api/assets`, {
+            method: 'POST',
+            body: JSON.stringify({
+            City: city,
+            Street: street,
+            Zip: zip,
+            Country: country,
+            Neighborhood: neighborhood,
+            Rooms: rooms,
+            SquareFeet: squareFeet,
+            Floors: floors,
+            Parking: parking,
+            Elevator: elevator,
+            PetsAllowed: petsAllowed,
+            Condition: condition,
+            Price: price,
+            Avilability: avilability,
+            Description: description,
+            OwnerId: {ownerId},
+            }),
+			headers: {'Content-Type': 'application/json'},
+	})
+			.then(response => response.json())
+			.then(result => {
+
+			})
     }
 
     return (
