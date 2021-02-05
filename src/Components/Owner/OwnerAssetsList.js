@@ -5,7 +5,7 @@ export default function OwnerAssetList(props) {
    
     const eachItem = (item) => {
         return (
-            <OwnerAssetCard key={item.id} id={item.id} item={item}> 
+            <OwnerAssetCard key={item.id} id={item.id} item={item} onClickEdit={props.onClickEdit} onClickDelete={props.onClickDelete} > 
                 {props.children}
             </OwnerAssetCard>
         )

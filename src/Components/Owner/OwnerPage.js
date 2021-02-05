@@ -1,5 +1,5 @@
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AssetList from '../HomePage/AssetsList';
 import { Link } from 'react-router-dom';
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
@@ -7,7 +7,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import OwnerAssetsList from './OwnerAssetsList';
 import RenterList from './RenterList';
 
-const ownerId = 9;
+const ownerId = 6;
 const OwnerPage = (props) => {
 	// const [items, setItems] = useState(AssetsData.items);
 	const [editing, setEditing] = useState(false);
@@ -15,6 +15,7 @@ const OwnerPage = (props) => {
 	// const [ownerId,setOwnerId] = useState("");
 	const [ownerAssetsList, setOwnerAssetsList] = useState([]);
 	const [renterNumb, setRenterNumb] = useState([]);
+	
 
 	useEffect(() => {
 		fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
@@ -26,14 +27,34 @@ const OwnerPage = (props) => {
 
 	}, [])
 
+	const editAsset = (assetId) => {
+		// fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
+		// 	method: 'PUT',
+		// 	body: JSON.stringify(),
+			// headers: {'Content-Type': 'application/json'},
+		// })
+		// 	.then(response => response.json())
+		// 	.then(result => {
+		// 		setAsset(result)
+		// 	})
+			console.log(assetId)
+	}
 
 
-
-	// const deleteOwner = (target) => {
-	// 	setItems(prevState => ({
-	// 		items: prevState.items.filter(item => item.id !== target)
-	// 	}))
-	// }
+	const deleteAsset = (assetId) => {
+		fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
+			method: 'DELETE',
+	})
+			.then(response => response.json())
+			.then(result => {
+				console.log(result)
+				window.location.reload()
+			})
+		// setItems(prevState => ({
+		// 	items: prevState.items.filter(item => item.id !== target)
+		// }))
+		console.log(assetId)
+	}
 
 	// const editItem = (id) => {
 	// 	const item = this.state.items.filter(item => item.id === id)[0];
@@ -95,7 +116,7 @@ const OwnerPage = (props) => {
 					<Link to={{ pathname: "/AssetAddForm", submit: onAddAsset }}>
 						<AddCircleIcon className="plus" />
 					</Link>
-					<OwnerAssetsList ownerAssetsList={ownerAssetsList} />
+					<OwnerAssetsList ownerAssetsList={ownerAssetsList} onClickEdit={editAsset} onClickDelete={deleteAsset} />
 					<h1>Your assets in proccess</h1>
 					<RenterList renterNumb={renterNumb} />
 				</div>
