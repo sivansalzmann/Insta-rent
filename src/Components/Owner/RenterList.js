@@ -56,9 +56,9 @@ export default function RenterList() {
               <TableCell component="th" scope="row">
                 {renterList.name}
               </TableCell>
-              <TableCell align="right">{renterList.id}</TableCell>
-              <TableCell align="right">{renterList.FirstName}</TableCell>
-              <TableCell align="right">{renterList.Phone}</TableCell>
+              <TableCell align="left">{renterList.id}</TableCell>
+              <TableCell align="left">{renterList.FirstName} {renterList.LastName}</TableCell>
+              <TableCell align="left">{renterList.Phone}</TableCell>
             </TableRow>
           ))}
         </TableBody>
