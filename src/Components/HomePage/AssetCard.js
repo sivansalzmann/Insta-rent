@@ -17,7 +17,7 @@ export default function AssetCard (props) {
     const classes = useStyles();
     return (
         <Card className={classes.card}>
-            <CardMedia component="img" height="140" image="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F1026205392%2F960x0.jpg%3Ffit%3Dscale" title="Referrals"/>
+            <CardMedia component="img" height="140" image={props.item.UrlPicture} title="Referrals"/>
             <CardContent>
                 <Typography component="h5" style={{fontFamily: 'Lato',overflow: 'hidden',webkitLineClamp: '2',textOverflow: 'ellipsis'}}>
                     {props.item.Description}

@@ -48,7 +48,7 @@ export default function AssetSearchForm(props) {
                 <Button variant="outlined" color="primary" onClick={() => setOpenEdit(true)} className={"filterBut"} style={{marginBottom:'2%'}}>
                     Advanced search
                 </Button>
-                <PopUp onSubmit={onSubmit} title={"Filter assets"} open={openEdit} closePopup={() => setOpenEdit(false)}>
+                <PopUp onSubmit={onSubmit} title={"Filter assets"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
                     <TextField autoFocus margin="dense" label="Square feet" type="Name" onChange={e => setSquareFeet(e.target.value)} value={squareFeet} fullWidth/>
                     <div className={"checkboxs"}>
                         <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} name="parking" color="primary" value = {true} />} label="Parking"/>

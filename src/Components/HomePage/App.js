@@ -2,20 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
 
-const userId = '3';
-
 export default function App(props) {
-
-    const [wantedAsset,setWantedAsset] = useState("");
-
-    useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${userId}`)
-            .then(response => response.json())
-            .then(result => {
-              setWantedAsset(result)
-            })
-    }, [wantedAsset])
-  
     return (
         <div>
             <div className={"background"}> 
@@ -24,7 +11,7 @@ export default function App(props) {
                     <div className={"options"}>
                         <h3><Link to={{ pathname: '/'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/'}}>Search</Link></h3>
-                        <h3><Link to={{ pathname: '/Renter', wantedAsset:wantedAsset}}>SignIn</Link></h3>
+                        <h3><Link to={{ pathname: '/Renter'}}>SignIn</Link></h3>
                     </div>
                 </div>
                 <div className={"homePageContainer"}>

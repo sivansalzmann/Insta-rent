@@ -3,7 +3,6 @@ import LocationCityIcon from '@material-ui/icons/LocationCity';
 import StreetviewIcon from '@material-ui/icons/Streetview';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import './AssetDeatils.css';
-import imgAsset from './Media/house.jpg';
 
 export default function AssetPage(props) {
 
@@ -14,7 +13,7 @@ export default function AssetPage(props) {
             <p>{props.item.Description}</p>
             </div>
         <div className={"image"}>
-            <img src={imgAsset} alt="Asset"/>
+            <img src={props.item.UrlPicture} alt="Asset"/>
         </div>
         <div className={"rowDetlails"}>
             <div>

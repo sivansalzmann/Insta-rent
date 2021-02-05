@@ -19,8 +19,9 @@ import TextField from '@material-ui/core/TextField';
 import Contract from './Contract';
 import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
-import Message from '../All/Message';
+import MessageList from '../Message/MessageList';
 import AssetDeatils from '../All/AssetDeatils';
+
 
 const userId = '3';
 
@@ -67,6 +68,7 @@ export default function RenterPage(props) {
     const [budget,setBudget] = useState("");
     const [message,setMessage] = useState("");
     const [timestamp,setTimestamp] = useState("");
+    const [wantedAsset,setWantedAsset] = useState("");
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -96,6 +98,15 @@ export default function RenterPage(props) {
         })
         
     }, [renterDeatils])
+
+    useEffect(() => {
+        // fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${userId}`)
+        fetch(`http://localhost:3000/api/assets?RenterId=${userId}`)
+            .then(response => response.json())
+            .then(result => {
+              setWantedAsset(result)
+            })
+    }, [wantedAsset])
 
     useEffect(() => {
       // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
@@ -129,8 +140,8 @@ export default function RenterPage(props) {
     const addMessage = () => {
       let today = new Date();
       setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
-      const body = { Message: message , RenterId:userId, OwnerId:0,Timestamp:timestamp};
-      console.log(body)
+      const body = { Message: message , RenterId:userId, OwnerId:wantedAsset[0].OwnerId,Timestamp:timestamp};
+      console.log(body);
       // fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
         fetch(`http://localhost:3000/api/messages` ,{
           method: 'POST',
@@ -178,7 +189,7 @@ export default function RenterPage(props) {
                 <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label="In progress" {...a11yProps(0)} />
                 <Tab label="Asset place deatils" {...a11yProps(1)}  />
-                <Tab label="Chat with my owner" {...a11yProps(2)}  />
+                <Tab label="Messages to my owner" {...a11yProps(2)}  />
                 </Tabs>
             </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}onChangeIndex={handleChangeIndex}>
@@ -219,12 +230,7 @@ export default function RenterPage(props) {
               From google api
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              {/* {console.log(renterMessages)}
-              {
-                renterMessages.forEach((item) => {
-                  console.log(item)
-                })
-              } */}
+              <MessageList messageList={renterMessages}/>
             </TabPanel>
           </SwipeableViews>
         </div> 
@@ -234,9 +240,9 @@ export default function RenterPage(props) {
         <TextField label="JobTitle" value={jobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
         <TextField label="Budget" value={budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
     </PopUp>
-    {/* <PopUp onSubmit={() => setOpen(false)} wantAssetBtn={false} title={props.location.wantedAsset[0].Country} open={open} closePopup={() => setOpen(false)} sendBtn={false}>
-      <AssetDeatils item={props.location.wantedAsset[0]} />
-    </PopUp> */}
+    <PopUp onSubmit={() => setOpen(false)} wantAssetBtn={false} title={wantedAsset.Country} open={open} closePopup={() => setOpen(false)} sendBtn={false}>
+      <AssetDeatils item={wantedAsset[0]} />
+    </PopUp>
     <Footer/>
 	</div>
 	);
