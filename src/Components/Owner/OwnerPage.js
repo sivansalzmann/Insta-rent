@@ -6,6 +6,8 @@ import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import OwnerAssetsList from './OwnerAssetsList';
 import RenterList from './RenterList';
+import TextField from '@material-ui/core/TextField';
+import PopUp from '../All/PopUp';
 
 const ownerId = 6;
 const OwnerPage = (props) => {
@@ -15,7 +17,7 @@ const OwnerPage = (props) => {
 	// const [ownerId,setOwnerId] = useState("");
 	const [ownerAssetsList, setOwnerAssetsList] = useState([]);
 	const [renterNumb, setRenterNumb] = useState([]);
-	
+
 
 	useEffect(() => {
 		fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
@@ -31,20 +33,20 @@ const OwnerPage = (props) => {
 		// fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
 		// 	method: 'PUT',
 		// 	body: JSON.stringify(),
-			// headers: {'Content-Type': 'application/json'},
+		// headers: {'Content-Type': 'application/json'},
 		// })
 		// 	.then(response => response.json())
 		// 	.then(result => {
 		// 		setAsset(result)
 		// 	})
-			console.log(assetId)
+		console.log(assetId)
 	}
 
 
 	const deleteAsset = (assetId) => {
 		fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
 			method: 'DELETE',
-	})
+		})
 			.then(response => response.json())
 			.then(result => {
 				console.log(result)
@@ -99,6 +101,22 @@ const OwnerPage = (props) => {
 	const onAddAsset = (data) => {
 		console.log(data)
 	}
+	// const onChange = () => {
+	// 	setCountry("");
+	// 	setCity("");
+	// 	setNeighborhood("");
+	// 	setStreet("");
+	// 	setZip("");
+	// 	setSquareFeet("");
+	// 	setRooms("");
+	// 	setCondition("");
+	// 	setParking("");
+	// 	setElevator("");
+	// 	setPetsAllowed("");
+	// 	setPrice("");
+	// 	setAvilability("");
+	// 	setDescription("");
+	// }
 
 	return (
 		<>
@@ -119,6 +137,15 @@ const OwnerPage = (props) => {
 					<OwnerAssetsList ownerAssetsList={ownerAssetsList} onClickEdit={editAsset} onClickDelete={deleteAsset} />
 					<h1>Your assets in proccess</h1>
 					<RenterList renterNumb={renterNumb} />
+					{/* <PopUp onSubmit={() => editAsset(false)} title={"Edit Asset"} open={open} closePopup={() => setOpen(false)}>
+						<div><TextField className="input" label="Country" size="large" onChange={(event) => setCountry(event.target.value)} value={country} name="Country" /></div>
+						<div><TextField className="input" label="City" size="large" onChange={(event) => setCity(event.target.value)} value={city} name="City" /></div>
+						<div><TextField className="input" label="Neighborhood" size="large" onChange={(event) => setNeighborhood(event.target.value)} value={neighborhood} name="Neighborhood" /></div>
+						<div><TextField className="input" label="Street" size="large" onChange={(event) => setStreet(event.target.value)} value={street} name="Street" /></div>
+						<div><TextField className="input" label="Zip" size="large" onChange={(event) => setZip(event.target.value)} value={zip} name="Zip" /></div>
+						<div><TextField className="input" label="SquareFeet" size="large" onChange={(event) => setSquareFeet(event.target.value)} value={squareFeet} name="SquareFeet" /></div>
+						<div><TextField className="input" label="Rooms" size="large" onChange={(event) => setRooms(event.target.value)} value={rooms} name="Rooms" /></div>
+					</PopUp> */}
 				</div>
 
 
