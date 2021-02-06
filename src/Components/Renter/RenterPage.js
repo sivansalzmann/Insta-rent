@@ -140,7 +140,7 @@ export default function RenterPage(props) {
 			<NavBar/>
 			<div className={"renterPageContainer"}>
         <div className={"personalDeatilsContainer"}>
-           <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id}/>
+           <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id} FavoriteCountry={renterDeatils.FavoriteCountry} renter={true}/>
         </div>
       <div className={"containerRenter"}>
           <div className={"currentContainer"}>
