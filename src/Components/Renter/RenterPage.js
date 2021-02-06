@@ -119,57 +119,57 @@ export default function RenterPage(props) {
 			<NavBar/>
 			<div className={"renterPageContainer"}>
         <div className={"personalDeatilsContainer"}>
-           <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id} FavoriteCountry={renterDeatils.FavoriteCountry} renter={true}/>
+          <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id} FavoriteCountry={renterDeatils.FavoriteCountry} renter={true}/>
         </div>
         <div className={"containerRenter"}>
           <div className={"currentContainer"}>
-              <div className={"curStatus"}>
-                  <h1>Current status</h1>
-                  <p>Looking for rent appetmant in {renterDeatils.FavoriteCountry} </p>
-              </div>
-              <div className={"curBud"}>
-                  <h1>Cuurent budget</h1>
-                  <p>{renterDeatils.Budget} $</p>
-              </div>
+            <div className={"curStatus"}>
+              <h1>Current status</h1>
+              <p>Looking for rent appetmant in {renterDeatils.FavoriteCountry} </p>
+            </div>
+            <div className={"curBud"}>
+                <h1>Cuurent budget</h1>
+                <p>{renterDeatils.Budget} $</p>
+            </div>
           </div>
           <div className={"progress"}>
             <AppBar position="static" color="default">
-                <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+              <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label="In progress" {...a11yProps(0)} />
                 <Tab label="Asset place deatils" {...a11yProps(1)}  />
                 <Tab label="Messages to my owner" {...a11yProps(2)}  />
-                </Tabs>
+              </Tabs>
             </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}onChangeIndex={handleChangeIndex}>
             <TabPanel value={value} index={0} dir={theme.direction}>
               <h1 style={{fontFamily:'Lato'}}>Rent asset progress</h1>
               <div>
                 <Stepper active orientation="vertical">
-                    <Step >
-                        <StepLabel style={{fontFamily:'Lato'}}>Request recived</StepLabel>
-                        <StepContent>
-                        <Typography style={{fontFamily:'Lato'}}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
-                        <Button variant="contained" color="primary" size="small" onClick={() => setOpen(true)}>Asset deatils</Button>
-                        </StepContent>
-                    </Step>
+                  <Step >
+                    <StepLabel style={{fontFamily:'Lato'}}>Request recived</StepLabel>
+                    <StepContent>
+                    <Typography style={{fontFamily:'Lato'}}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
+                    <Button variant="contained" color="primary" size="small" onClick={() => setOpen(true)}>Asset deatils</Button>
+                    </StepContent>
+                  </Step>
                     <Step active>
-                        <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
-                        <StepContent>
-                        <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
-                            <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
-                            <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
-                              <TextField label="Message" value={message} onChange={e => setMessage(e.target.value)} fullWidth required/>
-                            </PopUp>
-                            <Contract/>
-                        </StepContent>
+                      <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
+                      <StepContent>
+                      <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
+                        <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
+                        <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+                          <TextField label="Message" value={message} onChange={e => setMessage(e.target.value)} fullWidth required/>
+                        </PopUp>
+                        <Contract/>
+                      </StepContent>
                     </Step>
                     <Step >
-                        <StepLabel style={{fontFamily:'Lato'}}>Enjoy in your new journey!</StepLabel>
-                        <StepContent>
-                        <Typography style={{fontFamily:'Lato'}}></Typography>
-                        <Button variant="contained" color="primary" size="small">Chat</Button>
-                        <Contract/>
-                        </StepContent>
+                      <StepLabel style={{fontFamily:'Lato'}}>Enjoy in your new journey!</StepLabel>
+                      <StepContent>
+                      <Typography style={{fontFamily:'Lato'}}></Typography>
+                      <Button variant="contained" color="primary" size="small">Chat</Button>
+                      <Contract/>
+                      </StepContent>
                     </Step>
                 </Stepper>
               </div> 
