@@ -34,15 +34,14 @@ export default function Login (props) {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const login = () => {
+  const login = (respons) => {
     Axios({
       method: "POST",
       data: {
-        username: loginUsername,
-        password: loginPassword,
+        token: respons.tokenId
       },
       withCredentials: true,
-      url: "http://localhost:3000/api/owners/login",
+      url: "http://localhost:3000/api/auth/login",
     }).then((res) => console.log(res));
   };
 
@@ -66,7 +65,7 @@ export default function Login (props) {
                 <GoogleLogin
                 className={classes.google}
                 clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
-                onSuccess={responseGoogle}
+                onSuccess={login}
                 onFailure={responseGoogle}
                 />
             </div>
