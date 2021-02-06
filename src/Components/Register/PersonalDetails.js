@@ -1,12 +1,6 @@
-import react ,{ useState } from 'react';
-import Axios from "axios";
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import './SignIn.css';
-import Footer from '../All/Footer';
-import NavBar from '../All/NavBar';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';

@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import NavBar from '../All/NavBar';
-import Footer from '../All/Footer';
 
 export default function App(props) {
     return (
@@ -12,7 +10,7 @@ export default function App(props) {
                     <h1><a href="/">InstaRent</a></h1>
                     <div className={"options"}>
                         <h3><Link to={{ pathname: '/'}}>About</Link></h3>
-                        <h3><Link to={{ pathname: '/'}}>Search</Link></h3>
+                        <h3><Link to={{ pathname: '/RenterSearch'}}>Search</Link></h3>
                         <h3><Link to={{ pathname: '/Renter'}}>SignIn</Link></h3>
                     </div>
                 </div>

@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import AssetDeatils from '../All/AssetDeatils';
-import './AssetPage.css';
 import PopUp from '../All/PopUp';
-
 
 const userId = '5'; //change to login
 
 export default function AssetPage(props) {
   const [open, setOpen] = useState(false);
-
   const wantIt = () => {
     const body={RenterId: userId}
     fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
@@ -22,7 +19,6 @@ export default function AssetPage(props) {
               // alert("The owner will contact with you soon as possible")
           })
    };
-
   return (
     <div>
       <div className={"buttonsAssets"}>

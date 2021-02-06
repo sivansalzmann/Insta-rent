@@ -59,3 +59,10 @@ h1{
 p{
     font-size: 100%;
 }
+.myAssetsTab{
+    margin-left: 3%;
+}
+.myAssetsTab h2{
+    margin:5%;
+    font-size: 200%;
+}

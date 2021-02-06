@@ -12,7 +12,6 @@ const useStyles = makeStyles({
     },
     
 });
-
 export default function AssetCard (props) {
     const classes = useStyles();
     return (

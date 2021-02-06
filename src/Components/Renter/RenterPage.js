@@ -15,19 +15,17 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PopUp from '../All/PopUp';
 import TextField from '@material-ui/core/TextField';
-import Contract from './Contract';
+import Contract from '../All/Contract';
 import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
 import MessageList from '../Message/MessageList';
 import AssetDeatils from '../All/AssetDeatils';
 import PrsonalDeatils from '../All/PersonalDeatils';
 
-
 const userId = '3'; //change it
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-  
     return (
       <div role="tabpanel" hidden={value !== index} id={`full-width-tabpanel-${index}`} aria-labelledby={`full-width-tab-${index}`} {...other} >
         {value === index && (
@@ -38,24 +36,20 @@ function TabPanel(props) {
       </div>
     );
   }
-  
   TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
   };
-  
   function a11yProps(index) {
     return {
       id: `full-width-tab-${index}`,
           'aria-controls': `full-width-tabpanel-${index}`,
     };
   }
-  
 export default function RenterPage(props) {
 
     const theme = useTheme();
-
     const [open, setOpen] = useState(false);
     const [openMessage, setOpenMessage] = useState(false);
     const [renterMessages, setRenterMessages] = useState("");
@@ -70,71 +64,56 @@ export default function RenterPage(props) {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-  
     const handleChangeIndex = (index) => {
       setValue(index);
     };
-
     useEffect(() => {
-      // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-        fetch(`http://localhost:3000/api/users/${userId}`)
-          .then(response => response.json())
-          .then(result =>  {
-             setUser(result)
-          })
-          
-  }, [user])
-
-  useEffect(() => {
-    // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-      fetch(`http://localhost:3000/api/renterDeatils/${userId}`)
+      fetch(`http://localhost:3000/api/users/${userId}`)
         .then(response => response.json())
         .then(result =>  {
-          setRenterDeatils(result)
-          setRenterDeatilsId(result.id)
-        })
-        
+            setUser(result)
+        })    
+    }, [user])
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/renterDeatils/${userId}`)
+      .then(response => response.json())
+      .then(result =>  {
+        setRenterDeatils(result)
+        setRenterDeatilsId(result.id)
+      }) 
     }, [renterDeatils])
 
     useEffect(() => {
-        // fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${userId}`)
-        fetch(`http://localhost:3000/api/assets?RenterId=${userId}`)
-            .then(response => response.json())
-            .then(result => {
-              setWantedAsset(result)
-            })
+      fetch(`http://localhost:3000/api/assets?RenterId=${userId}`)
+        .then(response => response.json())
+        .then(result => {
+          setWantedAsset(result)
+      })
     }, [wantedAsset])
-
     useEffect(() => {
-      // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-        fetch(`http://localhost:3000/api/messages?RenterId=${userId}`)
-          .then(response => response.json())
-          .then(result =>  {
-            setRenterMessages(result)
-            // console.log(result)
-          })
-          
-      }, [renterMessages])
-
+      fetch(`http://localhost:3000/api/messages?RenterId=${userId}`)
+        .then(response => response.json())
+        .then(result =>  {
+          setRenterMessages(result)
+        })
+    }, [renterMessages])
     const addMessage = () => {
       let today = new Date();
       setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
       const body = { Message: message , RenterId:userId, OwnerId:wantedAsset[0].OwnerId,Timestamp:timestamp};
-      console.log(body);
-      // fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
         fetch(`http://localhost:3000/api/messages` ,{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
-      })
+        })
         .then(response => response.json())
         .then(result => {
-            setOpenMessage(false)
-            setMessage(result)
-            setMessage("")
-        });
+          setOpenMessage(false)
+          setMessage(result)
+          setMessage("")
+      });
     }
-
     return (
 		<div className={"renterMainPage"}>
 			<NavBar/>
@@ -142,7 +121,7 @@ export default function RenterPage(props) {
         <div className={"personalDeatilsContainer"}>
            <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id} FavoriteCountry={renterDeatils.FavoriteCountry} renter={true}/>
         </div>
-      <div className={"containerRenter"}>
+        <div className={"containerRenter"}>
           <div className={"currentContainer"}>
               <div className={"curStatus"}>
                   <h1>Current status</h1>
@@ -163,8 +142,8 @@ export default function RenterPage(props) {
             </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}onChangeIndex={handleChangeIndex}>
             <TabPanel value={value} index={0} dir={theme.direction}>
-            <h1 style={{fontFamily:'Lato'}}>Rent asset progress</h1>
-            <div>
+              <h1 style={{fontFamily:'Lato'}}>Rent asset progress</h1>
+              <div>
                 <Stepper active orientation="vertical">
                     <Step >
                         <StepLabel style={{fontFamily:'Lato'}}>Request recived</StepLabel>
@@ -179,7 +158,7 @@ export default function RenterPage(props) {
                         <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
                             <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
                             <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
-                                <TextField label="Message" value={message} onChange={e => setMessage(e.target.value)} fullWidth required/>
+                              <TextField label="Message" value={message} onChange={e => setMessage(e.target.value)} fullWidth required/>
                             </PopUp>
                             <Contract/>
                         </StepContent>
@@ -194,13 +173,13 @@ export default function RenterPage(props) {
                     </Step>
                 </Stepper>
               </div> 
-            </TabPanel>
-            <TabPanel value={value} index={1} dir={theme.direction}> 
-              From google api
-            </TabPanel>
-            <TabPanel value={value} index={2} dir={theme.direction}>
-              <MessageList messageList={renterMessages} renter={true}/>
-            </TabPanel>
+              </TabPanel>
+              <TabPanel value={value} index={1} dir={theme.direction}> 
+                From google api
+              </TabPanel>
+              <TabPanel value={value} index={2} dir={theme.direction}>
+                <MessageList messageList={renterMessages} renter={true}/>
+              </TabPanel>
           </SwipeableViews>
         </div> 
       </div>

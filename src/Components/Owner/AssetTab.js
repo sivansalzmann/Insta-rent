@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -11,6 +11,7 @@ import PopUp from '../All/PopUp';
 import './AssetTab.css';
 import UserDeatils from '../All/UserDeatils';
 import { Button } from '@material-ui/core';
+import Contract from '../All/Contract';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,50 +40,64 @@ export default function AssetTab (props) {
       setExpanded(isExpanded ? panel : false);
     };
     const classes = useStyles();
-
     const isRenterExist = () => {
-      if(props.item.RenterId != 0) {
+      if(props.item.RenterId !== 0) {
         return  (
-              <>
-                <Button variant="contained" color="primary" size="small" onClick={() => setOpenRenter(true)} className={"but"}>See renter</Button>
-                <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false}>
-                    <UserDeatils item={props.item.RenterId} />
-                </PopUp>
-              </>
+          <>
+            <Button variant="contained" color="primary" size="small" onClick={() => setOpenRenter(true)} className={"but"}>See renter</Button>
+            <Contract isRenter={false}/>
+            <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false}>
+                <UserDeatils item={props.item.RenterId} />
+            </PopUp>
+          </>
           );
         }
+      }
+    const isRenterExistTop = () => {
+      if(props.item.RenterId !== 0) {
+        return (
+          <>
+            <Typography className={classes.secondaryHeading}>In proccess</Typography>
+          </>
+        )
+      }
+      else {
+        return (
+          <>
+            <Typography className={classes.secondaryHeading}>Nobody interst yet</Typography>
+          </>
+        );
+      }
     }
-
-
-    return (
-        <div className={"assetContainer"}>
-            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
-                    <Typography className={classes.heading}>{props.item.Country},{props.item.City}</Typography>
-                    <Typography className={classes.secondaryHeading}>Renter name: {props.item.RenterId} see renter deatils</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                  <div className={"details"}>
-                    {props.item.Description}
-                  </div>
-                  <div className={"detailsHead"}>
-                      Avilablie from {props.item.Avilability}
-                  </div>
-                  <div className={"detailsHead"}>
-                      {props.item.Price} $
-                  </div>
-                  <div>
-                    <div className={"butRow"}>
-                      {isRenterExist()}
-                      <AssetEdit idAsset={props.item.id}/>
-                      <AssetDelete idAsset={props.item.id}/>
-                    </div>
-                  </div>
-                  </Typography>
-                </AccordionDetails>
-            </Accordion>
-        </div>
+  return (
+      <div className={"assetContainer"}>
+        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1bh-content" id="panel1bh-header">
+              <Typography className={classes.heading}>{props.item.Country},{props.item.City}</Typography>
+              {isRenterExistTop()}
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+            <div className={"details"}>
+              {props.item.Description}
+            </div>
+            <div className={"detailsHead"}>
+                Avilablie from {props.item.Avilability}
+            </div>
+            <div className={"detailsHead"}>
+                {props.item.Price} $
+            </div>
+            <div>
+              <div className={"butRow"}>
+                {isRenterExist()}
+                <AssetEdit idAsset={props.item.id}/>
+                <AssetDelete idAsset={props.item.id}/>
+              </div>
+            </div>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     );
 }
 

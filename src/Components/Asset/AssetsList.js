@@ -2,7 +2,6 @@ import AssetCard from './AssetCard';
 import Grid from '@material-ui/core/Grid';
 
 export default function AssetList(props) {
-
     const eachItem = (item) => {
         return (
             <AssetCard key={item.id} id={item.id} item={item}> 
@@ -15,6 +14,4 @@ export default function AssetList(props) {
             { props.assetsList.map(eachItem) }
         </Grid>
     )
-
-
 }

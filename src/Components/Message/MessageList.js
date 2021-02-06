@@ -2,10 +2,9 @@ import Message from './Message';
 import Grid from '@material-ui/core/Grid';
 
 export default function MessageList(props) {
-
     const eachItem = (item) => {
         return (
-            <Message key={item.id} id={item.id} item={item}> 
+            <Message key={item.id} id={item.id} item={item} isRenter={props.isRenter}> 
                 {props.children}
             </Message>
         )
@@ -15,6 +14,4 @@ export default function MessageList(props) {
             { props.messageList.map(eachItem) }
         </Grid>
     )
-
-
 }

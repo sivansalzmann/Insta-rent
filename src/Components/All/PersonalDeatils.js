@@ -1,15 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import './PrsonalDeatils.css';
-// import profileImg from './Media/profile.png'
 import { Button } from '@material-ui/core';
 import PopUp from '../All/PopUp';
 import TextField from '@material-ui/core/TextField';
 
-
-  
 export default function RenterPage(props) {
-
-
     const [openEdit,setOpenEdit] = useState(false);
     const [jobTitle,setJob] = useState("");
     const [budget,setBudget] = useState("");
@@ -17,14 +12,12 @@ export default function RenterPage(props) {
     const [phone,setPhone] = useState("");
     const [country,setCountry] = useState("");
     const [email,setEmail] = useState("");
-
     const [renterDeatils,setRenterDeatils] = useState("");
     const [owner,setOwner] = useState("");
 
     const editRenter = () => {
         const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
         console.log(body);
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}`, {
         fetch(`http://localhost:3000/api/renterDeatils/${props.idRenter}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -39,11 +32,9 @@ export default function RenterPage(props) {
               setFavoriteCountry("")
           });
       }
-
       const editOwner = () => {
         const body = { Country: country,Email:email,Phone:phone};
         console.log(body);
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}`, {
         fetch(`http://localhost:3000/api/users/${props.idOwner}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -58,7 +49,6 @@ export default function RenterPage(props) {
               setPhone("")
           });
       }
-
       const isRenter = () => {
           return (
               <>
@@ -75,7 +65,9 @@ export default function RenterPage(props) {
       const isOwner = () => {
         return (
             <>
-              <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>EDIT</Button></div>   
+              <div>
+                  <Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>EDIT</Button>
+                </div>   
               <PopUp onSubmit={editOwner} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
                   <TextField label="Country" value={country} onChange={e => setCountry(e.target.value)} fullWidth required/>
                   <TextField label="Email" value={email} onChange={e => setEmail(e.target.value)} fullWidth required/>
@@ -98,11 +90,6 @@ export default function RenterPage(props) {
             <p>Country</p>
             <span>{props.Country}</span>
             {props.renter ? isRenter() : isOwner()} 
-            {/* <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>Edit</Button></div>   
-            <PopUp onSubmit={editUser} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
-                <TextField label="JobTitle" value={jobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
-                <TextField label="Budget" value={budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
-            </PopUp> */}
         </div>
 
 	);

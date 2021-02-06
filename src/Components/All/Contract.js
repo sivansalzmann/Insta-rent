@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-export default function Contract() {
+export default function Contract(props) {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
 
@@ -33,6 +33,16 @@ export default function Contract() {
       }
     }
   }, [open]);
+
+  const isRenter = () => {
+    if(props.isRenter) {
+      return (
+        <Button onClick={handleCloseAgree} color="primary">
+            Agree
+          </Button>
+      );
+    }
+  }
 
   return (
     <>
@@ -65,9 +75,7 @@ export default function Contract() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleCloseAgree} color="primary">
-            Agree
-          </Button>
+          {isRenter()}
         </DialogActions>
       </Dialog>
     </>

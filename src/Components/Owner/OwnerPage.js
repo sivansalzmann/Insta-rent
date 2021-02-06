@@ -11,30 +11,18 @@ import './OwnerPage.css';
 import PrsonalDeatils from '../All/PersonalDeatils';
 import AssetTable from './AssetTable';
 import MessageList from '../Message/MessageList';
-import { Button } from '@material-ui/core';
 import AddAsset from './AddAsset';
-import OwnerAssetsList from '../need to delete/OwnerAssetsList';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PhoneIcon from '@material-ui/icons/Phone';
 import MessageIcon from '@material-ui/icons/Message';
-import AnnouncementIcon from '@material-ui/icons/Announcement';
 import HouseIcon from '@material-ui/icons/House';
-import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 const ownerId = 2;
 
 function TabPanel(props) {
-
     const { children, value, index, ...other } = props;
-  
     return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`scrollable-auto-tabpanel-${index}`}
-        aria-labelledby={`scrollable-auto-tab-${index}`}
-        {...other}
-      >
+      <div role="tabpanel" hidden={value !== index}  id={`scrollable-auto-tabpanel-${index}`} aria-labelledby={`scrollable-auto-tab-${index}`} {...other}>
         {value === index && (
           <Box p={3}>
             <Typography>{children}</Typography>
@@ -43,124 +31,108 @@ function TabPanel(props) {
       </div>
     );
   }
-  
   TabPanel.propTypes = {
     children: PropTypes.node,
     index: PropTypes.any.isRequired,
     value: PropTypes.any.isRequired,
   };
-  
   function a11yProps(index) {
     return {
       id: `scrollable-auto-tab-${index}`,
       'aria-controls': `scrollable-auto-tabpanel-${index}`,
     };
   }
-  
-
-
 export default function OwnerPage1() {
 
     const [user,setUser] = useState("");
     const [assets,setAssets] = useState("");
     const [messages,setOwnerMessages] = useState("");
     const [value, setValue] = useState(0);
-    
-  
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
-
-
     useEffect(() => {
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-          fetch(`http://localhost:3000/api/users/${ownerId}`)
-            .then(response => response.json())
-            .then(result =>  {
-               setUser(result)
-            })
-            
+      fetch(`http://localhost:3000/api/users/${ownerId}`)
+        .then(response => response.json())
+        .then(result =>  {
+            setUser(result)
+        })
     }, [user])
 
     useEffect(() => {
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-          fetch(`http://localhost:3000/api/assets?OwnerId=${ownerId}`)
-            .then(response => response.json())
-            .then(result =>  {
-               setAssets(result)
-            })
-            
+      fetch(`http://localhost:3000/api/assets?OwnerId=${ownerId}`)
+        .then(response => response.json())
+        .then(result =>  {
+            setAssets(result)
+        })     
     }, [assets])
 
     useEffect(() => {
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
-          fetch(`http://localhost:3000/api/messages?OwnerId=${ownerId}`)
-            .then(response => response.json())
-            .then(result =>  {
-                setOwnerMessages(result)
-              // console.log(result)
-            })
-            
-        }, [messages])
-
+      fetch(`http://localhost:3000/api/messages?OwnerId=${ownerId}`)
+        .then(response => response.json())
+        .then(result =>  {
+            setOwnerMessages(result)
+        }) 
+    }, [messages])
+    
   return (
     <div className={"ownerMainPage"}>
-        <NavBar />
+      <NavBar />
       <div className={"containerOwner"}>
-          <div className={"personalDet"}>
-              <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id} renter={false}/>
-          </div>
-          <div className={"containerOptions"}>
-            <div className={"progressOwner"}>
-                <AppBar position="static" color="default">
-                    <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable" scrollButtons="auto" >
-                    <Tab label="General" {...a11yProps(0)} />
-                    <Tab label=" My assets" {...a11yProps(1)} style={{marginLeft:'8%'}}/>
-                    <Tab label="My messages" {...a11yProps(2)} style={{marginLeft:'6%'}}/>
-                    </Tabs>
-                </AppBar>
-                <TabPanel value={value} index={0}>
-                <h1>Prsonal info</h1>
-                <div className={"ownerContainer"}>
-                    <div className={"currentContainerRow"}>
-                      <div className={"prsonalDetOwner"}>
-                          <MailOutlineIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
-                          <h3>My email</h3>
-                          <p>{user.Email}</p>
+        <div className={"personalDet"}>
+            <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id} renter={false}/>
+        </div>
+        <div className={"containerOptions"}>
+          <div className={"progressOwner"}>
+              <AppBar position="static" color="default">
+                  <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable" scrollButtons="auto" >
+                  <Tab label="General" {...a11yProps(0)} />
+                  <Tab label=" My assets" {...a11yProps(1)} style={{marginLeft:'8%'}}/>
+                  <Tab label="My messages" {...a11yProps(2)} style={{marginLeft:'6%'}}/>
+                  </Tabs>
+              </AppBar>
+              <TabPanel value={value} index={0}>
+              <h1>Prsonal info</h1>
+              <div className={"ownerContainer"}>
+                  <div className={"currentContainerRow"}>
+                    <div className={"prsonalDetOwner"}>
+                        <MailOutlineIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
+                        <h3>My email</h3>
+                        <p>{user.Email}</p>
+                    </div>
+                    <div className={"prsonalDetOwner"}>
+                      <PhoneIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
+                      <h3>My phone</h3>
+                      <p>{user.Phone}</p>
+                    </div>
+                  </div>
+                  <h1>Assets deatils</h1>
+                  <div className={"currentContainerRow"}>
+                    <div className={"prsonalDetOwner"}>
+                      <HouseIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
+                        <h3>Number of assets</h3>
+                        <p>{assets.length}</p>
                       </div>
                       <div className={"prsonalDetOwner"}>
-                        <PhoneIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
-                        <h3>My phone</h3>
-                        <p>{user.Phone}</p>
-                      </div>
-                      </div>
-                      <h1>Assets deatils</h1>
-                      <div className={"currentContainerRow"}>
-                      <div className={"prsonalDetOwner"}>
-                        <HouseIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
-                          <h3>Number of assets</h3>
-                          <p>{assets.length}</p>
-                        </div>
-                        <div className={"prsonalDetOwner"}>
-                        <MessageIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
-                          <h3>Messages</h3>
-                          <p>{messages.length}</p>
-                        </div>
+                      <MessageIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
+                        <h3>Messages</h3>
+                        <p>{messages.length}</p>
                       </div>
                   </div>
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <h2>My assets</h2>
-                  <AssetTable assetsList={assets} />
-                  <AddAsset style={{margin:'5%'}}/>
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <MessageList messageList={messages} />
-                </TabPanel>
-                </div>
-            </div>
+              </div>
+              </TabPanel>
+              <TabPanel value={value} index={1} className={"myAssetsTab"}>
+                <h2>My assets</h2>
+                <AssetTable assetsList={assets}/>
+                <AddAsset />
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                <MessageList messageList={messages} isRenter={false}/>
+              </TabPanel>
+          </div>
         </div>
-        <Footer />
+      </div>
+      <Footer />
     </div>
   );
 }

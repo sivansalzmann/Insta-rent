@@ -3,8 +3,7 @@ import './PopUp.css';
 import {ButtonBase, Modal} from "@material-ui/core";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
-const PopUp = (props) => {
-
+export default function PopUp(props) {
     const sendBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
@@ -12,8 +11,6 @@ const PopUp = (props) => {
             </ButtonBase>
         )
     }
-
-
     const okBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
@@ -21,15 +18,6 @@ const PopUp = (props) => {
             </ButtonBase>
         )
     }
-
-    const contactOwnerBtn = () => {
-        return (
-            <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p>CONTECT OWNER</p>
-            </ButtonBase>
-        )
-    }
-
     const renderModal = () => {
         return (
             <div className={'popup'}>
@@ -50,7 +38,6 @@ const PopUp = (props) => {
             </div>
         )
     }
-
     return (
         <Modal open={props.open} onClose={props.closePopup} style={{overflow:'scroll'}}>
             {renderModal()}
@@ -58,4 +45,3 @@ const PopUp = (props) => {
     )
 }
 
-export default PopUp;
