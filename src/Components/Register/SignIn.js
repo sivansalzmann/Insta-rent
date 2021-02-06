@@ -9,6 +9,8 @@ import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
 import GoogleLogin from 'react-google-login';
 
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -63,7 +65,7 @@ export default function Login (props) {
             <div className={"googleLogIn"}> 
                 <GoogleLogin
                 className={classes.google}
-                clientId="455770929949-rknvnltjkidooak44tu8jbt49372itkn.apps.googleusercontent.com"
+                clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 />
