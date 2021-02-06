@@ -12,6 +12,15 @@ const useStyles = makeStyles({
     
 });
 
+
+const answerBtn = () => {
+    return (
+        <Button variant="contained" color="primary">
+            Answer
+        </Button>
+    )
+}
+
 export default function AssetCard (props) {
     const classes = useStyles();
     return (
@@ -25,7 +34,7 @@ export default function AssetCard (props) {
                     <p>{props.item.Message}</p>
                 </Typography>
                 </div>
-                <Button variant="contained" color="primary">See answer</Button>
+                {answerBtn()}
             </CardContent>
         </Card> 
     );

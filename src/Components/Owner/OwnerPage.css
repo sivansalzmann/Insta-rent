@@ -1,0 +1,33 @@
+.ownerMainPage {
+    background-color: #F8F8F8;
+}
+.containerOwner {
+    display: flex;
+    flex-direction: row;
+}
+.personalDet {
+    background-color: #FFFFFF;
+    width: 30%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 3%;  
+    margin-bottom: 100px;
+}
+.progressOwner {
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-top: 3%;
+}
+.containerOptions {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    width: 50%;
+}
+.progressOwner h2{
+    font-family: 'Lato';
+
+}
+.containerOptions .addBut {
+    margin-left: 90%;
+}

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import './RenterPage.css';
-import profileImg from './Media/profile.png'
 import { Button } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -21,9 +20,10 @@ import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
 import MessageList from '../Message/MessageList';
 import AssetDeatils from '../All/AssetDeatils';
+import PrsonalDeatils from '../All/PersonalDeatils';
 
 
-const userId = '3';
+const userId = '3'; //change it
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -56,7 +56,6 @@ export default function RenterPage(props) {
 
     const theme = useTheme();
 
-    const [openEdit,setOpenEdit] = useState(false);
     const [open, setOpen] = useState(false);
     const [openMessage, setOpenMessage] = useState(false);
     const [renterMessages, setRenterMessages] = useState("");
@@ -64,8 +63,6 @@ export default function RenterPage(props) {
     const [renterDeatils,setRenterDeatils] = useState("");
     const [renterDeatilsId,setRenterDeatilsId] = useState("");
     const [value, setValue] = useState(0);
-    const [jobTitle,setJob] = useState("");
-    const [budget,setBudget] = useState("");
     const [message,setMessage] = useState("");
     const [timestamp,setTimestamp] = useState("");
     const [wantedAsset,setWantedAsset] = useState("");
@@ -119,24 +116,6 @@ export default function RenterPage(props) {
           
       }, [renterMessages])
 
-    const editUser = () => {
-        const body = { JobTitle: jobTitle,Budget:budget};
-        console.log(body);
-        // fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}`, {
-        fetch(`http://localhost:3000/api/renterDeatils/${renterDeatils.id}` ,{
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        })
-          .then(response => response.json())
-          .then(result => {
-              setOpenEdit(false);
-              setRenterDeatils(result)
-              setJob("")
-              setBudget("")
-          });
-      }
-
     const addMessage = () => {
       let today = new Date();
       setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
@@ -160,18 +139,8 @@ export default function RenterPage(props) {
 		<div className={"renterMainPage"}>
 			<NavBar/>
 			<div className={"renterPageContainer"}>
-        <div className={"personalDeatils"}>
-            <img src={profileImg} alt="profile" />
-            <h1>{user.FirstName} {user.LastName}</h1>
-            <h3>{renterDeatils.JobTitle}</h3>
-            <div className={"line"}></div>
-            <p>Gender</p>
-            <span>{user.Gender}</span>
-            <p>Age</p>
-            <span>{user.Age}</span>
-            <p>Country</p>
-            <span>{user.Country}</span>
-            <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>Edit</Button></div>        
+        <div className={"personalDeatilsContainer"}>
+           <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} JobTitle={renterDeatils.JobTitle} idRenter={renterDeatils.id}/>
         </div>
       <div className={"containerRenter"}>
           <div className={"currentContainer"}>
@@ -230,16 +199,12 @@ export default function RenterPage(props) {
               From google api
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              <MessageList messageList={renterMessages}/>
+              <MessageList messageList={renterMessages} renter={true}/>
             </TabPanel>
           </SwipeableViews>
         </div> 
       </div>
     </div>
-    <PopUp onSubmit={editUser} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
-        <TextField label="JobTitle" value={jobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
-        <TextField label="Budget" value={budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
-    </PopUp>
     <PopUp onSubmit={() => setOpen(false)} wantAssetBtn={false} title={wantedAsset.Country} open={open} closePopup={() => setOpen(false)} sendBtn={false}>
       <AssetDeatils item={wantedAsset[0]} />
     </PopUp>
