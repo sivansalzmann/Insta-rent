@@ -1,0 +1,31 @@
+.rowImg {
+    display: flex;
+    flex-direction: row;
+}
+.rowImg img{
+    width:30%;
+    height: 30%;
+    margin: 5%;
+}
+.renterContainer {
+    display: flex;
+    flex-direction: column;
+}
+.firstDeatils {
+    display: flex;
+    flex-direction: row;
+}
+.firstDeatils div {
+    margin: 8%;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+.coulmn {
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+}
