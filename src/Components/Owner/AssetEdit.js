@@ -10,6 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const ownerId = 2;
 
@@ -34,42 +35,40 @@ export default function AddAsset() {
     const [newAsset, setNewAsset] = useState("");
     const [add,setOpenAdd] = useState(false);
 
-  const addAsset = () => {
-    const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl,RenterId:0};
-    console.log(body);
-    fetch(`http://localhost:3000/api/assets`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-	})
+  const addAsset = (props) => {
+    const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl};
+    console.log(props.idAsset);
+    fetch(`http://localhost:3000/api/renterDeatils/${props.idAsset}` ,{
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        })
 			.then(response => response.json())
 			.then(result => {
-        console.log("here");
-        setOpenAdd(false);
-        setNewAsset(result);
-        setCountry("");
-        setCity("");
-        setNeighborhood("");
-        setStreet("");
-        setZip("");
-        setSquareFeet("");
-        setRooms("");
-        setCondition("");
-        setParking(false);
-        setElevator(false);
-        setPetsAllowed(false);
-        setPrice("");
-        setAvilability("");
-        setDescription("");
-        setImageUrl("");
+            setOpenAdd(false);
+            setNewAsset(result);
+            setCountry("");
+            setCity("");
+            setNeighborhood("");
+            setStreet("");
+            setZip("");
+            setSquareFeet("");
+            setRooms("");
+            setCondition("");
+            setParking("");
+            setElevator("");
+            setPetsAllowed("");
+            setPrice("");
+            setAvilability("");
+            setDescription("");
+            setImageUrl("");
 		})
     }
 
   return (
     <div className={"addAssetContainer"}>
-
-  <Button variant="contained" color="primary" className={"addButAsset"} onClick={() => setOpenAdd(true)}>Add new asset</Button>
-  <PopUp onSubmit={addAsset} title={"Add asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
+  <Button variant="contained" color="primary" onClick={() => setOpenAdd(true)}>EDIT</Button>
+  <PopUp onSubmit={addAsset} title={"Edit asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
         <div className={"addAssetForm"}>
             <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth/>
             <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth/>

@@ -3,7 +3,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import OwnerPage from './OwnerPage';
+import OwnerPage from '../Owner/OwnerPage';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 const useStyles = makeStyles({
@@ -34,8 +34,9 @@ export default function OwnerAssetCard(props) {
                 <Typography variant="h5" component="h5" style={{ fontFamily: 'Lato', fontWeight: 'bold' }}>
                     Avilable from {props.item.Avilability}
                 </Typography>
-                <EditOutlinedIcon onClick={() => props.onClickEdit(props.item.id)}/>
-                <DeleteOutlineIcon onClick={() => props.onClickDelete(props.item.id)} />
+                <AssetEdit idAsset={props.item.id} />
+                {/* <EditOutlinedIcon onClick={() => props.onClickEdit(props.item.id)}/> */}
+                {/* <DeleteOutlineIcon onClick={() => props.onClickDelete(props.item.id)} /> */}
             </CardContent>
         </Card>
 

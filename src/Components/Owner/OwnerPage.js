@@ -1,160 +1,166 @@
+import React, {useEffect, useState} from 'react';
+import PropTypes from 'prop-types';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import NavBar from '../All/NavBar';
+import Footer from '../All/Footer';
+import './OwnerPage.css';
+import PrsonalDeatils from '../All/PersonalDeatils';
+import AssetTable from './AssetTable';
+import MessageList from '../Message/MessageList';
+import { Button } from '@material-ui/core';
+import AddAsset from './AddAsset';
+import OwnerAssetsList from '../need to delete/OwnerAssetsList';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import PhoneIcon from '@material-ui/icons/Phone';
+import MessageIcon from '@material-ui/icons/Message';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import HouseIcon from '@material-ui/icons/House';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
-import React, { useEffect, useState } from 'react';
-import AssetList from '../HomePage/AssetsList';
-import { Link } from 'react-router-dom';
-import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import OwnerAssetsList from './OwnerAssetsList';
-import RenterList from './RenterList';
-import TextField from '@material-ui/core/TextField';
-import PopUp from '../All/PopUp';
+const ownerId = 2;
 
-const ownerId = 6;
-const OwnerPage = (props) => {
-	// const [items, setItems] = useState(AssetsData.items);
-	const [editing, setEditing] = useState(false);
-	const [itemToEdit, setItemToEdit] = useState(null);
-	// const [ownerId,setOwnerId] = useState("");
-	const [ownerAssetsList, setOwnerAssetsList] = useState([]);
-	const [renterNumb, setRenterNumb] = useState([]);
+function TabPanel(props) {
 
-
-	useEffect(() => {
-		fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${ownerId}`)
-			.then(response => response.json())
-			.then(result => {
-				setRenterNumb(result)
-				setOwnerAssetsList(result)
-			})
-
-	}, [])
-
-	const editAsset = (assetId) => {
-		// fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
-		// 	method: 'PUT',
-		// 	body: JSON.stringify(),
-		// headers: {'Content-Type': 'application/json'},
-		// })
-		// 	.then(response => response.json())
-		// 	.then(result => {
-		// 		setAsset(result)
-		// 	})
-		console.log(assetId)
-	}
-
-
-	const deleteAsset = (assetId) => {
-		fetch(`https://instarent-1st.herokuapp.com/api/assets/${assetId}`, {
-			method: 'DELETE',
-		})
-			.then(response => response.json())
-			.then(result => {
-				console.log(result)
-				window.location.reload()
-			})
-		// setItems(prevState => ({
-		// 	items: prevState.items.filter(item => item.id !== target)
-		// }))
-		console.log(assetId)
-	}
-
-	// const editItem = (id) => {
-	// 	const item = this.state.items.filter(item => item.id === id)[0];
-	// 	setEditing(() => ({
-	// 		editing: true,
-	// 		itemToEdit: item
-	// 	}));
-	// }
-
-	// const showAsset = (id) => {
-	// 	const item = this.state.items.filter(item => item.id === id)[0];
-	// 	console.log(item);
-	// }
-
-	// add(item) {
-	// 	this.setState(prevState => ({
-	// 		items: [
-	// 			...prevState.items, {
-	// 				id: this.nextId(prevState.items),
-	// 				date: item.date,
-	// 				location: item.location,
-	// 				client: item.client
-	// 			}]
-	// 	}))
-	// }
-
-	// update(updatedItem) {
-	// 	this.setState(prevState => ({
-	// 		items: prevState.items.map(
-	// 			item => item.id === this.state.itemToEdit.id ? { id: item.id, client: updatedItem.client, date: updatedItem.date, location: updatedItem.location } : item
-	// 		),
-	// 		editing: false,
-	// 		itemToEdit: null
-	// 	}));
-	// }
-
-	// const nextId = (items = []) => {
-	// 	let max = items.reduce((prev, curr) => prev.id > curr.id ? prev.id : curr.id, 0);
-	// 	return ++max;
-	// }
-
-	const onAddAsset = (data) => {
-		console.log(data)
-	}
-	// const onChange = () => {
-	// 	setCountry("");
-	// 	setCity("");
-	// 	setNeighborhood("");
-	// 	setStreet("");
-	// 	setZip("");
-	// 	setSquareFeet("");
-	// 	setRooms("");
-	// 	setCondition("");
-	// 	setParking("");
-	// 	setElevator("");
-	// 	setPetsAllowed("");
-	// 	setPrice("");
-	// 	setAvilability("");
-	// 	setDescription("");
-	// }
-
-	return (
-		<>
-			<div className={"renterMainPage"}>
-				<div className={"navBar"}>
-					<h1><Link to={{ pathname: "/" }}>InstaRent</Link></h1>
-					<ul>
-						<li><Link to={{ pathname: "/" }}>HOME</Link></li>
-						<li><Link to={{ pathname: "/" }}>APPERTMANTS</Link></li>
-						<li><Link to={{ pathname: "/" }}>PROFILE</Link></li>
-					</ul>
-				</div>
-				<div className="wrapper">
-					<h1>Youe Assets</h1>
-					<Link to={{ pathname: "/AssetAddForm", submit: onAddAsset }}>
-						<AddCircleIcon className="plus" />
-					</Link>
-					<OwnerAssetsList ownerAssetsList={ownerAssetsList} onClickEdit={editAsset} onClickDelete={deleteAsset} />
-					<h1>Your assets in proccess</h1>
-					<RenterList renterNumb={renterNumb} />
-					{/* <PopUp onSubmit={() => editAsset(false)} title={"Edit Asset"} open={open} closePopup={() => setOpen(false)}>
-						<div><TextField className="input" label="Country" size="large" onChange={(event) => setCountry(event.target.value)} value={country} name="Country" /></div>
-						<div><TextField className="input" label="City" size="large" onChange={(event) => setCity(event.target.value)} value={city} name="City" /></div>
-						<div><TextField className="input" label="Neighborhood" size="large" onChange={(event) => setNeighborhood(event.target.value)} value={neighborhood} name="Neighborhood" /></div>
-						<div><TextField className="input" label="Street" size="large" onChange={(event) => setStreet(event.target.value)} value={street} name="Street" /></div>
-						<div><TextField className="input" label="Zip" size="large" onChange={(event) => setZip(event.target.value)} value={zip} name="Zip" /></div>
-						<div><TextField className="input" label="SquareFeet" size="large" onChange={(event) => setSquareFeet(event.target.value)} value={squareFeet} name="SquareFeet" /></div>
-						<div><TextField className="input" label="Rooms" size="large" onChange={(event) => setRooms(event.target.value)} value={rooms} name="Rooms" /></div>
-					</PopUp> */}
-				</div>
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`scrollable-auto-tabpanel-${index}`}
+        aria-labelledby={`scrollable-auto-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `scrollable-auto-tab-${index}`,
+      'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    };
+  }
+  
 
 
-			</div>
-		</>
-	)
+export default function OwnerPage1() {
+
+    const [user,setUser] = useState("");
+    const [assets,setAssets] = useState("");
+    const [messages,setOwnerMessages] = useState("");
+    const [value, setValue] = useState(0);
+    
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
 
+    useEffect(() => {
+        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+          fetch(`http://localhost:3000/api/users/${ownerId}`)
+            .then(response => response.json())
+            .then(result =>  {
+               setUser(result)
+            })
+            
+    }, [user])
 
+    useEffect(() => {
+        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+          fetch(`http://localhost:3000/api/assets?OwnerId=${ownerId}`)
+            .then(response => response.json())
+            .then(result =>  {
+               setAssets(result)
+            })
+            
+    }, [assets])
+
+    useEffect(() => {
+        // fetch(`https://instarent-1st.herokuapp.com/api/users/${userId}`)
+          fetch(`http://localhost:3000/api/messages?OwnerId=${ownerId}`)
+            .then(response => response.json())
+            .then(result =>  {
+                setOwnerMessages(result)
+              // console.log(result)
+            })
+            
+        }, [messages])
+
+  return (
+    <div className={"ownerMainPage"}>
+        <NavBar />
+      <div className={"containerOwner"}>
+          <div className={"personalDet"}>
+              <PrsonalDeatils FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id} renter={false}/>
+          </div>
+          <div className={"containerOptions"}>
+            <div className={"progressOwner"}>
+                <AppBar position="static" color="default">
+                    <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable" scrollButtons="auto" >
+                    <Tab label="General" {...a11yProps(0)} />
+                    <Tab label=" My assets" {...a11yProps(1)} style={{marginLeft:'8%'}}/>
+                    <Tab label="My messages" {...a11yProps(2)} style={{marginLeft:'6%'}}/>
+                    </Tabs>
+                </AppBar>
+                <TabPanel value={value} index={0}>
+                <h1>Prsonal info</h1>
+                <div className={"ownerContainer"}>
+                    <div className={"currentContainerRow"}>
+                      <div className={"prsonalDetOwner"}>
+                          <MailOutlineIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
+                          <h3>My email</h3>
+                          <p>{user.Email}</p>
+                      </div>
+                      <div className={"prsonalDetOwner"}>
+                        <PhoneIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/> 
+                        <h3>My phone</h3>
+                        <p>{user.Phone}</p>
+                      </div>
+                      </div>
+                      <h1>Assets deatils</h1>
+                      <div className={"currentContainerRow"}>
+                      <div className={"prsonalDetOwner"}>
+                        <HouseIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
+                          <h3>Number of assets</h3>
+                          <p>{assets.length}</p>
+                        </div>
+                        <div className={"prsonalDetOwner"}>
+                        <MessageIcon style={{width:'20%' ,height:'20%',margin:'5%'}}/>
+                          <h3>Messages</h3>
+                          <p>{messages.length}</p>
+                        </div>
+                      </div>
+                  </div>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <h2>My assets</h2>
+                  <AssetTable assetsList={assets} />
+                  <AddAsset style={{margin:'5%'}}/>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <MessageList messageList={messages} />
+                </TabPanel>
+                </div>
+            </div>
+        </div>
+        <Footer />
+    </div>
+  );
 }
-
-export default OwnerPage;
