@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './AddAsset.css';
 import PopUp from '../All/PopUp';
 import TextField from '@material-ui/core/TextField';
@@ -14,7 +14,7 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const ownerId = 2;
 
-export default function AddAsset() {
+export default function AddAsset(props) {
 
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
@@ -33,12 +33,26 @@ export default function AddAsset() {
     const [imageUrl, setImageUrl] = useState("");
 
     const [newAsset, setNewAsset] = useState("");
+    const [asset, setAsset] = useState("");
     const [add,setOpenAdd] = useState(false);
 
-  const addAsset = (props) => {
+    useEffect(() => {
+      console.log(props.idAsset)
+      fetch(`http://localhost:3000/api/assets/${props.idAsset}`)
+        .then(response => response.json())
+        .then(result =>  {
+          console.log(result)
+          setAsset(result)
+        })
+        
+      }, [])
+
+  const editAsset = (props) => {
+    console.log(asset.id);
     const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl};
-    console.log(props.idAsset);
-    fetch(`http://localhost:3000/api/renterDeatils/${props.idAsset}` ,{
+    console.log(body);
+
+    fetch(`http://localhost:3000/api/assets/${asset.id}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -67,8 +81,8 @@ export default function AddAsset() {
 
   return (
     <div className={"addAssetContainer"}>
-  <Button variant="contained" color="primary" onClick={() => setOpenAdd(true)}>EDIT</Button>
-  <PopUp onSubmit={addAsset} title={"Edit asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
+  <Button variant="contained" color="primary" onClick={() => setOpenAdd(true)} className={"but"}>EDIT</Button>
+  <PopUp onSubmit={editAsset} title={"Edit asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
         <div className={"addAssetForm"}>
             <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth/>
             <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth/>
@@ -93,9 +107,9 @@ export default function AddAsset() {
                             </Select>
                     </FormControl>
             <div className={"rowOptions"}>
-                <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} color="primary" value = {true} />} label="Parking"/>
-                <FormControlLabel control={<Checkbox onChange={e => setElevator(e.target.value)} color="primary" value = {true} />} label="Elevator"/>
-                <FormControlLabel control={<Checkbox onChange={e => setPetsAllowed(e.target.value)} color="primary" value = {true} />} label="Pets"/>
+                <FormControlLabel control={<Checkbox onChange={e => setParking(e.target.value)} color="primary" value = {parking} />} label="Parking"/>
+                <FormControlLabel control={<Checkbox onChange={e => setElevator(e.target.value)} color="primary" value = {elevator} />} label="Elevator"/>
+                <FormControlLabel control={<Checkbox onChange={e => setPetsAllowed(e.target.value)} color="primary" value = {petsAllowed} />} label="Pets"/>
             </div>
             <TextField id="outlined-multiline-static" label="description"  multiline rows={4} onChange={(event) => setDescription(event.target.value)} value={description} variant="outlined" fullWidth/>
             <TextField label="Image Url" onChange={(event) => setImageUrl(event.target.value)} value={imageUrl} name="imageUrl" fullWidth/>
