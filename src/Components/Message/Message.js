@@ -20,7 +20,6 @@ export default function AssetCard (props) {
     const [answer,setAnswer] = useState("");
 
     const addAnswer = () => {
-        console.log("here");
         const body = {Answer:answer};
         console.log(body);
         fetch(`http://localhost:3000/api/messages/${props.item.id}`, {
@@ -35,14 +34,7 @@ export default function AssetCard (props) {
         })
     }
     const answerBtn = () => {
-        if(props.isRenter) {
-            return (
-                <Button variant="contained" color="primary">
-                    See answer
-                </Button>
-            )
-        }
-        else {
+        if(!props.isRenter) {
             return (
                 <Button variant="contained" color="primary" onClick={() => setOpenMessage(true)}>
                     Send answer
@@ -74,7 +66,8 @@ export default function AssetCard (props) {
         <Card className={classes.card}>
             <CardContent>
                 <Typography component="h5" style={{fontFamily: 'Lato',overflow: 'hidden',fontWeight: 'bold'}}>
-                    {props.item.Timestamp}
+                    {props.item.Timestamp} <br/><br/>
+                    Meesage:
                 </Typography>
                 <div>
                 <Typography component="h5" color="textSecondary" component="subtitle2" style={{fontFamily: 'Lato',fontWeight: 'bold',marginTop:'5%'}}>

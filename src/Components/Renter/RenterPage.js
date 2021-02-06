@@ -22,7 +22,7 @@ import MessageList from '../Message/MessageList';
 import AssetDeatils from '../All/AssetDeatils';
 import PrsonalDeatils from '../All/PersonalDeatils';
 
-const userId = '3'; //change it
+const userId = 3; //change it
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -133,11 +133,11 @@ export default function RenterPage(props) {
             </div>
           </div>
           <div className={"progress"}>
-            <AppBar position="static" color="default">
-              <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+          < AppBar position="static" color="default">
+              <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="scrollable" scrollButtons="auto" >
                 <Tab label="In progress" {...a11yProps(0)} />
-                <Tab label="Asset place deatils" {...a11yProps(1)}  />
-                <Tab label="Messages to my owner" {...a11yProps(2)}  />
+                <Tab label="Asset place deatils" {...a11yProps(1)} style={{marginLeft:'8%'}} />
+                <Tab label="Messages to my owner" {...a11yProps(2)}  style={{marginLeft:'6%'}}/>
               </Tabs>
             </AppBar>
             <SwipeableViews axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'} index={value}onChangeIndex={handleChangeIndex}>
@@ -191,4 +191,3 @@ export default function RenterPage(props) {
 	</div>
 	);
 }
-

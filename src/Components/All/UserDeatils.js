@@ -9,19 +9,17 @@ export default function UserDeatils(props) {
           .then(response => response.json())
           .then(result =>  {
             setRenter(result)
-            console.log(result)
           })
           
-        }, )
+        },[renter] )
     useEffect(() => {
         fetch(`http://localhost:3000/api/renterDeatils/${props.item}`)
             .then(response => response.json())
             .then(result =>  {
             setRenterDeatils(result)
-            console.log(result)
             })
             
-        }, )
+        }, [renterDeatils])
 
     return (
         <div>

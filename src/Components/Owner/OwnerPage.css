@@ -31,6 +31,7 @@
 .ownerContainer{
     display: flex;
     flex-direction: column;
+    
 }
 .containerOptions .addBut {
     margin-left: 90%;
@@ -66,3 +67,4 @@ p{
     margin:5%;
     font-size: 200%;
 }
+

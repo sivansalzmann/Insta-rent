@@ -5,6 +5,7 @@ import Signup from '../Components/Register/SignUp';
 import OwnerPage from '../Components/Owner/OwnerPage';
 import App from '../Components/HomePage/App';
 import Renter from '../Components/Renter/RenterPage';
+import PrivatePage from '../Components/All/PrivatePage';
 
 const ReactRouter = () => {
     return (
@@ -15,6 +16,7 @@ const ReactRouter = () => {
             <Route path="/Signup" component={Signup} />
             <Route path="/OwnerPage" component={OwnerPage} />
             <Route exact path ="/Renter" component={Renter} />
+            <Route exact path = "PrivatePage" component={PrivatePage} />
         </>
     )
 }

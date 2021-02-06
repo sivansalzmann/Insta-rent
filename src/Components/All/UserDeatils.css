@@ -5,13 +5,13 @@
 .rowImg img{
     width:30%;
     height: 30%;
-    margin: 5%;
+    margin: 2%;
 }
 .rowImg span{
-    margin: 5%;
+    margin: 2%;
 }
 .rowImg div {
-    margin: 5%;
+    margin: 0.5%;
 }
 .renterContainer {
     display: flex;
@@ -22,13 +22,13 @@
     flex-direction: row;
 }
 .firstDeatils div {
-    margin-left: 8%;
+    margin-left: 2%;
 }
 .row {
     display: flex;
     flex-direction: row;
-    margin-left: 5%;
-    margin-top: 5%;
+    margin-left: 2%;
+    margin-top: 2%;
 }
 .coulmn {
     display: flex;

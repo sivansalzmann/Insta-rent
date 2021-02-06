@@ -1,6 +1,7 @@
 .renterMainPage .renterMainPgeHeadline {
-    margin-top: 5%;
+    /* margin-top: 5%; */
+    justify-content: center;
     font-size: 300%;
     color: #5D6D7E;
-    margin-left: 30%;
+    margin-left:  35%;
 }

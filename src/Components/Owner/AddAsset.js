@@ -9,7 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
 
-const ownerId = 2;
+const ownerId = 5;
 
 export default function AddAsset() {
     const [country, setCountry] = useState("");
@@ -30,7 +30,7 @@ export default function AddAsset() {
     const [newAsset, setNewAsset] = useState("");
     const [add,setOpenAdd] = useState(false);
 
-  const addAsset = () => {
+  const addAsset = (props) => {
     const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl,RenterId:0};
     console.log(body);
     fetch(`http://localhost:3000/api/assets`, {

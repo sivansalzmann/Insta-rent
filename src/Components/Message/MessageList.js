@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 export default function MessageList(props) {
     const eachItem = (item) => {
         return (
-            <Message key={item.id} id={item.id} item={item} isRenter={props.isRenter}> 
+            <Message key={item.id} id={item.id} item={item} isRenter={props.renter}> 
                 {props.children}
             </Message>
         )

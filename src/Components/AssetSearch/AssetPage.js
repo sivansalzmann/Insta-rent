@@ -3,11 +3,14 @@ import Button from '@material-ui/core/Button';
 import AssetDeatils from '../All/AssetDeatils';
 import PopUp from '../All/PopUp';
 
-const userId = '5'; //change to login
+const userId = 3; //change to login
 
 export default function AssetPage(props) {
+
   const [open, setOpen] = useState(false);
+
   const wantIt = () => {
+    console.log(userId)
     const body={RenterId: userId}
     fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
             method: 'PUT',
@@ -15,15 +18,15 @@ export default function AssetPage(props) {
             body: JSON.stringify(body),
         })
           .then(response => response.json())
-          .then(result => { //add message
-              // alert("The owner will contact with you soon as possible")
+          .then(result => { 
+              alert("The owner will contact with you soon as possible")
           })
    };
   return (
     <div>
       <div className={"buttonsAssets"}>
         <Button variant="outlined" color="primary" onClick={() => setOpen(true)} style={{margin:'2%'}}>Show deatils</Button>
-        <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={wantIt()}>I wnat this asset</Button>
+        <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I wnat this asset</Button>
       </div>
         <PopUp onSubmit={() => setOpen(false)} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)}>
             <AssetDeatils item={props.item} />

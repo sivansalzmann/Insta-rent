@@ -8,7 +8,7 @@ export default function AssetPage(props) {
 
   return (
     <div>
-        <div className={"rowImg"}>
+        <div className={"firstRow"}>
             <h3>{props.item.City}</h3>
             <p>{props.item.Description}</p>
             </div>

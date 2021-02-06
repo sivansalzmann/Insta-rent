@@ -38,10 +38,12 @@ export default function AddAsset(props) {
         .then(result =>  {
             setAsset(result)
         })
-      }, )
+    }, )
+
   const editAsset = () => {
     console.log(asset.id);
     const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl};
+    console.log(body)
     fetch(`http://localhost:3000/api/assets/${asset.id}` ,{
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -66,6 +68,7 @@ export default function AddAsset(props) {
         setAvilability("");
         setDescription("");
         setImageUrl("");
+        window.location.reload()
 		  })
     }
 
