@@ -8,10 +8,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
+import moment from 'moment';
 
-const ownerId = 5;
-
-export default function AddAsset() {
+export default function AddAsset(props) {
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
@@ -30,16 +29,37 @@ export default function AddAsset() {
     const [newAsset, setNewAsset] = useState("");
     const [add,setOpenAdd] = useState(false);
 
+    const assetValidation = () => {
+      let errors = [];
+        if (!moment(avilability, "DD.MM.YYYY").isValid())
+          errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
+        else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
+          errors.push("Invalid date, please insert a valid date later then today. \n")
+        if (country === "")
+          errors.push("Country is requierd, please make sure the field is full. \n")
+        if (city === "")
+          errors.push("City is requierd, please make sure the field is full. \n")
+        if(price === "" )
+          errors.push("Price is requierd, please make sure the field is full. \n")
+        if(isNaN(price))
+          errors.push("Price must to be numbers. \n")
+        if (errors.length > 0)
+            alert(errors)
+        else
+            return true
+    }
+
   const addAsset = (props) => {
-    const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl,RenterId:0};
-    console.log(body);
-    fetch(`http://localhost:3000/api/assets`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-	  })
-			.then(response => response.json())
-			.then(result => {
+    if(assetValidation()) {
+      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl,RenterId:0};
+      console.log(body);
+      fetch(`http://localhost:3000/api/assets`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+        .then(response => response.json())
+        .then(result => {
           setOpenAdd(false);
           setNewAsset(result);
           setCountry("");
@@ -57,16 +77,18 @@ export default function AddAsset() {
           setAvilability("");
           setDescription("");
           setImageUrl("");
-		  })
+        })
+      }
     }
+
 
   return (
     <div >
       <Button variant="contained" color="primary" className={"addButAsset"} onClick={() => setOpenAdd(true)}>Add new asset</Button>
       <PopUp onSubmit={addAsset} title={"Add asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
         <div className={"addAssetForm"}>
-          <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth/>
-          <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth/>
+          <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth required/>
+          <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth required/>
           <TextField label="Neighborhood" onChange={(event) => setNeighborhood(event.target.value)} value={neighborhood} fullWidth/>
           <TextField label="Street" onChange={(event) => setStreet(event.target.value)} value={street} fullWidth/>
           <div className={"rowOptions"}>
@@ -75,8 +97,8 @@ export default function AddAsset() {
             <TextField label="Rooms" className={"inputRow"} onChange={(event) => setRooms(event.target.value)} value={rooms} />
           </div>
           <div className={"rowOptions"}>
-            <TextField label="Avilability" className={"inputRow"} onChange={(event) => setAvilability(event.target.value)} value={avilability} />
-            <TextField label="Price" className={"inputRow"}  onChange={(event) => setPrice(event.target.value)} value={price} />
+            <TextField label="Avilability" className={"inputRow"} onChange={(event) => setAvilability(event.target.value)} value={avilability} required/>
+            <TextField label="Price" className={"inputRow"}  onChange={(event) => setPrice(event.target.value)} value={price} required/>
           </div>
           <FormControl fullWidth > 
           <InputLabel htmlFor="age-native-simple">Condition</InputLabel>

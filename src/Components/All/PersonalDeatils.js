@@ -15,39 +15,68 @@ export default function RenterPage(props) {
     const [renterDeatils,setRenterDeatils] = useState("");
     const [owner,setOwner] = useState("");
 
+    const validatePhone = () => {        
+        let errors = [];
+        if(phone != "") {
+            if(isNaN(phone)) {
+                errors.push("You have entered an invalid phone number, please insert another one \n")
+            }
+        }
+        if (errors.length > 0)
+            alert(errors)
+        else
+            return true
+    }
+
+    const validateBudget = () => {        
+        let errors = [];
+        if(budget != "") {
+            if(isNaN(budget)) {
+                errors.push("You have entered an invalid budget, please insert another one \n")
+            }
+        }
+        if (errors.length > 0)
+            alert(errors)
+        else
+            return true
+    }
+
     const editRenter = () => {
-        const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
-        console.log(props.idRenter);
-        fetch(`http://localhost:3000/api/renterDeatils/${props.idRenter}` ,{
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        })
-          .then(response => response.json())
-          .then(result => {
-              setOpenEdit(false);
-              setRenterDeatils(result)
-              setJob("")
-              setBudget("")
-              setFavoriteCountry("")
-          });
+        if(validateBudget()) {
+            const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
+            console.log(props.idRenter);
+            fetch(`http://localhost:3000/api/renterDeatils/${props.idRenter}` ,{
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            })
+            .then(response => response.json())
+            .then(result => {
+                setOpenEdit(false);
+                setRenterDeatils(result)
+                setJob("")
+                setBudget("")
+                setFavoriteCountry("")
+            });
+        }
       }
       const editOwner = () => {
-        const body = { Country: country,Email:email,Phone:phone};
-        console.log(props.idOwner);
-        fetch(`http://localhost:3000/api/users/${props.idOwner}` ,{
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        })
-          .then(response => response.json())
-          .then(result => {
-              setOpenEdit(false);
-              setOwner(result)
-              setCountry("")
-              setEmail("")
-              setPhone("")
-          });
+        if(validatePhone()) {
+            const body = { Country: country,Email:email,Phone:phone};
+            fetch(`http://localhost:3000/api/users/${props.idOwner}` ,{
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+            })
+            .then(response => response.json())
+            .then(result => {
+                setOpenEdit(false);
+                setOwner(result)
+                setCountry("")
+                setEmail("")
+                setPhone("")
+            });
+        }
       }
       const isRenter = () => {
           return (

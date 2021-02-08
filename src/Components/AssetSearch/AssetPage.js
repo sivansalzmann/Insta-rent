@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import AssetDeatils from '../All/AssetDeatils';
+import AssetDeatils from '../Asset/AssetDeatils';
 import PopUp from '../All/PopUp';
 
 const userId = 3; //change to login

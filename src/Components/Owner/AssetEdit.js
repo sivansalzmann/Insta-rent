@@ -8,8 +8,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
-
-const ownerId = 2;
+import moment from 'moment';
 
 export default function AddAsset(props) {
 
@@ -40,36 +39,55 @@ export default function AddAsset(props) {
         })
     }, [asset])
 
-  const editAsset = () => {
-    console.log(asset.id);
-    const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl};
-    console.log(body)
-    fetch(`http://localhost:3000/api/assets/${asset.id}` ,{
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    })
-			.then(response => response.json())
-			.then(result => {
-        setOpenAdd(false);
-        setEditAsset(result);
-        setCountry("");
-        setCity("");
-        setNeighborhood("");
-        setStreet("");
-        setZip("");
-        setSquareFeet("");
-        setRooms("");
-        setCondition("");
-        setParking("");
-        setElevator("");
-        setPetsAllowed("");
-        setPrice("");
-        setAvilability("");
-        setDescription("");
-        setImageUrl("");
-		  })
+    const dateAndPriceValidation = () => {
+      let errors = [];
+      if(avilability != "") {
+        if (!moment(avilability, "DD.MM.YYYY").isValid())
+          errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
+        else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
+          errors.push("Invalid date, please insert a valid date later then today. \n")
+        }
+        if(price != "" ) {
+          if(isNaN(price)) {
+            errors.push("Price must to be numbers. \n")
+          }
+        }
+        if (errors.length > 0)
+            alert(errors)
+        else
+            return true
     }
+
+  const editAsset = () => {
+    if(dateAndPriceValidation()) {
+      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl};
+      fetch(`http://localhost:3000/api/assets/${asset.id}` ,{
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+        .then(response => response.json())
+        .then(result => {
+          setOpenAdd(false);
+          setEditAsset(result);
+          setCountry("");
+          setCity("");
+          setNeighborhood("");
+          setStreet("");
+          setZip("");
+          setSquareFeet("");
+          setRooms("");
+          setCondition("");
+          setParking("");
+          setElevator("");
+          setPetsAllowed("");
+          setPrice("");
+          setAvilability("");
+          setDescription("");
+          setImageUrl("");
+        })
+    }
+  }
 
   return (
     <div className={"addAssetContainer"}>

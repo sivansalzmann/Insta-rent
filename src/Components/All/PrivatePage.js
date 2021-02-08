@@ -17,7 +17,7 @@ import Contract from '../All/Contract';
 import Footer from '../All/Footer';
 import NavBar from '../All/NavBar';
 import MessageList from '../Message/MessageList';
-import AssetDeatils from '../All/AssetDeatils';
+import AssetDeatils from '../Asset/AssetDeatils';
 import PrsonalDeatils from '../All/PersonalDeatils';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -181,8 +181,8 @@ export default function PrivatePage(props) {
             return (
                 <>
                     <h2>My assets</h2>
-                    <AssetTable assetsList={props.assets}/>
-                    <AddAsset />
+                    <AssetTable assetsList={props.assets} idOwner={props.idOwner}/>
+                    <AddAsset idOwner={props.idOwner}/>
                 </>
             )
         }
@@ -239,17 +239,3 @@ export default function PrivatePage(props) {
     </div>
   );
 }
-
-      {/* <PrivatePage label1={"General"} label2={"My assets"} label3={"Messages"} 
-      FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id}
-      firstHead={"Prsonal deatils"}
-      renter={false}
-      user={user} assets={assets} messages={messages}
-      /> */}
-
-      // <PrivatePage label1={"In progress"} label2={"Asset place deatils"} label3={"Messages to my owner"} 
-      // FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id}
-      // FavoriteCountry={renterDeatils.FavoriteCountry} Budget={renterDeatils.Budget} userId={user.id}
-      // firstHead={"Prsonal deatils"}
-      // renter={true}
-      // user={user} messages={messages} wantedAsset={wantedAsset}

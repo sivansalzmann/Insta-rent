@@ -11,7 +11,6 @@ import Select from '@material-ui/core/Select';
 import './AssetSearchForm.css';
 
 export default function AssetSearchForm(props) {
-    const [date, setDate] = useState("");
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [squareFeet, setSquareFeet] = useState("");
@@ -25,13 +24,12 @@ export default function AssetSearchForm(props) {
     const [openEdit,setOpenEdit] = useState(false);
 
     const onSubmit = () => {
-        fetch(`http://localhost:3000/api/assets?Country=${country}&City=${city}&Avilability=${date}&Price=${price}&SquareFeet=${squareFeet}&Condition=${condition}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
+        fetch(`http://localhost:3000/api/assets?Country=${country}&City=${city}&Price=${price}&SquareFeet=${squareFeet}&Condition=${condition}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
             .then(response => response.json())
             .then(result => {
                 setAssetList(result)
                 console.log(parking)
                 setOpenEdit(false)
-                setDate("")
                 setCountry("")
                 setCity("")
                 setSquareFeet("")
@@ -49,7 +47,6 @@ export default function AssetSearchForm(props) {
             <form noValidate autoComplete="off">
                 <div><TextField className="input" label="Country" size="large" onChange={ (event) => setCountry(event.target.value) } value={ country } /></div>
                 <div><TextField className="input" label="city" size="large" onChange={ (event) => setCity(event.target.value) } value={ city } /></div>
-                <div><TextField className="input" label="date" size="large" onChange={ (event) => setDate(event.target.value) } value={ date } /></div>
                 <div><Button variant="contained" color="primary" onClick={onSubmit} value="search" >search</Button> </div>
             </form>
             <Button variant="outlined" color="primary" onClick={() => setOpenEdit(true)} className={"filterBut"} style={{marginBottom:'2%'}}>

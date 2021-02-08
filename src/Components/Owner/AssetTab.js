@@ -90,8 +90,8 @@ export default function AssetTab (props) {
             <div>
               <div className={"butRow"}>
                 {isRenterExist()}
-                <AssetEdit idAsset={props.item.id}/>
-                <AssetDelete idAsset={props.item.id}/>
+                <AssetEdit idAsset={props.item.id} idOwner={props.idOwner}/>
+                <AssetDelete idAsset={props.item.id} idOwner={props.idOwner}/>
               </div>
             </div>
             </Typography>
