@@ -16,9 +16,9 @@
         "Price": 8214.85,
         "Avilability": "28/08/2021",
         "Description": "Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.\n\nIn hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.\n\nAliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.",
-        "Want": true,
+        "UrlPicture": "https://media.foxbusiness.com/BrightCove/854081161001/202008/3787/854081161001_6178875221001_6178880081001-vs.jpg",
         "OwnerId": 1,
-        "RenterId": 1
+        "RenterId": 0
     },
     {
         "id": 2,
@@ -37,7 +37,7 @@
         "Price": 3939.13,
         "Avilability": "03/12/2021",
         "Description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.",
-        "Want": false,
+        "UrlPicture": "https://cdn.vox-cdn.com/thumbor/heSlsMPUG7Bb7EEuus7_nW1wfI0=/0x0:4000x2657/1200x800/filters:focal(1680x1009:2320x1649)/cdn.vox-cdn.com/uploads/chorus_image/image/66540044/HOUSE_iStock_153139903.14.jpg",
         "OwnerId": 2,
         "RenterId": 0
     },
@@ -58,9 +58,9 @@
         "Price": 7015.57,
         "Avilability": "28/04/2020",
         "Description": "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.\n\nFusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
-        "Want": true,
+        "UrlPicture": "https://media2.s-nbcnews.com/i/newscms/2019_24/1448814/how-size-doesnt-make-you-happier-today-main-190614_b7784729377665100e60a6b2d3a6150e.jpg",
         "OwnerId": 3,
-        "RenterId": 3
+        "RenterId": 0
     },
     {
         "id": 4,
@@ -79,7 +79,7 @@
         "Price": 6654.89,
         "Avilability": "29/03/2020",
         "Description": "Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.\n\nAenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
-        "Want": false,
+        "UrlPicture": "https://archello.s3.eu-central-1.amazonaws.com/images/2020/04/18/Modern-House-Design-1.1587212339.6759.jpg",
         "OwnerId": 4,
         "RenterId": 0
     },
@@ -100,7 +100,7 @@
         "Price": 3042.36,
         "Avilability": "07/08/2021",
         "Description": "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
-        "Want": false,
+        "UrlPicture": "https://www.tollmans.co.il/wp-content/uploads/2020/12/1.jpg",
         "OwnerId": 5,
         "RenterId": 0
     },
@@ -121,9 +121,9 @@
         "Price": 7774.34,
         "Avilability": "24/05/2020",
         "Description": "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-        "Want": false,
-        "OwnerId": 6,
-        "RenterId": 6
+        "UrlPicture": "https://images.livemint.com/img/2019/04/16/600x338/Kerala_1555430371601.jpg",
+        "OwnerId": 1,
+        "RenterId": 0
     },
     {
         "id": 7,
@@ -142,8 +142,8 @@
         "Price": 8067.74,
         "Avilability": "25/02/2020",
         "Description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
-        "Want": false,
-        "OwnerId": 7,
+        "UrlPicture": "https://www.tollmans.co.il/wp-content/uploads/2020/12/1.jpg",
+        "OwnerId": 2,
         "RenterId": 0
     },
     {
@@ -163,9 +163,9 @@
         "Price": 5648.21,
         "Avilability": "16/11/2021",
         "Description": "Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.",
-        "Want": true,
-        "OwnerId": 8,
-        "RenterId": 8
+        "UrlPicture": "https://townsquare.media/site/204/files/2020/08/kae-brown-house-pictures.jpg?w=980&q=75",
+        "OwnerId": 3,
+        "RenterId": 0
     },
     {
         "id": 9,
@@ -184,9 +184,9 @@
         "Price": 8897.35,
         "Avilability": "09/09/2020",
         "Description": "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
-        "Want": false,
-        "OwnerId": 9,
-        "RenterId": 9
+        "UrlPicture": "https://static.dezeen.com/uploads/2020/02/house-in-the-landscape-niko-arcjitect-architecture-residential-russia-houses-khurtin_dezeen_2364_hero.jpg",
+        "OwnerId": 4,
+        "RenterId": 0
     },
     {
         "id": 10,
@@ -205,8 +205,8 @@
         "Price": 2635.6,
         "Avilability": "14/10/2021",
         "Description": "Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.\n\nIn congue. Etiam justo. Etiam pretium iaculis justo.",
-        "Want": false,
-        "OwnerId": 10,
+        "UrlPicture": "https://img.wcdn.co.il/f_auto,w_700/3/0/6/1/3061491-46.jpg",
+        "OwnerId": 5,
         "RenterId": 0
     }
 ]

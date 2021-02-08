@@ -11,7 +11,7 @@ export default function AssetDelete(props) {
 		.then(result =>  {
 			setAsset(result)
 		})  
-	},)
+	},[asset])
   
     const deleteAsset = () => {
 		fetch(`http://localhost:3000/api/assets/${asset.id}`, {

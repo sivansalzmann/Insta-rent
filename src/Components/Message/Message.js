@@ -34,7 +34,7 @@ export default function AssetCard (props) {
         })
     }
     const answerBtn = () => {
-        if(!props.isRenter) {
+        if(!props.renter) {
             return (
                 <Button variant="contained" color="primary" onClick={() => setOpenMessage(true)}>
                     Send answer

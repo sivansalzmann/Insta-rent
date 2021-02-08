@@ -38,7 +38,7 @@ export default function AddAsset(props) {
         .then(result =>  {
             setAsset(result)
         })
-    }, )
+    }, [asset])
 
   const editAsset = () => {
     console.log(asset.id);
@@ -68,7 +68,6 @@ export default function AddAsset(props) {
         setAvilability("");
         setDescription("");
         setImageUrl("");
-        window.location.reload()
 		  })
     }
 

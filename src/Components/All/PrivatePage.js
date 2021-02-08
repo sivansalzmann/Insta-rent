@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Button } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -25,7 +25,6 @@ import MessageIcon from '@material-ui/icons/Message';
 import HouseIcon from '@material-ui/icons/House';
 import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
-import Progress from'./Progress';
 import './PrivatePage.css';
 
 
@@ -87,18 +86,16 @@ export default function PrivatePage(props) {
     const isRenterTabs  = () => {
         if(props.renter) {
             return (
-                <div className={"containerRenter"}>
-                    <div className={"currentContainer"}>
-                        <div className={"curStatus"}>
-                        <h1>Current status</h1>
-                        <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
-                        </div>
-                        <div className={"curBud"}>
-                            <h1>Cuurent budget</h1>
-                            <p>{props.Budget} $</p>
-                        </div>
+                  <div className={"currentContainer"}>
+                    <div className={"curStatus"}>
+                      <h1>Current status</h1>
+                      <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
                     </div>
-                </div>
+                    <div className={"curBud"}>
+                      <h1>Cuurent budget</h1>
+                      <p>{props.Budget} $</p>
+                    </div>
+                  </div>
             )
         }
     }
@@ -195,13 +192,13 @@ export default function PrivatePage(props) {
         if(props.renter) {
             return(
                 <>
-                    <MessageList messageList={props.messages} isRenter={true}/>
+                  <MessageList messageList={props.messages} renter={true}/>
                 </>
             )
         }
         else {
             return (
-                <MessageList messageList={props.messages} isRenter={false}/>
+                <MessageList messageList={props.messages} renter={false}/>
             )
         }
     }
@@ -211,7 +208,7 @@ export default function PrivatePage(props) {
       <NavBar />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils FirstName={props.FirstName} LastName={props.LastName} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.id} renter={false}/>
+          <PrsonalDeatils FirstName={props.FirstName} LastName={props.LastName} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter}/>
         </div>
         <div className={"containerOptions"}>
         {isRenterTabs()}

@@ -17,7 +17,7 @@ export default function RenterPage(props) {
 
     const editRenter = () => {
         const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
-        console.log(body);
+        console.log(props.idRenter);
         fetch(`http://localhost:3000/api/renterDeatils/${props.idRenter}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -34,7 +34,7 @@ export default function RenterPage(props) {
       }
       const editOwner = () => {
         const body = { Country: country,Email:email,Phone:phone};
-        console.log(body);
+        console.log(props.idOwner);
         fetch(`http://localhost:3000/api/users/${props.idOwner}` ,{
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },

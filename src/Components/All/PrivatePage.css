@@ -1,4 +1,4 @@
-/* .privatePage{
+.privatePage{
     background-color: #F8F8F8;
 }
 .privatePageConatiner {
@@ -10,16 +10,16 @@
     width: 30%;
     height: 80%;
     margin-left: 10%;
-    margin-top: 3%;  
+    /* margin-top: 3%;   */
     margin-bottom: 100px;
 }
-.containerRenter{
+/* .containerRenter{
     width: 100%;
     margin-left: 5%;
     margin-top: 3%;
 
-}
-.currentContainer {
+} */
+/* .currentContainer {
     display: flex;
     flex-direction: row;
 }
@@ -49,7 +49,7 @@
     margin: 5%;
     font-size: 20px;
     margin-bottom: 15%;
-}
+} */
 .litMenu {
     width:77%;
     height: 10%;
@@ -76,4 +76,4 @@
     height: 40%;
     width: 30%;
     margin: 1%;
-} */
+}
