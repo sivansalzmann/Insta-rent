@@ -65,75 +65,116 @@ export default function PrivatePage(props) {
     };
 
     const addMessage = () => {
-        let today = new Date();
-        setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
-        console.log(timestamp);
-        const body = { Message: message , RenterId:props.userId, OwnerId:props.wantedAsset[0].OwnerId,Timestamp:timestamp};
-          fetch(`http://localhost:3000/api/messages` ,{
-            method: 'POST',
+      let today = new Date();
+      console.log(today);
+      setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
+      console.log(timestamp);
+      const body = { Message: message , RenterId:props.userId, OwnerId:props.wantedAsset[0].OwnerId,Timestamp:timestamp};
+        fetch(`http://localhost:3000/api/messages` ,{
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        .then(response => response.json())
+        .then(result => {
+          setOpenMessage(false)
+          setMessage(result)
+          setMessage("")
+      });
+    }
+
+    const giveUpOnAsset = () => {
+      const body={RenterId: 0}
+      fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.wantedAsset[0].id}`, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
           })
-          .then(response => response.json())
-          .then(result => {
-            setOpenMessage(false)
-            setMessage(result)
-            setMessage("")
-        });
-        
-      }
+            .then(response => response.json())
+            .then(result => { 
+              alert("Tha asset is deletd from your proccess successfully!")
+              window.location.reload()
+            })
+      };
 
     const isRenterTabs  = () => {
         if(props.renter) {
             return (
-                  <div className={"currentContainer"}>
-                    <div className={"curStatus"}>
-                      <h1>Current status</h1>
-                      <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
-                    </div>
-                    <div className={"curBud"}>
-                      <h1>Cuurent budget</h1>
-                      <p>{props.Budget} $</p>
-                    </div>
-                  </div>
+              <div className={"currentContainer"}>
+                <div className={"curStatus"}>
+                  <h1>Current status</h1>
+                  <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
+                </div>
+                <div className={"curBud"}>
+                  <h1>Cuurent budget</h1>
+                  <p>{props.Budget} $</p>
+                </div>
+              </div>
             )
         }
+    }
+
+    const wantedAsset = () => {
+      if(props.wantedAsset == "") {
+        return (
+          <Stepper active orientation="vertical">
+          <Step >
+            <StepLabel style={{fontFamily:'Lato'}}></StepLabel>
+            <StepContent>
+            <Typography style={{fontFamily:'Lato'}}>You don't in proccess with owner yet, choose asset and start soon!</Typography>
+            </StepContent>
+          </Step>
+            <Step>
+              <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
+            </Step>
+            <Step >
+              <StepLabel style={{fontFamily:'Lato'}}>Enjoy in your new journey!</StepLabel>
+            </Step>
+        </Stepper>
+        )
+      }
+      else {
+        return (
+          <Stepper active orientation="vertical">
+            <Step >
+              <StepLabel style={{fontFamily:'Lato'}}>Request recived</StepLabel>
+              <StepContent>
+              <Typography style={{fontFamily:'Lato'}}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
+              <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
+              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false}>
+                  <AssetDeatils item={props.wantedAsset[0]} />
+              </PopUp>
+              </StepContent>
+            </Step>
+              <Step active>
+                <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
+                <StepContent>
+                <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
+                  <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
+                  <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+                    <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required/>
+                  </PopUp>
+                  <Contract isRenter={true}/>
+                  <Button variant="contained" color="primary" size="small" onClick={() => giveUpOnAsset()}>give up on this asset</Button>
+                </StepContent>
+              </Step>
+              <Step >
+                <StepLabel style={{fontFamily:'Lato'}}>Enjoy in your new journey!</StepLabel>
+                <StepContent>
+                <Typography style={{fontFamily:'Lato'}}></Typography>
+                <Button variant="contained" color="primary" size="small">Chat</Button>
+                <Contract/>
+                </StepContent>
+              </Step>
+            </Stepper>
+        )
+      }
     }
 
     const label1 = () => {
         if(props.renter) {
             return (
-                <Stepper active orientation="vertical">
-                  <Step >
-                    <StepLabel style={{fontFamily:'Lato'}}>Request recived</StepLabel>
-                    <StepContent>
-                    <Typography style={{fontFamily:'Lato'}}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
-                    <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
-                    <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false}>
-                        <AssetDeatils item={props.wantedAsset[0]} />
-                    </PopUp>
-                    </StepContent>
-                  </Step>
-                    <Step active>
-                      <StepLabel style={{fontFamily:'Lato'}}>Asset rentering in proccess</StepLabel>
-                      <StepContent>
-                      <Typography style={{fontFamily:'Lato'}}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
-                        <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
-                        <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
-                          <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required/>
-                        </PopUp>
-                        <Contract isRenter={true}/>
-                      </StepContent>
-                    </Step>
-                    <Step >
-                      <StepLabel style={{fontFamily:'Lato'}}>Enjoy in your new journey!</StepLabel>
-                      <StepContent>
-                      <Typography style={{fontFamily:'Lato'}}></Typography>
-                      <Button variant="contained" color="primary" size="small">Chat</Button>
-                      <Contract/>
-                      </StepContent>
-                    </Step>
-                </Stepper>
+                wantedAsset()
             )
         }
         else {

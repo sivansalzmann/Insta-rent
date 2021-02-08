@@ -36,6 +36,7 @@ export default function RenterPage(props) {
           setWantedAsset(result)
       })
     }, [wantedAsset])
+
     useEffect(() => {
       fetch(`http://localhost:3000/api/messages?RenterId=${userId}`)
         .then(response => response.json())

@@ -14,14 +14,14 @@ const useStyles = makeStyles({
     },
     
 });
-export default function AssetCard (props) {
+
+export default function Message (props) {
     const classes = useStyles();
     const [openMessage,setOpenMessage] = useState("");
     const [answer,setAnswer] = useState("");
 
     const addAnswer = () => {
         const body = {Answer:answer};
-        console.log(body);
         fetch(`http://localhost:3000/api/messages/${props.item.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -33,6 +33,7 @@ export default function AssetCard (props) {
             setAnswer(result);
         })
     }
+    
     const answerBtn = () => {
         if(!props.renter) {
             return (
@@ -42,6 +43,7 @@ export default function AssetCard (props) {
             )
         }
     }
+
     const haveAnswer = () => {
         if(props.item.Answer != null){
             return (
@@ -62,6 +64,7 @@ export default function AssetCard (props) {
         }
 
     }
+
     return (
         <Card className={classes.card}>
             <CardContent>
