@@ -60,6 +60,7 @@ export default function RenterPage(props) {
             });
         }
       }
+
       const editOwner = () => {
         if(validatePhone()) {
             const body = { Country: country,Email:email,Phone:phone};
@@ -78,6 +79,7 @@ export default function RenterPage(props) {
             });
         }
       }
+      
       const isRenter = () => {
           return (
               <>

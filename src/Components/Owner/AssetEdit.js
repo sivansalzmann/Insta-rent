@@ -12,51 +12,51 @@ import moment from 'moment';
 
 export default function AddAsset(props) {
 
-    const [country, setCountry] = useState("");
-    const [city, setCity] = useState("");
-    const [neighborhood, setNeighborhood] = useState("");
-    const [street, setStreet] = useState("");
-    const [zip, setZip] = useState("");
-    const [squareFeet, setSquareFeet] = useState("");
-    const [rooms, setRooms] = useState("");
-    const [condition, setCondition] = useState("");
-    const [parking, setParking] = useState(false);
-    const [elevator, setElevator] = useState(false);
-    const [petsAllowed, setPetsAllowed] = useState(false);
-    const [price, setPrice] = useState("");
-    const [avilability, setAvilability] = useState("");
-    const [description, setDescription] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
-    const [editedAsset, setEditAsset] = useState("");
-    const [asset, setAsset] = useState("");
-    const [add,setOpenAdd] = useState(false);
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [street, setStreet] = useState("");
+  const [zip, setZip] = useState("");
+  const [squareFeet, setSquareFeet] = useState("");
+  const [rooms, setRooms] = useState("");
+  const [condition, setCondition] = useState("");
+  const [parking, setParking] = useState(false);
+  const [elevator, setElevator] = useState(false);
+  const [petsAllowed, setPetsAllowed] = useState(false);
+  const [price, setPrice] = useState("");
+  const [avilability, setAvilability] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [editedAsset, setEditAsset] = useState("");
+  const [asset, setAsset] = useState("");
+  const [add,setOpenAdd] = useState(false);
 
-    useEffect(() => {
-      fetch(`http://localhost:3000/api/assets/${props.idAsset}`)
-        .then(response => response.json())
-        .then(result =>  {
-            setAsset(result)
-        })
-    }, [asset])
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/assets/${props.idAsset}`)
+      .then(response => response.json())
+      .then(result =>  {
+          setAsset(result)
+      })
+  }, [asset])
 
-    const dateAndPriceValidation = () => {
-      let errors = [];
-      if(avilability != "") {
-        if (!moment(avilability, "DD.MM.YYYY").isValid())
-          errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
-        else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
-          errors.push("Invalid date, please insert a valid date later then today. \n")
+  const dateAndPriceValidation = () => {
+    let errors = [];
+    if(avilability !== "") {
+      if (!moment(avilability, "DD.MM.YYYY").isValid())
+        errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
+      else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
+        errors.push("Invalid date, please insert a valid date later then today. \n")
+      }
+      if(price !== "" ) {
+        if(isNaN(price)) {
+          errors.push("Price must to be numbers. \n")
         }
-        if(price != "" ) {
-          if(isNaN(price)) {
-            errors.push("Price must to be numbers. \n")
-          }
-        }
-        if (errors.length > 0)
-            alert(errors)
-        else
-            return true
-    }
+      }
+      if (errors.length > 0)
+          alert(errors)
+      else
+          return true
+  }
 
   const editAsset = () => {
     if(dateAndPriceValidation()) {

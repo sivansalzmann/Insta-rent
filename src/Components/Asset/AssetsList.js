@@ -6,7 +6,7 @@ export default function AssetList(props) {
     const assetWanted = (item) => {
         if(item.RenterId==0) {
             return (
-            <AssetCard key={item.id} id={item.id} item={item}> 
+            <AssetCard key={item.id} id={item.id} item={item} renterId={props.renterId}> 
                 {props.children}
             </AssetCard>
             )

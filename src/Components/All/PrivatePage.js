@@ -70,7 +70,8 @@ export default function PrivatePage(props) {
       setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
       console.log(timestamp);
       const body = { Message: message , RenterId:props.userId, OwnerId:props.wantedAsset[0].OwnerId,Timestamp:timestamp};
-        fetch(`http://localhost:3000/api/messages` ,{
+      console.log(body)  
+      fetch(`http://localhost:3000/api/messages` ,{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -86,32 +87,39 @@ export default function PrivatePage(props) {
     const giveUpOnAsset = () => {
       const body={RenterId: 0}
       fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.wantedAsset[0].id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+          .then(response => response.json())
+          .then(result => { 
+            alert("Tha asset is deletd from your proccess successfully!")
+            window.location.reload()
           })
-            .then(response => response.json())
-            .then(result => { 
-              alert("Tha asset is deletd from your proccess successfully!")
-              window.location.reload()
-            })
       };
 
-    const isRenterTabs  = () => {
-        if(props.renter) {
-            return (
-              <div className={"currentContainer"}>
-                <div className={"curStatus"}>
-                  <h1>Current status</h1>
-                  <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
-                </div>
-                <div className={"curBud"}>
-                  <h1>Cuurent budget</h1>
-                  <p>{props.Budget} $</p>
-                </div>
-              </div>
-            )
-        }
+    const tabs  = () => {
+      if(props.renter) {
+        return (
+          <div className={"currentContainer"}>
+            <div className={"curStatus"}>
+              <h1>Current status</h1>
+              <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
+            </div>
+            <div className={"curBud"}>
+              <h1>Cuurent budget</h1>
+              <p>{props.Budget} $</p>
+            </div>
+          </div>
+        )
+      }
+      else {
+        return (
+          <div>
+            <AddAsset idOwner={props.idOwner} className={"addAssetBig"}/>
+          </div>
+        )
+      }
     }
 
     const wantedAsset = () => {
@@ -233,6 +241,10 @@ export default function PrivatePage(props) {
         if(props.renter) {
             return(
                 <>
+                  <Button variant="contained" color="primary" size="large" style={{width: "100%"}} onClick={() => setOpenMessage(true)}>send message to owner</Button>
+                  <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+                    <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required/>
+                  </PopUp>
                   <MessageList messageList={props.messages} renter={true}/>
                 </>
             )
@@ -252,7 +264,7 @@ export default function PrivatePage(props) {
           <PrsonalDeatils FirstName={props.FirstName} LastName={props.LastName} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter}/>
         </div>
         <div className={"containerOptions"}>
-        {isRenterTabs()}
+        {tabs()}
           <div className={"progressOwner"}>
           <AppBar position="static" color="default">
               <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">

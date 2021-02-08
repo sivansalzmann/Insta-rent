@@ -29,14 +29,7 @@ const Message = (props) => {
           <DialogContentText>
             Please enter your message
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="meesage"
-            rows={4}
-            fullWidth
-          />
+          <TextField autoFocus margin="dense" id="name" label="meesage" rows={4} fullWidth/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

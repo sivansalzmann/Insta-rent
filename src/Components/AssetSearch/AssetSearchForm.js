@@ -106,7 +106,7 @@ export default function AssetSearchForm(props) {
                     </div>
                 </div>
                 </PopUp>
-            <AssetList assetsList={assetsList} />
+            <AssetList assetsList={assetsList} renterId={props.renterId}/>
         </div>
     )
 }

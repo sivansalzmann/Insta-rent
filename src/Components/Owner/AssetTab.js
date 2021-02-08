@@ -39,6 +39,7 @@ export default function AssetTab (props) {
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
+
     const classes = useStyles();
     const isRenterExist = () => {
       if(props.item.RenterId !== 0) {
@@ -53,6 +54,7 @@ export default function AssetTab (props) {
           );
         }
       }
+
     const isRenterExistTop = () => {
       if(props.item.RenterId !== 0) {
         return (
@@ -69,6 +71,7 @@ export default function AssetTab (props) {
         );
       }
     }
+    
   return (
       <div className={"assetContainer"}>
         <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>

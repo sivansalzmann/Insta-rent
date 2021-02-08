@@ -6,20 +6,19 @@ export default function UserDeatils(props) {
     const [renterDeatils,setRenterDeatils] = useState("")
     useEffect(() => {
         fetch(`http://localhost:3000/api/users/${props.item}`)
-          .then(response => response.json())
-          .then(result =>  {
-            setRenter(result)
-          })
-          
-        },[renter] )
+            .then(response => response.json())
+            .then(result =>  {
+                setRenter(result)
+        })
+    },[renter] )
+
     useEffect(() => {
         fetch(`http://localhost:3000/api/renterDeatils/${props.item}`)
             .then(response => response.json())
             .then(result =>  {
-            setRenterDeatils(result)
+                setRenterDeatils(result)
             })
-            
-        }, [renterDeatils])
+    }, [renterDeatils])
 
     return (
         <div>

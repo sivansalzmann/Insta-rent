@@ -12,6 +12,7 @@ const useStyles = makeStyles({
     },
     
 });
+
 export default function AssetCard (props) {
     const classes = useStyles();
     return (
@@ -31,7 +32,7 @@ export default function AssetCard (props) {
                 Avilable from {props.item.Avilability} 
                 </Typography>
             </CardContent>
-            <AssetPage item={props.item}/>
+            <AssetPage item={props.item} renterId={props.renterId}/>
         </Card> 
     );
 }

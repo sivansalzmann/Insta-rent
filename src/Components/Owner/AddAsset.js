@@ -10,6 +10,8 @@ import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
 import moment from 'moment';
 
+const ownerId = 2; // change to login
+
 export default function AddAsset(props) {
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
@@ -31,27 +33,29 @@ export default function AddAsset(props) {
 
     const assetValidation = () => {
       let errors = [];
-        if (!moment(avilability, "DD.MM.YYYY").isValid())
-          errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
-        else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
-          errors.push("Invalid date, please insert a valid date later then today. \n")
-        if (country === "")
-          errors.push("Country is requierd, please make sure the field is full. \n")
-        if (city === "")
-          errors.push("City is requierd, please make sure the field is full. \n")
-        if(price === "" )
-          errors.push("Price is requierd, please make sure the field is full. \n")
-        if(isNaN(price))
-          errors.push("Price must to be numbers. \n")
-        if (errors.length > 0)
-            alert(errors)
-        else
-            return true
+      if (!moment(avilability, "DD.MM.YYYY").isValid())
+        errors.push("Invalid date, please insert a valid date in format of: DD.MM.YYYY.\n")
+      else if (moment().isAfter(moment(avilability, 'DD.MM.YYYY'))) 
+        errors.push("Invalid date, please insert a valid date later then today. \n")
+      if (country === "")
+        errors.push("Country is requierd, please make sure the field is full. \n")
+      if (city === "")
+        errors.push("City is requierd, please make sure the field is full. \n")
+      if(price === "" )
+        errors.push("Price is requierd, please make sure the field is full. \n")
+      if(isNaN(price))
+        errors.push("Price must to be numbers. \n")
+      if (errors.length > 0)
+          alert(errors)
+      else
+          return true
     }
 
   const addAsset = (props) => {
+    console.log(props.idOwner)
+
     if(assetValidation()) {
-      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl,RenterId:0};
+      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl,RenterId:0};
       console.log(body);
       fetch(`http://localhost:3000/api/assets`, {
         method: 'POST',

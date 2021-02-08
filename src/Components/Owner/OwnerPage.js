@@ -2,16 +2,14 @@ import React, {useEffect, useState} from 'react';
 import './OwnerPage.css';
 import PrivatePage from '../All/PrivatePage';
 
-const ownerId = 4;
-
-export default function OwnerPage1() {
+export default function OwnerPage1(props) {
 
     const [user,setUser] = useState("");
     const [assets,setAssets] = useState("");
     const [messages,setOwnerMessages] = useState("");
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/users/${ownerId}`)
+      fetch(`http://localhost:3000/api/users/${props.location.ownerId}`)
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
@@ -19,7 +17,7 @@ export default function OwnerPage1() {
     }, [user])
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/assets?OwnerId=${ownerId}`)
+      fetch(`http://localhost:3000/api/assets?OwnerId=${props.location.ownerId}`)
         .then(response => response.json())
         .then(result =>  {
             setAssets(result)
@@ -27,7 +25,7 @@ export default function OwnerPage1() {
     }, [assets])
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/messages?OwnerId=${ownerId}`)
+      fetch(`http://localhost:3000/api/messages?OwnerId=${props.location.ownerId}`)
         .then(response => response.json())
         .then(result =>  {
             setOwnerMessages(result)
