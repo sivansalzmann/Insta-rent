@@ -98,6 +98,17 @@ export default function PrivatePage(props) {
       })
   };
 
+  // function initMap() {
+  //   const map = new google.maps.Map(document.getElementById("map"), {
+  //     zoom: 8,
+  //     center: { lat: -34.397, lng: 150.644 },
+  //   });
+  //   const geocoder = new google.maps.Geocoder();
+  //   document.getElementById("submit").addEventListener("click", () => {
+  //     geocodeAddress(geocoder, map);
+  //   });
+  // }
+
   const tabs = () => {
     if (props.renter) {
       return (
@@ -220,19 +231,11 @@ export default function PrivatePage(props) {
 
   const label2 = () => {
     if (props.renter) {
-      return ( <h1>Google api</h1>
-    //     <>
-    //       function initMap() {
-    //         const map = new google.maps.Map(document.getElementById("map"), {
-    //         zoom: 8,
-    //         center: { lat: -34.397, lng: 150.644 },
-    //       });
-    //         const geocoder = new google.maps.Geocoder();
-    //         document.getElementById("submit").addEventListener("click", () => {
-    //         geocodeAddress(geocoder, map);
-    //   });
-    // }
-    //     </>
+      return (
+        <>
+          <h1>Google api</h1>
+
+        </>
       )
     }
     else {
