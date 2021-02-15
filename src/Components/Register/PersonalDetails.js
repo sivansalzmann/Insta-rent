@@ -28,32 +28,24 @@ export default function SignUp (props) {
 
   const classes = useStyles();
 
-  const { FirstName, LastName, Gender, Email, Phone } = props.values;
+  const { Age, Country, Gender, Phone } = props.values;
 
     return (
-        <>
+        <> 
           <TextField 
-              id="FirstName" 
-              label="First name" 
-              name="First name"
-              defaultValue={FirstName}
-              onChange={props.handleChange('FirstName')}
+              id="Age" 
+              label="Age" 
+              name="Age"
+              defaultValue={Age}
+              onChange={props.handleChange('Age')}
               fullWidth
           />
           <TextField 
-              id="LastName" 
-              label="Last name" 
-              name="Last name"
-              defaultValue={LastName}
-              onChange={props.handleChange('LastName')}
-              fullWidth
-          />
-          <TextField 
-              id="Email" 
-              label="Email" 
-              name="Email"
-              defaultValue={Email}
-              onChange={props.handleChange('Email')}
+              id="Country" 
+              label="Country" 
+              name="Country"
+              defaultValue={Country}
+              onChange={props.handleChange('Country')}
               fullWidth
           />
           <TextField 
@@ -64,6 +56,7 @@ export default function SignUp (props) {
               onChange={props.handleChange('Phone')}
               fullWidth
           />
+      
           <FormControl className={classes.formControl}>
             <InputLabel id="Gender">Gender</InputLabel>
             <Select 

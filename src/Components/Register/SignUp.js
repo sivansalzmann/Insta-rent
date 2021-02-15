@@ -59,7 +59,7 @@ const onSubmit = event => {
       <div className={'background'}>
         <NavBar />
         <div className={"signInContainer"}>
-          <h1>SIGN UP</h1>
+          <h1>Additional Information</h1>
           <form className={classes.root} onSubmit={onSubmit} autoComplete="off">
           <PersonalDetails
             handleChange={handleChange}
