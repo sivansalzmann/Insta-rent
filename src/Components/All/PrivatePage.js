@@ -115,7 +115,6 @@ export default function PrivatePage(props) {
     else {
       return (
         <div>
-          {/* <p>{(props.userId.id)}</p> */}
           <AddAsset ownerId={props.userId.id} className={"addAssetBig"} />
         </div>
       )
@@ -258,7 +257,7 @@ export default function PrivatePage(props) {
   }
   return (
     <div className={"privatePage"}>
-      <NavBar userId={props.userId} renter={props.renter} />
+      <NavBar userId={props.userId} isRenter={props.renter} />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
           <PrsonalDeatils renterDeatilsId={props.renterDeatilsId} userId={props.userId} FirstName={props.FirstName} LastName={props.LastName} JobTitle={props.JobTitle} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter} />

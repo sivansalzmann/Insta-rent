@@ -35,7 +35,7 @@ export default function NavBar(props) {
     }
 
     const navBarPosition = () => {
-        if(props.renter == true) {
+        if(props.isRenter == true) {
             return ( 
                 <>
                     <div className={"rowOptionsNavBar"}>
@@ -60,7 +60,7 @@ export default function NavBar(props) {
                 </>
             )
         }
-        if(props.renter == false) {
+        if(props.isRenter == false) {
             return ( 
                 <>
                     <div className={"rowOptionsNavBar"}>

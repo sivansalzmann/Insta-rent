@@ -44,17 +44,11 @@ export default function App(props) {
         })
           .then(response => response.json())
           .then(result => {
-            // let path = `/RenterSearch`
             setRenterDeatilsPopUp(false)
             setRenterDeatils(result)
             serJobTitle("")
             setBudget("")
             setFavoriteCountry("")
-        //     history.push({
-        //         pathname: path,
-        //         user: user,
-        //         renter: renter
-        //   })
           });
       }
 
@@ -63,13 +57,8 @@ export default function App(props) {
             return (
                 <div className={"buttons"}>
                     {renterDeatilsExistFunc()}
-                    <Link to={{ pathname: "/RenterSearch" , user:user, renter:true }}><Button onClick={() => setRenterDeatilsPopUp(true)}><p>I want to rent asset</p></Button></Link>
-                    {/* <PopUp open={renterDeatilsPopUp} onSubmit={() => addRenterDeatils()} title={"Insert deatils on your current position"} closePopup={() => setRenterDeatilsPopUp(false)} showBt={true}>
-                        <TextField className="input" label="Country" size="large" onChange={ (event) => serJobTitle(event.target.value) } value={ jobTitle } fullWidth/>   
-                        <TextField className="input" label="jobTitle" size="large" onChange={ (event) => setBudget(event.target.value) } value={ budget } fullWidth/>   
-                        <TextField className="input" label="budget" size="large" onChange={ (event) => setFavoriteCountry(event.target.value) } value={ favoriteCountry } fullWidth/>   
-                    </PopUp>                     */}
-                    <Link to={{ pathname: "/Renter" , user:user, renter:true }}><Button type={"submit"}><p>My renter page</p></Button></Link>
+                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button onClick={() => setRenterDeatilsPopUp(true)}><p>I want to rent asset</p></Button></Link>
+                    <Link to={{ pathname: "/Renter" , user:user, isRenter:true }}><Button type={"submit"}><p>My renter page</p></Button></Link>
                 </div>
                 )
             }
@@ -77,7 +66,7 @@ export default function App(props) {
             return (
                 <div className={"buttons"}>
                     <Button type={"submit"}><p>post asset</p></Button>
-                    <Link to={{ pathname: "/OwnerPage" , user:user, renter:false }}><Button type={"submit"}><p>My owner page</p></Button></Link>
+                    <Link to={{ pathname: "/OwnerPage" , user:user, isRenter:false }}><Button type={"submit"}><p>My owner page</p></Button></Link>
                 </div>
             )
             }
