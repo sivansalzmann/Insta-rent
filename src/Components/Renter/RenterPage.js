@@ -20,7 +20,7 @@ export default function RenterPage(props) {
       .then(result =>  {
           setUser(result)
       })    
-  }, [user])
+  }, [])
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/renterDeatils/${userProps.id}`)
@@ -32,27 +32,27 @@ export default function RenterPage(props) {
   }, [renterDeatils])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?googleID=${userProps.id}`)
+    fetch(`http://localhost:3000/api/assets?RenterId=${userProps.id}`)
       .then(response => response.json())
       .then(result => {
         setWantedAsset(result)
     })
-  }, [wantedAsset])
+  }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/messages?googleID=${userProps.id}`)
+    fetch(`http://localhost:3000/api/messages?RenterId=${userProps.id}`)
       .then(response => response.json())
       .then(result =>  {
         setRenterMessages(result)
       })
-  }, [renterMessages])
+  }, [])
 
   return (
       <div className={"renterMainPage"}>
         <PrivatePage label1={"In progress"} label2={"Asset place deatils"} label3={"Messages to my owner"} 
         FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idRenter={user.id}
         FavoriteCountry={renterDeatils.FavoriteCountry} Budget={renterDeatils.Budget} JobTitle={renterDeatils.JobTitle} userId={user}
-        firstHead={"Prsonal deatils"} renter={true} user={user} messages={renterMessages} wantedAsset={wantedAsset} renterDeatilsId={renterDeatilsId}/>
+        firstHead={"Prsonal deatils"} isRenter={true} user={user} messages={renterMessages} wantedAsset={wantedAsset} renterDeatilsId={renterDeatilsId} />
     </div>
 );
 }

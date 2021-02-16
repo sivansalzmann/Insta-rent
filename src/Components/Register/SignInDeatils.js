@@ -1,14 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useContext} from 'react';
 import './SignInDeatils.css';
 import Footer from '../All/Footer';
 import AddDeatils from './addDeatils';
 import {useHistory} from "react-router-dom";
+import {UserContext} from '../../UserContext';
 
 export default function SignInDeatils (props) { 
-  let history = useHistory();
+  const history = useHistory();
+  const { setUser } = useContext(UserContext);
 
   const [userId] = useState(props.location.userId)
-  const [user,setUser] = useState("");
+  const [user,setByUserId] = useState("");
 
   console.log(userId)
 
@@ -16,7 +18,7 @@ export default function SignInDeatils (props) {
     fetch(`http://localhost:3000/api/users/${userId}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
-          setUser(result)
+          setByUserId(result)
           console.log(result)
       })    
   }, [])

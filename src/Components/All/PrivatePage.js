@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Button } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -27,6 +27,7 @@ import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
 import Map from '../All/Map';
+import {UserContext} from '../../UserContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,11 +54,14 @@ function a11yProps(index) {
 }
 
 export default function PrivatePage(props) {
+  const { user} = useContext(UserContext);
+
   const theme = useTheme();
   const [message, setMessage] = useState("");
   const [openMessage, setOpenMessage] = useState(false);
   const [openAsset, setOpenAsset] = useState(false);
   const [timestamp, setTimestamp] = useState("");
+  const [asset,setAsset] = useState("");
 
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -83,22 +87,25 @@ export default function PrivatePage(props) {
       });
   }
 
+
   const giveUpOnAsset = () => {
+    console.log(props.wantedAsset[0].id)
     const body = { RenterId: 0 }
-    fetch(`http://localhost:3000/assets/${props.wantedAsset[0].id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+    fetch(`http://localhost:3000/api/assets/${props.wantedAsset[0].id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
     })
       .then(response => response.json())
       .then(result => {
+        setAsset(result)
         alert("Tha asset is deletd from your proccess successfully!")
         window.location.reload()
       })
   };
 
   const tabs = () => {
-    if (props.renter) {
+    if (props.isRenter) {
       return (
         <div className={"currentContainer"}>
           <div className={"curStatus"}>
@@ -115,7 +122,7 @@ export default function PrivatePage(props) {
     else {
       return (
         <div>
-          <AddAsset ownerId={props.userId.id} className={"addAssetBig"} />
+          <AddAsset idOwner={props.userId.id} className={"addAssetBig"} />
         </div>
       )
     }
@@ -178,8 +185,27 @@ export default function PrivatePage(props) {
     }
   }
 
+  const disableTabs = () => {
+    if (props.wantedAsset == "") {
+      return (
+        <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+          <Tab label={props.label1} {...a11yProps(0)} />
+          <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} disabled/>
+          <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} disabled/>
+        </Tabs>
+      )
+    }
+    if(props.wantedAsset == "" || props.isRenter == true) {
+      <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+        <Tab label={props.label1} {...a11yProps(0)} />
+        <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
+        <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
+      </Tabs>
+    }
+  }
+
   const label1 = () => {
-    if (props.renter) {
+    if (props.isRenter) {
       return (
         wantedAsset()
       )
@@ -218,7 +244,7 @@ export default function PrivatePage(props) {
   }
 
   const label2 = () => {
-    if (props.renter) {
+    if (props.isRenter) {
       return (
         <>
           {/* <Map address={props.Country}/> */}
@@ -228,17 +254,16 @@ export default function PrivatePage(props) {
     else {
       return (
         <>
-        {console.log(props.userId.id)}
           <h2>My assets</h2>
-          <AssetTable assetsList={props.assets} idOwner={props.idOwner} />
-          <AddAsset ownerId={props.userId.id} />
+          <AssetTable assetsList={props.assets} idOwner={props.userId.id} googleIdRenter={props.userId}/>
+          <AddAsset idOwner={props.userId.id} />
         </>
       )
     }
   }
 
   const labeel3 = () => {
-    if (props.renter) {
+    if (props.isRenter) {
       return (
         <>
           <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button>
@@ -255,17 +280,20 @@ export default function PrivatePage(props) {
       )
     }
   }
+  
   return (
     <div className={"privatePage"}>
-      <NavBar userId={props.userId} isRenter={props.renter} />
+      <NavBar userId={props.userId}/>
+      {/* <NavBar userId={props.userId} isRenter={props.renter}/> */}
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils renterDeatilsId={props.renterDeatilsId} userId={props.userId} FirstName={props.FirstName} LastName={props.LastName} JobTitle={props.JobTitle} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter} />
+          <PrsonalDeatils renterDeatilsId={props.renterDeatilsId} userId={props.userId} FirstName={props.FirstName} LastName={props.LastName} JobTitle={props.JobTitle} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.isRenter} />
         </div>
         <div className={"containerOptions"}>
           {tabs()}
           <div className={"progressOwner"}>
             <AppBar position="static" color="default">
+              {/* {disableTabs()} */}
               <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label={props.label1} {...a11yProps(0)} />
                 <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />

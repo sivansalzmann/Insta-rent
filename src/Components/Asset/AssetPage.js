@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import AssetDeatils from '../Asset/AssetDeatils';
 import PopUp from '../All/PopUp';
+import {useHistory} from "react-router-dom";
 
 export default function AssetPage(props) {
+  let history = useHistory();
 
   const [open, setOpen] = useState(false);
   const [asset, setAsset] = useState("");
@@ -25,8 +27,12 @@ export default function AssetPage(props) {
         })
         .then(response => response.json())
         .then(result => { 
-            alert("The owner will contact with you soon as possible")
-            // window.location.reload()
+          let path = '/Renter'
+          alert("The owner will contact with you soon as possible")
+          history.push({
+            pathname: path,
+            user: result
+          })
         })
     };
 
@@ -49,7 +55,7 @@ export default function AssetPage(props) {
         <Button variant="outlined" color="primary" onClick={() => setOpen(true)} style={{margin:'2%'}}>Show deatils</Button>
         {haveAsset()}
       </div>
-        <PopUp onSubmit={() => setOpen(false)} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)}>
+        <PopUp onSubmit={() => setOpen(false)} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)} showBt={true}>
             <AssetDeatils item={props.item} />
         </PopUp>
     </div>

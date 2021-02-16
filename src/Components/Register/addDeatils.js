@@ -31,6 +31,30 @@ export default function SignInDeatils (props) {
   const [userDeatils,setUserDeatils] = useState("");
   const [openEdit,setOpenEdit] = useState(true);
 
+  const register = () => {
+    if(registerEmail === '' || registerPassword === '' || registerUsername === ''){
+        alert("Please fill all fields");
+    } else {
+    Axios({
+        method: "POST",
+        data: {
+        email: registerEmail,
+        username: registerUsername,
+        password: registerPassword,
+        },
+        withCredentials: true,
+        url: "http://localhost:4000/api/user/register",
+    }).then((res) => {
+        if(res.data.msg === "User Already Exists"){
+            window.location = '/';
+        }
+        else{            
+            window.location = '/';
+        }
+    });
+}
+};       
+
   const editUser = () => {
     const body = { Phone: phone,Gender:gender,Country: country,Age:age};
     fetch(`http://localhost:3000/api/users/${props.user.id}` ,{
@@ -63,6 +87,7 @@ export default function SignInDeatils (props) {
               value={country} 
               onChange={e => setCountry(e.target.value)}
               fullWidth
+              required
           />
           <TextField 
               id="Phone" 
@@ -80,6 +105,7 @@ export default function SignInDeatils (props) {
                 name="Age"
                 value={age} 
                 onChange={e => setAge(e.target.value)}
+                required
             />
             <FormControl >
               <InputLabel id="Gender">Gender</InputLabel>
@@ -89,22 +115,13 @@ export default function SignInDeatils (props) {
                 value={gender} 
                 onChange={e => setGender(e.target.value)}
                 fullWidth
+                required
                 >
                 <MenuItem value={"Male"}>Male</MenuItem>
                 <MenuItem value={"Female"}>Female</MenuItem>
               </Select>
             </FormControl>
           </div>
-          {/* <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={editUser}
-            style={{fontSize:'15px',fontWeight:'bold',marginLeft: '15%',marginTop:'5%',width:'60%'}}
-          >
-            <Link to={{pathname:'/HomePage', user:props.user }}>UPDATE</Link>
-        </Button> */}
         </div>
         </form>
         </PopUp>

@@ -6,24 +6,23 @@ export default function UserDeatils(props) {
     const [renterDeatils,setRenterDeatils] = useState("")
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${props.user.id}`)
+        console.log(renterDeatils.googleID)
+        fetch(`http://localhost:3000/api/users/${props.googleIdRenter.googleID}`)
+            .then(response => response.json())
+            .then(result =>  {
+                setRenter(result)
+        })
+    },[] )
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/api/renterDeatils/${props.googleIdRenter.id}`)
             .then(response => response.json())
             .then(result =>  {
                 setRenterDeatils(result)
             })
-    }, [renterDeatils])
+    }, [])
 
-    console.log(renterDeatils)
-
-    useEffect(() => {
-        console.log(renterDeatils.googleID)
-        fetch(`http://localhost:3000/api/users/${renterDeatils.googleID}`)
-            .then(response => response.json())
-            .then(result =>  {
-                setRenter(result)
-                console.log(result)
-        })
-    },[renter] )
+    console.log(props.userId)
 
 
     return (

@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddAsset from '../Owner/AddAsset';
 import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,9 +30,6 @@ export default function App(props) {
     const [renter,setRenter] = useState(false)
     const [owner,setOwner] = useState(false)
     const [renterDeatilsExist,setRenterDeatilsExist] = useState("")
-
-    const classes = useStyles();
-
 
     const addRenterDeatils = () => {
         const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
@@ -71,19 +67,20 @@ export default function App(props) {
             )
             }
         }
-
       const chooesPosition = () => {
-        return (
-            <PopUp open={position} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
-                <div className={"buttonsChoose"} >
-                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPosition(false)}}><p>I want to rent asset</p></Button>
-                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPosition(false)}}><p>I want to post asset</p></Button>
-                </div>
-            </PopUp>
-        )
+        if(props.location.fromLogin) {
+            return (
+                <PopUp open={position} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
+                    <div className={"buttonsChoose"} >
+                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPosition(false)}}><p>I want to rent asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPosition(false)}}><p>I want to post asset</p></Button>
+                    </div>
+                </PopUp>
+                
+            )
+        }
       }
-      console.log(user.id)
-
+      
       useEffect(() => {
         fetch(`http://localhost:3000/api/renterDeatils/${user.id}`)
           .then(response => response.json())
@@ -96,31 +93,31 @@ export default function App(props) {
           if(renterDeatilsExist == null) {
               return (
                 <PopUp open={renterDeatilsPopUp} onSubmit={() => addRenterDeatils()} title={"Insert deatils on your current position"} closePopup={() => setRenterDeatilsPopUp(false)} showBt={true}>
-                    <TextField className="input" label="Country" size="large" onChange={ (event) => serJobTitle(event.target.value) } value={ jobTitle } fullWidth/>   
-                    <TextField className="input" label="jobTitle" size="large" onChange={ (event) => setBudget(event.target.value) } value={ budget } fullWidth/>   
-                    <TextField className="input" label="budget" size="large" onChange={ (event) => setFavoriteCountry(event.target.value) } value={ favoriteCountry } fullWidth/>   
+                    <TextField className="input" label="Country" size="large" onChange={ (event) => serJobTitle(event.target.value) } value={ jobTitle } fullWidth required/>   
+                    <TextField className="input" label="jobTitle" size="large" onChange={ (event) => setBudget(event.target.value) } value={ budget } fullWidth required/>   
+                    <TextField className="input" label="budget" size="large" onChange={ (event) => setFavoriteCountry(event.target.value) } value={ favoriteCountry } fullWidth required/>   
                 </PopUp> 
               )
           }
       }
 
+      const insertDeatils = () => {
+          return (
+            <AddDeatils user={user}/>
+          )
+      }
+
     return (
         <div>
-            {/* <AddDeatils user={user}/> */}
-            {chooesPosition()}
             <div className={"background"}> 
                 <div className={'navBarHomePage'}>
+                    {chooesPosition()}
                     <h1><a href="/">InstaRent</a></h1>
                     <div className={"options"}>
                         {console.log(user)}
                         <h3><Link to={{ pathname: '/HomePage'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/RenterSearch' , user:user, renter:true }}>Search</Link></h3>
-                        {/* <div className={"rowName"}> */}
                         <h3>Hello {user.FirstName} {user.LastName} </h3>
-                            {/* <div className={classes.root}>
-                                <Avatar alt="Remy Sharp" src={user.ImageUrl} />
-                            </div> */}
-                        {/* </div> */}
                     </div>
                 </div>
                 <div className={"homePageContainer"}>
