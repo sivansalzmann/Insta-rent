@@ -1,15 +1,9 @@
-import { useState } from 'react';
-import Axios from "axios";
-import TextField from '@material-ui/core/TextField';
+import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
 import './SignIn.css';
 import Footer from '../All/Footer';
-import NavBar from '../All/NavBar';
 import GoogleLogin from 'react-google-login';
-
-
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,48 +22,50 @@ const responseGoogle = () => {
 }
 
 export default function Login (props) { 
+  let history = useHistory();
 
   const classes = useStyles();
 
-  const [loginUsername, setLoginUsername] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [user,setUser] = useState("")
 
-  const login = (respons) => {
-    Axios({
-      method: "POST",
-      data: {
-        token: respons.tokenId
-      },
-      withCredentials: true,
-      url: "http://localhost:3000/api/auth/login",
-    }).then((res) => console.log(res));
-  };
+  const login = async (response) => {
 
+    const body = {
+        token: response.tokenId
+    }
+    fetch(`http://localhost:3000/api/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body),
+    })
+        .then(response => response.json()) //fix it
+        .then(result => {
+              console.log(result)
+              let path = `/HomePage`
+              history.push({
+                  pathname: path,
+                  userId: result,
+                  userImg: result.avatar
+            })
+        });
+}
+
+const googleFailure = (response) => {
+    console.log(response);
+}
     return (
       <div className={'background'}>
-        <NavBar />
+        <h1 className={"headSignIn"}>InstaRent</h1>
         <div className={"signInContainer"}>
-          <form className={classes.root} noValidate autoComplete="off">
-            <TextField required id="standard-required" label="EMAIL" defaultValue="" onChange={(e) => setLoginUsername(e.target.value)}/>
-            <TextField required id="standard-password-input" label="PASSWORD" type="password" autoComplete="current-password" onChange={(e) => setLoginPassword(e.target.value)}/>  
-            <p><a href="#" style={{marginLeft: '39%',fontSize:'12px'}}>FORGOT YOUR PASSWORD?</a></p>
-            <Button variant="outlined" color="primary" style={{fontSize:'15px',fontWeight:'bold',marginLeft: '20%',marginTop:'5%',width:'60%'}} onClick={login}>SIGN IN</Button>
-          </form>
-          <div className={"loginWithSocial"}>
-            <div></div>
-            <p>SIGN IN WITH</p>
-            <div></div>
-          </div>
-          <div className={"signUpNow"}>
-            <div className={"googleLogIn"}> 
-                <GoogleLogin
-                className={classes.google}
-                clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
-                onSuccess={login}
-                onFailure={responseGoogle}
-                />
-            </div>
-            <Link to={{ pathname: "/SignUp"}}><p>Don't have an account yet? Sign up!</p></Link>
+          <p>SIGN IN WITH GOOGLE</p>
+          <div className={"googleLogIn"}> 
+              <GoogleLogin
+              className={classes.google}
+              clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
+              onSuccess={login}
+              onFailure={googleFailure}
+              />
           </div>
         </div>
         <Footer/>

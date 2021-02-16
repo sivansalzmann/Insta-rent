@@ -43,9 +43,9 @@ export default function RenterPage(props) {
 
     const editRenter = () => {
         if(validateBudget()) {
+            console.log(props.userId.id)
             const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
-            console.log(props.idRenter);
-            fetch(`http://localhost:3000/api/renterDeatils/${props.idRenter}` ,{
+            fetch(`http://localhost:3000/api/renterDeatils/${props.renterDeatilsId}` ,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -64,7 +64,7 @@ export default function RenterPage(props) {
       const editOwner = () => {
         if(validatePhone()) {
             const body = { Country: country,Email:email,Phone:phone};
-            fetch(`http://localhost:3000/api/users/${props.idOwner}` ,{
+            fetch(`http://localhost:3000/api/users/${props.userId}` ,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -84,7 +84,7 @@ export default function RenterPage(props) {
           return (
               <>
                 <div><Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>Edit</Button></div>   
-                <PopUp onSubmit={editRenter} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
+                <PopUp onSubmit={editRenter} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true} showBt={true}>
                     <TextField label="JobTitle" value={jobTitle} onChange={e => setJob(e.target.value)} fullWidth required/>
                     <TextField label="Budget" value={budget} onChange={e => setBudget(e.target.value)} fullWidth required/>
                     <TextField label="Favorite country" value={favoriteCountry} onChange={e => setFavoriteCountry(e.target.value)} fullWidth required/>
@@ -99,7 +99,7 @@ export default function RenterPage(props) {
               <div>
                   <Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>EDIT</Button>
                 </div>   
-              <PopUp onSubmit={editOwner} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true}>
+              <PopUp onSubmit={editOwner} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true} showBt={true}>
                   <TextField label="Country" value={country} onChange={e => setCountry(e.target.value)} fullWidth required/>
                   <TextField label="Email" value={email} onChange={e => setEmail(e.target.value)} fullWidth required/>
                   <TextField label="Phone" value={phone} onChange={e => setPhone(e.target.value)} fullWidth required/>

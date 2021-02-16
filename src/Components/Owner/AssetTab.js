@@ -48,7 +48,8 @@ export default function AssetTab (props) {
             <Button variant="contained" color="primary" size="small" onClick={() => setOpenRenter(true)} className={"but"}>See renter</Button>
             <Contract isRenter={false}/>
             <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false}>
-                <UserDeatils item={props.item.RenterId} />
+                <UserDeatils user={props.item} /> 
+                {/* item=asset */}
             </PopUp>
           </>
           );

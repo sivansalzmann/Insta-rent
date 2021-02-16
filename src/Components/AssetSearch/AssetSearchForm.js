@@ -28,7 +28,6 @@ export default function AssetSearchForm(props) {
             .then(response => response.json())
             .then(result => {
                 setAssetList(result)
-                console.log(parking)
                 setOpenEdit(false)
                 setCountry("")
                 setCity("")
@@ -106,7 +105,7 @@ export default function AssetSearchForm(props) {
                     </div>
                 </div>
                 </PopUp>
-            <AssetList assetsList={assetsList} renterId={props.renterId}/>
+            <AssetList assetsList={assetsList} renterId={props.user.id}/>
         </div>
     )
 }

@@ -4,21 +4,27 @@ import './UserDeatils.css';
 export default function UserDeatils(props) {
     const [renter,setRenter] = useState("")
     const [renterDeatils,setRenterDeatils] = useState("")
-    useEffect(() => {
-        fetch(`http://localhost:3000/api/users/${props.item}`)
-            .then(response => response.json())
-            .then(result =>  {
-                setRenter(result)
-        })
-    },[renter] )
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${props.item}`)
+        fetch(`http://localhost:3000/api/renterDeatils/${props.user.id}`)
             .then(response => response.json())
             .then(result =>  {
                 setRenterDeatils(result)
             })
     }, [renterDeatils])
+
+    console.log(renterDeatils)
+
+    useEffect(() => {
+        console.log(renterDeatils.googleID)
+        fetch(`http://localhost:3000/api/users/${renterDeatils.googleID}`)
+            .then(response => response.json())
+            .then(result =>  {
+                setRenter(result)
+                console.log(result)
+        })
+    },[renter] )
+
 
     return (
         <div>

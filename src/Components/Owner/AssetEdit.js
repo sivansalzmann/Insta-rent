@@ -92,7 +92,7 @@ export default function AddAsset(props) {
   return (
     <div className={"addAssetContainer"}>
       <Button variant="contained" color="primary" onClick={() => setOpenAdd(true)} className={"but"}>EDIT</Button>
-      <PopUp onSubmit={editAsset} title={"Edit asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
+      <PopUp onSubmit={editAsset} title={"Edit asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true} showBt={true}>
         <div className={"addAssetForm"}>
           <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth/>
           <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth/>

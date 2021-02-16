@@ -18,6 +18,15 @@ export default function PopUp(props) {
             </ButtonBase>
         )
     }
+    const showBt = () => {
+        if(props.showBt == true) {
+            return (
+                <div className={'divBtn'}>
+                    {props.sendBtn ? sendBtn() : okBtn()}
+                </div>
+            )
+        }
+    }
     const renderModal = () => {
         return (
             <div className={'popup'}>
@@ -32,9 +41,7 @@ export default function PopUp(props) {
                 <div className={'deatils'}>
                     {props.children}
                 </div>
-                <div className={'divBtn'}>
-                    {props.sendBtn ? sendBtn() : okBtn()}
-                </div>
+               {showBt()}
             </div>
         )
     }

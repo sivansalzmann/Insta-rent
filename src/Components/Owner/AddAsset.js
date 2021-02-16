@@ -9,10 +9,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
 import moment from 'moment';
-
-const ownerId = 2; // change to login
+import {useHistory} from "react-router-dom";
 
 export default function AddAsset(props) {
+  let history = useHistory()
+
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
@@ -52,10 +53,9 @@ export default function AddAsset(props) {
     }
 
   const addAsset = (props) => {
-    console.log(props.idOwner)
-
     if(assetValidation()) {
-      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: ownerId,UrlPicture:imageUrl,RenterId:0};
+      {console.log(props.ownerId)}
+      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.ownerId,UrlPicture:imageUrl,RenterId:0};
       console.log(body);
       fetch(`http://localhost:3000/api/assets`, {
         method: 'POST',
@@ -84,12 +84,12 @@ export default function AddAsset(props) {
         })
       }
     }
-
+    console.log()
 
   return (
     <div >
       <Button variant="contained" color="primary" className={"addButAsset"} onClick={() => setOpenAdd(true)}>Add new asset</Button>
-      <PopUp onSubmit={addAsset} title={"Add asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true}>
+      <PopUp onSubmit={addAsset} title={"Add asset"} open={add} closePopup={() => setOpenAdd(false)} sendBtn={true} showBt={true}>
         <div className={"addAssetForm"}>
           <TextField label="Country" onChange={(event) => setCountry(event.target.value)} value={country} fullWidth required/>
           <TextField label="City" onChange={(event) => setCity(event.target.value)} value={city} fullWidth required/>

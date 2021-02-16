@@ -8,8 +8,6 @@ export default function AssetPage(props) {
   const [open, setOpen] = useState(false);
   const [asset, setAsset] = useState("");
 
-  console.log(props.renterId)
-
   useEffect(() => {
     fetch(`http://localhost:3000/api/assets?RenterId=${props.renterId}`)
       .then(response => response.json())
@@ -28,7 +26,7 @@ export default function AssetPage(props) {
         .then(response => response.json())
         .then(result => { 
             alert("The owner will contact with you soon as possible")
-            window.location.reload()
+            // window.location.reload()
         })
     };
 

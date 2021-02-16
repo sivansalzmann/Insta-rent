@@ -6,9 +6,10 @@ import './RenterSearch.css';
 export default function RenterSearch(props) {
 	return (
 		<div className={"renterMainPage"}>
-			<NavBar />
+			<NavBar userId={props.location.userId} renter={props.location.renter}/>
 			<p className={"renterMainPgeHeadline"}>FIND YOUR NEXT ASSET</p>
-			<AssetSearchForm renterId={props.location.renterId}/>
+			<AssetSearchForm user={props.location.user}/>
+			{console.log(props.location.renter)}
 			<Footer />
 		</div>
 	);

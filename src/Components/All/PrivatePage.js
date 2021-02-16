@@ -26,7 +26,7 @@ import HouseIcon from '@material-ui/icons/House';
 import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
-
+import Map from '../All/Map';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -66,11 +66,10 @@ export default function PrivatePage(props) {
 
   const addMessage = () => {
     let today = new Date();
-    console.log(today);
+    console.log(today)
     setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
     console.log(timestamp);
-    const body = { Message: message, RenterId: props.userId, OwnerId: props.wantedAsset[0].OwnerId, Timestamp: timestamp };
-    console.log(body)
+    const body = { Message: message, RenterId: props.userId.id, OwnerId: props.wantedAsset[0].OwnerId, Timestamp: timestamp };
     fetch(`http://localhost:3000/api/messages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -86,7 +85,7 @@ export default function PrivatePage(props) {
 
   const giveUpOnAsset = () => {
     const body = { RenterId: 0 }
-    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.wantedAsset[0].id}`, {
+    fetch(`http://localhost:3000/assets/${props.wantedAsset[0].id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -97,17 +96,6 @@ export default function PrivatePage(props) {
         window.location.reload()
       })
   };
-
-  // function initMap() {
-  //   const map = new google.maps.Map(document.getElementById("map"), {
-  //     zoom: 8,
-  //     center: { lat: -34.397, lng: 150.644 },
-  //   });
-  //   const geocoder = new google.maps.Geocoder();
-  //   document.getElementById("submit").addEventListener("click", () => {
-  //     geocodeAddress(geocoder, map);
-  //   });
-  // }
 
   const tabs = () => {
     if (props.renter) {
@@ -127,7 +115,8 @@ export default function PrivatePage(props) {
     else {
       return (
         <div>
-          <AddAsset idOwner={props.idOwner} className={"addAssetBig"} />
+          {/* <p>{(props.userId.id)}</p> */}
+          <AddAsset ownerId={props.userId.id} className={"addAssetBig"} />
         </div>
       )
     }
@@ -160,7 +149,7 @@ export default function PrivatePage(props) {
             <StepContent>
               <Typography style={{ fontFamily: 'Lato' }}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
-              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false}>
+              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
                 <AssetDeatils item={props.wantedAsset[0]} />
               </PopUp>
             </StepContent>
@@ -170,7 +159,7 @@ export default function PrivatePage(props) {
             <StepContent>
               <Typography style={{ fontFamily: 'Lato' }}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
-              <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+              <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
                 <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required />
               </PopUp>
               <Contract isRenter={true} />
@@ -233,17 +222,17 @@ export default function PrivatePage(props) {
     if (props.renter) {
       return (
         <>
-          <h1>Google api</h1>
-
+          {/* <Map address={props.Country}/> */}
         </>
       )
     }
     else {
       return (
         <>
+        {console.log(props.userId.id)}
           <h2>My assets</h2>
           <AssetTable assetsList={props.assets} idOwner={props.idOwner} />
-          <AddAsset idOwner={props.idOwner} />
+          <AddAsset ownerId={props.userId.id} />
         </>
       )
     }
@@ -254,7 +243,7 @@ export default function PrivatePage(props) {
       return (
         <>
           <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button>
-          <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+          <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
             <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required />
           </PopUp>
           <MessageList messageList={props.messages} renter={true} />
@@ -267,13 +256,12 @@ export default function PrivatePage(props) {
       )
     }
   }
-
   return (
     <div className={"privatePage"}>
-      <NavBar />
+      <NavBar userId={props.userId} renter={props.renter} />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils FirstName={props.FirstName} LastName={props.LastName} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter} />
+          <PrsonalDeatils renterDeatilsId={props.renterDeatilsId} userId={props.userId} FirstName={props.FirstName} LastName={props.LastName} JobTitle={props.JobTitle} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.renter} />
         </div>
         <div className={"containerOptions"}>
           {tabs()}

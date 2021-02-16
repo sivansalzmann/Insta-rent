@@ -7,9 +7,10 @@ export default function OwnerPage1(props) {
     const [user,setUser] = useState("");
     const [assets,setAssets] = useState("");
     const [messages,setOwnerMessages] = useState("");
+    const [userProps] = useState(props.location.user)
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/users/${props.location.ownerId}`)
+      fetch(`http://localhost:3000/api/users/${userProps.googleID}`)
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
@@ -17,7 +18,7 @@ export default function OwnerPage1(props) {
     }, [user])
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/assets?OwnerId=${props.location.ownerId}`)
+      fetch(`http://localhost:3000/api/assets?OwnerId=${userProps.id}`)
         .then(response => response.json())
         .then(result =>  {
             setAssets(result)
@@ -25,7 +26,7 @@ export default function OwnerPage1(props) {
     }, [assets])
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/messages?OwnerId=${props.location.ownerId}`)
+      fetch(`http://localhost:3000/api/messages?OwnerId=${userProps.id}`)
         .then(response => response.json())
         .then(result =>  {
             setOwnerMessages(result)
@@ -36,7 +37,7 @@ export default function OwnerPage1(props) {
     <div className={"ownerMainPage"}>
       <PrivatePage label1={"General"} label2={"My assets"} label3={"Messages"} 
       FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id}
-      firstHead={"Prsonal deatils"} renter={false} user={user} assets={assets} messages={messages} 
+      firstHead={"Prsonal deatils"} renter={false} user={user} assets={assets} messages={messages} userId={user}
       />
     </div>
   );

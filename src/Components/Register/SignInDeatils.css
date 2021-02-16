@@ -1,0 +1,22 @@
+.SignInDeatilsContainer {
+    background-color: white;
+    width: 40%;
+    height: auto;
+    border-radius: 20px;
+    margin-top: 2%;
+    margin-left: 30%;
+}
+.SignInDeatilsContainer p{
+    margin-left: 25%;
+    margin-top: 5%;
+    font-size: 25px;
+    font-weight: bold;
+}
+.colForm {
+    display: flex;
+    flex-direction: column;
+}
+.rowForm {
+    display: flex;
+    flex-direction: row;
+}

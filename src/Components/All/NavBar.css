@@ -9,18 +9,29 @@
     flex-direction: row;
 }
 .navBar h1 {
-    margin-top: 2%;   
+    margin-top: 1%;  
+    margin-left: 5%; 
+ 
 }
 .navBar h1 a {
     font-size: 150%;
-    margin-left: 5%; 
 }
-.navBar a {
-    list-style-type: none;
-    font-size: 110%;
-    margin-left: 8%;
-    margin-top: 4%;
-}
-.navBar a{
+.navBar h3 a{
     color:  #F8F8F8;
+    font-size: 110%;
+    margin-top: 2%;   
+}
+.navBar h3 {
+    margin-top: 25%;   
+    margin-right: 30%;
+}
+.menu {
+    width: 100%;
+    margin-top: 3%;   
+    margin-left: 8%;
+}
+.rowOptionsNavBar{
+    display: flex;
+    flex-direction: row;
+    margin-left: 39%;
 }
