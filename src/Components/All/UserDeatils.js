@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import './UserDeatils.css';
+import {useCookies} from "react-cookie";
 
 export default function UserDeatils(props) {
     const [renter,setRenter] = useState("")
     const [renterDeatils,setRenterDeatils] = useState("")
+    const [cookies] = useCookies(['user']);
 
     useEffect(() => {
         console.log(renterDeatils.googleID)

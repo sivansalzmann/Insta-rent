@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import AddAsset from '../Owner/AddAsset';
 import { makeStyles } from '@material-ui/core/styles';
+import {useCookies} from "react-cookie";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function App(props) {
-    const [user] = useState(props.location.userId)
+    // const [user] = useState(props.location.userId)
     let history = useHistory()
     const [renterDeatilsPopUp,setRenterDeatilsPopUp] = useState(false)
     const [favoriteCountry,setFavoriteCountry] = useState("")
@@ -30,6 +31,24 @@ export default function App(props) {
     const [renter,setRenter] = useState(false)
     const [owner,setOwner] = useState(false)
     const [renterDeatilsExist,setRenterDeatilsExist] = useState("")
+    const [cookies] = useCookies(['user']);
+    const [user,setUser] = useState("")
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
+          .then(response => response.json())
+          .then(result =>  {
+            setRenterDeatilsExist(result)
+        })
+      }, [cookies.user.id])
+
+    useEffect(() => {
+    fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+        .then(response => response.json())
+        .then(result =>  {
+            setUser(result)
+    })
+    }, [cookies.user.id])
 
     const addRenterDeatils = () => {
         const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
@@ -68,7 +87,7 @@ export default function App(props) {
             }
         }
       const chooesPosition = () => {
-        if(props.location.fromLogin) {
+        // if(props.location.fromLogin) {
             return (
                 <PopUp open={position} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                     <div className={"buttonsChoose"} >
@@ -78,16 +97,9 @@ export default function App(props) {
                 </PopUp>
                 
             )
-        }
+        // }
       }
       
-      useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${user.id}`)
-          .then(response => response.json())
-          .then(result =>  {
-            setRenterDeatilsExist(result)
-        })
-      }, [])
     
       const renterDeatilsExistFunc = () => {
           if(renterDeatilsExist == null) {

@@ -9,6 +9,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import PopUp from '../All/PopUp';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,52 +32,55 @@ export default function SignInDeatils (props) {
   const [userDeatils,setUserDeatils] = useState("");
   const [openEdit,setOpenEdit] = useState(true);
 
+
   const register = () => {
-    if(registerEmail === '' || registerPassword === '' || registerUsername === ''){
+    console.log("here")
+    if(age === '' || gender === '' || country === '' || phone === ''){
         alert("Please fill all fields");
     } else {
     Axios({
         method: "POST",
         data: {
-        email: registerEmail,
-        username: registerUsername,
-        password: registerPassword,
+        Gender: setGender,
+        Phone: setPhone,
+        Country: setCountry,
+        Age: setAge,
         },
         withCredentials: true,
-        url: "http://localhost:4000/api/user/register",
+        url: `http://localhost:3000/api/users${props.loctaio.userId}`,
     }).then((res) => {
-        if(res.data.msg === "User Already Exists"){
+        //if(res.data.msg === "User Already Exists"){
             window.location = '/';
-        }
-        else{            
-            window.location = '/';
-        }
+        //}
+       // else{            
+         //   window.location = '/';
+        //}
     });
 }
 };       
 
-  const editUser = () => {
-    const body = { Phone: phone,Gender:gender,Country: country,Age:age};
-    fetch(`http://localhost:3000/api/users/${props.user.id}` ,{
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result)
-        setUserDeatils(result)
-        setOpenEdit(false)
-        setGender("")
-        setPhone("")
-        setCountry("")
-        setAge("")
-    });
-  }
+  // const editUser = () => {
+  //   const body = { Phone: phone,Gender:gender,Country: country,Age:age};
+  //   fetch(`http://localhost:3000/api/users/${props.user.id}` ,{
+  //       method: 'PUT',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body),
+  //   })
+  //   .then(response => response.json())
+  //   .then(result => {
+  //       console.log(result)
+  //       setUserDeatils(result)
+  //       setOpenEdit(false)
+  //       setGender("")
+  //       setPhone("")
+  //       setCountry("")
+  //       setAge("")
+  //   });
+  // }
 
 
     return (
-      <PopUp open={openEdit} onSubmit={() => editUser()} title={"edit your deatils"} showBt={true}>
+      <PopUp open={openEdit} onSubmit={() => register()} title={"edit your deatils"} showBt={true}>
       <form className={classes.root} autoComplete="off"> 
         <div className={"colForm"}>
           <div>

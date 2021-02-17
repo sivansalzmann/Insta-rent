@@ -6,10 +6,11 @@ import {UserContext} from '../../UserContext';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import './NavBar.css';
+import {useCookies} from "react-cookie";
 
 export default function NavBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  
+  const [cookies] = useCookies(['user']);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,7 +46,7 @@ export default function NavBar(props) {
                     </div>
                     <div className={"menu"}>
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{color:'white', fontFamily: 'Lato',fontWeight: 'bold', fontSize: '100%'}}>
-                        Hello {props.userId.FirstName} {props.userId.LastName}
+                        Hello {cookies.user.FirstName} {cookies.user.LastName}
                     </Button>
                     <Menu
                         id="simple-menu"

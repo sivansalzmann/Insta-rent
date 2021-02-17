@@ -28,6 +28,7 @@ import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
 import Map from '../All/Map';
 import {UserContext} from '../../UserContext';
+import {useCookies} from "react-cookie";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,6 +63,8 @@ export default function PrivatePage(props) {
   const [openAsset, setOpenAsset] = useState(false);
   const [timestamp, setTimestamp] = useState("");
   const [asset,setAsset] = useState("");
+  const [cookies] = useCookies(['user']);
+
 
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {

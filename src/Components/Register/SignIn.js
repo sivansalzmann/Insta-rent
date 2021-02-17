@@ -4,7 +4,6 @@ import './SignIn.css';
 import Footer from '../All/Footer';
 import GoogleLogin from 'react-google-login';
 import {useHistory} from "react-router-dom";
-import {UserContext} from '../../UserContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,45 +19,26 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login (props) { 
   let history = useHistory();
-  const { userId, setUserId} = useContext(UserContext);
-
   const classes = useStyles();
 
-  useEffect(() => {
-    if(userId != 0){
-      console.log("1", userId);
-      let path = '/HomePage';
-      history.push({
-        pathname: path,
-        userId: userId
-      });
-    }}, [userId]);
-
-    const handleLogin = async googleData => {
-
-    const res = await fetch(`http://localhost:3000/api/auth/login`, {
-      method: "POST",
-      body: JSON.stringify({
-      token: googleData.tokenId,
-    }),
-      credentials: 'include',
-      headers: {
-        "Content-Type": "application/json"
-      }
+  const googleSuccess = async (response) => {
+    const body = {token: response.tokenId}
+    fetch(`http://localhost:3000/api/auth/login`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(body),
     })
-    const data = await res.json()
-        console.log(res.cookies, data);
-        if(res.status === 200){
-          if(data === "the user does NOT exist"){
-            window.location = '/SignInDeatils';  
-          } else {
-            setUserId(data.id);
-          }
-        } else {
-          alert("Some error occurred");
-        }
-    }
+        .then(response => response.json())
+        .then(result => {
+            let path = '/HomePage'
+            history.push(path)
+        });
+  }
 
+  const googleFailure = (response) => {
+    console.log(response);
+}
 
     return (
       <div className={'background'}>
@@ -69,9 +49,8 @@ export default function Login (props) {
               <GoogleLogin
               className={classes.google}
               clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
-              onSuccess={handleLogin}
-              onFailure={handleLogin}
-              cookiePolicy={'single_host_origin'}
+              onSuccess={googleSuccess}
+              onFailure={googleFailure}
               />
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './RenterPage.css';
 import PrivatePage from '../All/PrivatePage';
 import {useHistory} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 export default function RenterPage(props) {
   let history = useHistory()
@@ -12,10 +13,11 @@ export default function RenterPage(props) {
   const [renterDeatilsId,setRenterDeatilsId] = useState("");
   const [wantedAsset,setWantedAsset] = useState("");
   const [userProps] = useState(props.location.user)
+  const [cookies] = useCookies(['user']);
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${userProps.googleID}`)
+    fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
           setUser(result)
@@ -23,7 +25,7 @@ export default function RenterPage(props) {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/renterDeatils/${userProps.id}`)
+    fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setRenterDeatils(result)
@@ -32,7 +34,7 @@ export default function RenterPage(props) {
   }, [renterDeatils])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?RenterId=${userProps.id}`)
+    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result => {
         setWantedAsset(result)
@@ -40,12 +42,13 @@ export default function RenterPage(props) {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/messages?RenterId=${userProps.id}`)
+    fetch(`http://localhost:3000/api/messages?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setRenterMessages(result)
       })
   }, [])
+
 
   return (
       <div className={"renterMainPage"}>
