@@ -22,7 +22,7 @@ export default function Message (props) {
 
     const addAnswer = () => {
         const body = {Answer:answer};
-        fetch(`http://localhost:3000/api/messages/${props.item.id}`, {
+        fetch(`https://instarent-1st.herokuapp.com/api/messages/${props.item.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),

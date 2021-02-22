@@ -74,7 +74,7 @@ export default function PrivatePage(props) {
     setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
     console.log(timestamp);
     const body = { Message: message, RenterId: props.user.id, OwnerId: props.wantedAsset.OwnerId, Timestamp: timestamp };
-    fetch(`http://localhost:3000/api/messages`, {
+    fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -90,7 +90,7 @@ export default function PrivatePage(props) {
   const giveUpOnAsset = () => {
     console.log(props.wantedAsset)
     const body = { RenterId: -1 }
-    fetch(`http://localhost:3000/api/assets/${props.wantedAsset.id}`, {
+    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.wantedAsset.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

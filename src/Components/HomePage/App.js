@@ -26,7 +26,7 @@ export default function App(props) {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
           .then(response => response.json())
           .then(result =>  {
             setRenterDeatilsExist(result)
@@ -34,7 +34,7 @@ export default function App(props) {
       }, [renterDeatilsExist])
 
     useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
@@ -43,7 +43,7 @@ export default function App(props) {
 
     const addRenterDeatils = () => {
         const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
-        fetch(`http://localhost:3000/api/renterDeatils`, {
+        fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
@@ -59,7 +59,7 @@ export default function App(props) {
       }
 
     const logout = () => {
-        fetch(`http://localhost:3000/api/auth/logout`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`, {credentials: 'include'})
         .then(result => {
             setCookie('user', '')
             history.push('/')
@@ -70,7 +70,7 @@ export default function App(props) {
     const setPosition = () => {
         console.log(renter)
         const body = {IsRenter:renter,IsOwner:owner};
-        fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),

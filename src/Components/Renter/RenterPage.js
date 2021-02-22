@@ -17,7 +17,7 @@ export default function RenterPage(props) {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
           setUser(result)
@@ -25,7 +25,7 @@ export default function RenterPage(props) {
   }, [user])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setRenterDeatils(result)
@@ -34,7 +34,7 @@ export default function RenterPage(props) {
   }, [renterDeatils])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result => {
         setWantedAsset(result)
@@ -42,7 +42,7 @@ export default function RenterPage(props) {
   }, [wantedAsset])
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/messages?RenterId=${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/messages?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setRenterMessages(result)

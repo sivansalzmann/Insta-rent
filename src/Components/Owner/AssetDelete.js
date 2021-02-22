@@ -6,7 +6,7 @@ export default function AssetDelete(props) {
     const [asset, setAsset] = useState("");
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/api/assets/${props.idAsset}`)
+		fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.idAsset}`)
 		.then(response => response.json())
 		.then(result =>  {
 			setAsset(result)
@@ -14,7 +14,7 @@ export default function AssetDelete(props) {
 	},[asset])
   
     const deleteAsset = () => {
-		fetch(`http://localhost:3000/api/assets/${asset.id}`, {
+		fetch(`https://instarent-1st.herokuapp.com/api/assets/${asset.id}`, {
 		method: 'DELETE',
 		})
 		.then(response => response.json())

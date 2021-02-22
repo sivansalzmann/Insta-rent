@@ -6,6 +6,7 @@ import GoogleLogin from 'react-google-login';
 import {useHistory} from "react-router-dom";
 import {useCookies} from "react-cookie";
 import userEvent from '@testing-library/user-event';
+import { ControlPointDuplicate } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +28,7 @@ export default function Login (props) {
 
   const googleSuccess = async (response) => {
     const body = {token: response.tokenId}
-    fetch(`http://localhost:3000/api/auth/login`, {
+    fetch(`https://instarent-1st.herokuapp.com/api/auth/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {'Content-Type': 'application/json'},
@@ -40,15 +41,16 @@ export default function Login (props) {
         resolve()
       });
       cookiePromise.then(() => {
+        console.log(result)
         if (result) {
-          if(result.Gender === null || result.Contry === null || result.Age === null || result.Phone === null) {
-            return (
-                history.push('/SignInDeatils')
-            )
-          }
-          else {
+          // if(result.Gender === null || result.Contry === null || result.Age === null || result.Phone === null) {
+          //   return (
+          //       history.push('/SignInDeatils')
+          //   )
+          // }
+          // else {
             history.push('/HomePage')
-          }
+          // }
         }
       })
     });
@@ -56,6 +58,7 @@ export default function Login (props) {
 
   const googleFailure = (response) => {
     console.log(response);
+    console.log('hi im keren not maarag')
   }
 
     return (

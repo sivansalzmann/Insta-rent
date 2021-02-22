@@ -13,7 +13,7 @@ export default function AssetPage(props) {
   const [cookies] = useCookies(['user']);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
+    fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setAsset(result)
@@ -25,7 +25,7 @@ export default function AssetPage(props) {
   const wantIt = () => {
     console.log(cookies.user.id)
     const body={RenterId: cookies.user.id}
-    fetch(`http://localhost:3000/api/assets/${props.item.id}`, {
+    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),

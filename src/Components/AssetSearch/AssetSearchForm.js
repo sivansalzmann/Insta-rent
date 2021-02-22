@@ -24,7 +24,7 @@ export default function AssetSearchForm(props) {
     const [openEdit,setOpenEdit] = useState(false);
 
     const onSubmit = () => {
-        fetch(`http://localhost:3000/api/assets?Country=${country}&City=${city}&Price=${price}&SquareFeet=${squareFeet}&Condition=${condition}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
+        fetch(`https://instarent-1st.herokuapp.com/api/assets?Country=${country}&City=${city}&Price=${price}&SquareFeet=${squareFeet}&Condition=${condition}&Parking=${parking}&Elevator=${elevator}&PetsAllowed=${pets}&Rooms=${rooms}`)
             .then(response => response.json())
             .then(result => {
                 setAssetList(result)

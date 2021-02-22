@@ -45,7 +45,7 @@ export default function RenterPage(props) {
         if(validateBudget()) {
             console.log(props.userId.id)
             const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
-            fetch(`http://localhost:3000/api/renterDeatils/${props.renterDeatilsId}` ,{
+            fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${props.renterDeatilsId}` ,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -64,7 +64,7 @@ export default function RenterPage(props) {
       const editOwner = () => {
         if(validatePhone()) {
             const body = { Country: country,Email:email,Phone:phone};
-            fetch(`http://localhost:3000/api/users/${props.userId}` ,{
+            fetch(`https://instarent-1st.herokuapp.com/api/users/${props.userId}` ,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),

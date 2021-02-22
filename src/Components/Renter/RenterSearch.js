@@ -10,7 +10,7 @@ export default function RenterSearch(props) {
 	const [user,setUser] = useState("")
 
 	useEffect(() => {
-        fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
           .then(response => response.json())
           .then(result =>  {
             setUser(result)

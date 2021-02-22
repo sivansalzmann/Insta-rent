@@ -32,7 +32,7 @@ export default function AddAsset(props) {
   const [add,setOpenAdd] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets/${props.idAsset}`)
+    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.idAsset}`)
       .then(response => response.json())
       .then(result =>  {
           setAsset(result)
@@ -61,7 +61,7 @@ export default function AddAsset(props) {
   const editAsset = () => {
     if(dateAndPriceValidation()) {
       const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl};
-      fetch(`http://localhost:3000/api/assets/${asset.id}` ,{
+      fetch(`https://instarent-1st.herokuapp.com/api/assets/${asset.id}` ,{
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
