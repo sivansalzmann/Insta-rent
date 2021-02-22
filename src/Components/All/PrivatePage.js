@@ -27,7 +27,6 @@ import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
 import Map from '../All/Map';
-import {useCookies} from "react-cookie";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,15 +58,12 @@ export default function PrivatePage(props) {
   const [openMessage, setOpenMessage] = useState(false);
   const [openAsset, setOpenAsset] = useState(false);
   const [timestamp, setTimestamp] = useState("");
-  const [asset,setAsset] = useState("");
-  const [cookies] = useCookies(['user']);
-
+  const [setAsset] = useState("");
 
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
   const addMessage = () => {
     const body = { Message: message, RenterId: props.user.id, OwnerId: props.wantedAsset.OwnerId, Timestamp: timestamp };
     fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
@@ -83,9 +79,7 @@ export default function PrivatePage(props) {
         setTimestamp("")
       });
   }
-
   const giveUpOnAsset = () => {
-    console.log(props.wantedAsset)
     const body = { RenterId: -1 }
     fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.wantedAsset.id}`, {
         method: 'PUT',
@@ -100,7 +94,6 @@ export default function PrivatePage(props) {
         window.location.reload()
       })
   };
-
   const tabs = () => {
     if (props.isRenter) {
       return (
@@ -166,7 +159,7 @@ export default function PrivatePage(props) {
                 <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required style={{marginTop:"1%"}}/>
               </PopUp>
               <Contract isRenter={true} />
-              <Button variant="contained" color="primary" size="small" onClick={() => giveUpOnAsset()}>give up on this asset</Button>
+              <Button variant="contained" color="primary" size="small" onClick={() => giveUpOnAsset()}>give up the asset</Button>
             </StepContent>
           </Step>
           <Step >
@@ -197,7 +190,7 @@ export default function PrivatePage(props) {
               <p>{props.user.Email}</p>
             </div>
             <div className={"prsonalDetOwner"}>
-              <PhoneIcon style={{ width: '20%', height: '20%', margin: '5%' }} />
+              <PhoneIcon style={{ width: '30%', height: '30%', margin: '5%' }} />
               <h3>My phone</h3>
               <p>{props.user.Phone}</p>
             </div>
@@ -219,12 +212,11 @@ export default function PrivatePage(props) {
       )
     }
   }
-
   const label2 = () => {
     if (props.isRenter) {
       return (
         <>
-        {/* {props.wantedAsset ? <Map address={props.Country}/> : <div><p>There is not map yet, find your next asset to see one</p></div>} */}
+        {/* {props.wantedAsset ? <Map address={props.wantedAsset.Country}/> : <div><p>There is not map yet, find your next asset to see one</p></div>} */}
         </>
       )
     }
@@ -258,13 +250,12 @@ export default function PrivatePage(props) {
       )
     }
   }
-  
   return (
     <div className={"privatePage"}>
       <NavBar />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} />
+          <PrsonalDeatils userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} isRenter={props.isRenter}/>
         </div>
         <div className={"containerOptions"}>
           {tabs()}

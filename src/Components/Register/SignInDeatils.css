@@ -1,15 +1,15 @@
 .SignInDeatilsContainer {
     background-color: white;
-    width: 40%;
+    width: 50%;
     height: auto;
     border-radius: 20px;
     margin-top: 2%;
-    margin-left: 30%;
+    margin-left: 25%;
 }
 .SignInDeatilsContainer p{
-    margin-left: 25%;
+    margin-left: 15%;
     margin-top: 5%;
-    font-size: 25px;
+    font-size: 250%;
     font-weight: bold;
 }
 .colForm {
@@ -19,4 +19,16 @@
 .rowForm {
     display: flex;
     flex-direction: row;
+    margin: 3%;
+}
+.SignInDeatilsContainer button {
+    margin-left: 10%;
+    width: 80%;
+    margin-bottom: 5%;
+}
+.SignInDeatilsContainer button p{
+    margin: 1%;
+    color: white;
+    font-family: 'Lato';
+    font-size: 20px;
 }

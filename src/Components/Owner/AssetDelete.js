@@ -11,8 +11,7 @@ export default function AssetDelete(props) {
 		.then(result =>  {
 			setAsset(result)
 		})  
-	},[asset])
-  
+	},[props.idAsset,asset])
     const deleteAsset = () => {
 		fetch(`https://instarent-1st.herokuapp.com/api/assets/${asset.id}`, {
 		method: 'DELETE',
@@ -20,9 +19,9 @@ export default function AssetDelete(props) {
 		.then(response => response.json())
 		.then(result => {})
 	}
-  return (
-    <div className={"deleteAssetContainer"}>
-        <Button variant="contained" color="primary" className={"but"} onClick={deleteAsset}>DELETE</Button>
-   </div>
+	return (
+		<div className={"deleteAssetContainer"}>
+			<Button variant="contained" color="primary" className={"but"} onClick={deleteAsset}>DELETE</Button>
+	</div>
   );
 }

@@ -9,10 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select'
 import { Button } from '@material-ui/core';
 import moment from 'moment';
-import {useHistory} from "react-router-dom";
 
 export default function AddAsset(props) {
-  let history = useHistory()
     const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [neighborhood, setNeighborhood] = useState("");
@@ -28,7 +26,6 @@ export default function AddAsset(props) {
     const [avilability, setAvilability] = useState("");
     const [description, setDescription] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-    const [newAsset, setNewAsset] = useState("");
     const [add,setOpenAdd] = useState(false);
 
     const assetValidation = () => {
@@ -50,7 +47,6 @@ export default function AddAsset(props) {
       else
           return true
     }
-
   const addAsset = () => {
     if(assetValidation()) {
       const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl,RenterId:0};
@@ -62,7 +58,6 @@ export default function AddAsset(props) {
         .then(response => response.json())
         .then(result => {
           setOpenAdd(false);
-          setNewAsset(result);
           setCountry("");
           setCity("");
           setNeighborhood("");
@@ -81,7 +76,6 @@ export default function AddAsset(props) {
         })
       }
     }
-
   return (
     <div >
       <Button variant="contained" color="primary" className={"addButAsset"} onClick={() => setOpenAdd(true)}>Add new asset</Button>

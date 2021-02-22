@@ -8,7 +8,6 @@ export default function OwnerPage1(props) {
     const [user,setUser] = useState("");
     const [assets,setAssets] = useState("");
     const [messages,setOwnerMessages] = useState("");
-    const [userProps] = useState(props.location.user)
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
@@ -17,28 +16,25 @@ export default function OwnerPage1(props) {
         .then(result =>  {
             setUser(result)
         })    
-    }, [user])
-
+    }, [cookies.user.id,user])
     useEffect(() => {
       fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${cookies.user.id}`, {credentials: 'include'})
         .then(response => response.json())
         .then(result =>  {
             setAssets(result)
         })     
-    }, [assets])
-
+    }, [cookies.user.id,assets])
     useEffect(() => {
       fetch(`https://instarent-1st.herokuapp.com/api/messages?OwnerId=${cookies.user.id}`, {credentials: 'include'})
         .then(response => response.json())
         .then(result =>  {
             setOwnerMessages(result)
         }) 
-    }, [messages])
-
-  return (
+    }, [cookies.user.id,messages])
+    return (
     <div className={"ownerMainPage"}>
       <PrivatePage label1={"General"} label2={"My assets"} label3={"Messages"} 
-      firstHead={"Prsonal deatils"} user={user} assets={assets} messages={messages} isOwner={true} renterDeatils={-1}
+      firstHead={"Prsonal deatils"} user={user} assets={assets} messages={messages} isOwner={true} 
       />
     </div>
   );

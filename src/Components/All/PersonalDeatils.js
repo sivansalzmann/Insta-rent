@@ -9,24 +9,7 @@ export default function RenterPage(props) {
     const [jobTitle,setJob] = useState("");
     const [budget,setBudget] = useState("");
     const [favoriteCountry,setFavoriteCountry] = useState("");
-    const [phone,setPhone] = useState("");
-    const [country,setCountry] = useState("");
-    const [email,setEmail] = useState("");
-    const [renterDeatils,setRenterDeatils] = useState("");
-    const [owner,setOwner] = useState("");
-
-    const validatePhone = () => {        
-        let errors = [];
-        if(phone !== "") {
-            if(isNaN(phone)) {
-                errors.push("You have entered an invalid phone number, please insert another one \n")
-            }
-        }
-        if (errors.length > 0)
-            alert(errors)
-        else
-            return true
-    }
+    const [setUser] = useState("");
 
     const validateBudget = () => {        
         let errors = [];
@@ -40,12 +23,10 @@ export default function RenterPage(props) {
         else
             return true
     }
-
     const editRenter = () => {
         if(validateBudget()) {
-            console.log(props.userId.id)
             const body = { JobTitle: jobTitle,Budget:budget,FavoriteCountry: favoriteCountry};
-            fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${props.renterDeatilsId}` ,{
+            fetch(`https://instarent-1st.herokuapp.com/api/users/${props.user.id}` ,{
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body),
@@ -53,33 +34,13 @@ export default function RenterPage(props) {
             .then(response => response.json())
             .then(result => {
                 setOpenEdit(false);
-                setRenterDeatils(result)
+                setUser(result)
                 setJob("")
                 setBudget("")
                 setFavoriteCountry("")
             });
         }
       }
-
-      const editOwner = () => {
-        if(validatePhone()) {
-            const body = { Country: country,Email:email,Phone:phone};
-            fetch(`https://instarent-1st.herokuapp.com/api/users/${props.userId}` ,{
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            })
-            .then(response => response.json())
-            .then(result => {
-                setOpenEdit(false);
-                setOwner(result)
-                setCountry("")
-                setEmail("")
-                setPhone("")
-            });
-        }
-      }
-      
       const isRenter = () => {
           return (
               <>
@@ -92,15 +53,12 @@ export default function RenterPage(props) {
             </>
           )
       }
-
       const isOwner = () => {
         return (
             <>
-              
-          </>
+            </>
         )
     }
-
     return (
         <div className={"personalDeatils"}>
             <img src={props.ImageUrl} alt="profile" />
@@ -113,9 +71,8 @@ export default function RenterPage(props) {
             <span>{props.Age}</span>
             <p>Country</p>
             <span>{props.Country}</span>
-            {props.renter ? isRenter() : isOwner()} 
+            {props.isRenter ? isRenter() : isOwner()} 
         </div>
-
 	);
 }
 

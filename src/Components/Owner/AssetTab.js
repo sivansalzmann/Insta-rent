@@ -39,7 +39,6 @@ export default function AssetTab (props) {
     const handleChange = (panel) => (event, isExpanded) => {
       setExpanded(isExpanded ? panel : false);
     };
-
     const classes = useStyles();
     const isRenterExist = () => {
       if(props.item.RenterId !== 0) {
@@ -49,13 +48,11 @@ export default function AssetTab (props) {
             <Contract isRenter={false}/>
             <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false} showBt={true}>
                 <UserDeatils userId={props.item} googleIdRenter={props.googleIdRenter}/> 
-                {/* item=asset */}
             </PopUp>
           </>
           );
         }
       }
-
     const isRenterExistTop = () => {
       if(props.item.RenterId !== 0) {
         return (

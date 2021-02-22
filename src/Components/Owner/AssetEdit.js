@@ -27,7 +27,7 @@ export default function AddAsset(props) {
   const [avilability, setAvilability] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [editedAsset, setEditAsset] = useState("");
+  const [setEditAsset] = useState("");
   const [asset, setAsset] = useState("");
   const [add,setOpenAdd] = useState(false);
 
@@ -37,8 +37,7 @@ export default function AddAsset(props) {
       .then(result =>  {
           setAsset(result)
       })
-  }, [asset])
-
+  }, [props.idAsset,asset])
   const dateAndPriceValidation = () => {
     let errors = [];
     if(avilability !== "") {
@@ -57,7 +56,6 @@ export default function AddAsset(props) {
       else
           return true
   }
-
   const editAsset = () => {
     if(dateAndPriceValidation()) {
       const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl};
@@ -88,7 +86,6 @@ export default function AddAsset(props) {
         })
     }
   }
-
   return (
     <div className={"addAssetContainer"}>
       <Button variant="contained" color="primary" onClick={() => setOpenAdd(true)} className={"but"}>EDIT</Button>

@@ -7,7 +7,6 @@ import {useCookies} from "react-cookie";
 
 export default function AssetPage(props) {
   let history = useHistory();
-
   const [open, setOpen] = useState(false);
   const [asset, setAsset] = useState("");
   const [cookies] = useCookies(['user']);
@@ -18,10 +17,8 @@ export default function AssetPage(props) {
       .then(result =>  {
         setAsset(result)
       })    
-  },[asset])
-
+  },[cookies.user.id,asset])
   const wantIt = () => {
-    console.log(cookies.user.id)
     const body={RenterId: cookies.user.id}
     fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
             method: 'PUT',
@@ -38,7 +35,6 @@ export default function AssetPage(props) {
           })
         })
     };
-
     const haveAsset = () => {
       if(asset) {
         return (
@@ -51,7 +47,6 @@ export default function AssetPage(props) {
         )
       }
     }
-
   return (
     <div>
       <div className={"buttonsAssets"}>

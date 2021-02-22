@@ -4,7 +4,6 @@ import {useCookies} from "react-cookie";
 
 export default function UserDeatils(props) {
     const [renter,setRenter] = useState("")
-    const [renterDeatils,setRenterDeatils] = useState("")
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
@@ -15,23 +14,15 @@ export default function UserDeatils(props) {
         })
     }, )
 
-    useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
-            .then(response => response.json())
-            .then(result =>  {
-                setRenterDeatils(result)
-            })
-    }, )
-
     return (
         <div>
             <div className={"rowImg"}>
                 <div className={"coulmn"}>            
                     <h1>{renter.FirstName},{renter.LastName}</h1>
-                    <span>{renterDeatils.JobTitle}</span>
+                    <span>{renter.JobTitle}</span>
                     <div>
                         <h4>Budget:</h4>
-                        <span>{renterDeatils.Budget}</span>
+                        <span>{renter.Budget}</span>
                     </div>
                 </div> 
                 <img src={renter.ImageUrl} alt="profile"/>

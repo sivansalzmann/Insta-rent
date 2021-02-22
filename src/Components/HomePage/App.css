@@ -25,6 +25,7 @@ a{
 .navBarHomePage .options h3 {
     font-size: 90%;
     margin-left: 50%;
+    color: white;
 }
 .rowName { 
     display: flex;

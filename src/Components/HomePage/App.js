@@ -3,61 +3,25 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import PopUp from '../All/PopUp';
 import {useHistory} from "react-router-dom";
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 import {useCookies} from "react-cookie";
-
 
 export default function App(props) {
     let history = useHistory()
-    const [renterDeatilsPopUp,setRenterDeatilsPopUp] = useState(false)
-    const [favoriteCountry,setFavoriteCountry] = useState("")
-    const [budget,setBudget] = useState("")
-    const [jobTitle,serJobTitle] = useState("")
-    const [renterDeatils,setRenterDeatils] = useState("")
     const [positionPopUp,setPositionPopUp] = useState(true)
-    const [position,setPositionUser] = useState("")
     const [renter,setRenter] = useState(false)
     const [owner,setOwner] = useState(false)
-    const [renterDeatilsExist,setRenterDeatilsExist] = useState("")
     const [cookies,setCookie] = useCookies(['user']);
     const [user,setUser] = useState("")
 
-
     useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
-          .then(response => response.json())
-          .then(result =>  {
-            setRenterDeatilsExist(result)
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
+            .then(response => response.json())
+            .then(result =>  {
+                setUser(result)
         })
-      }, [renterDeatilsExist])
-
-    useEffect(() => {
-    fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
-        .then(response => response.json())
-        .then(result =>  {
-            setUser(result)
-    })
-    }, [user])
-
-    const addRenterDeatils = () => {
-        const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
-        fetch(`https://instarent-1st.herokuapp.com/api/renterDeatils`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
-          .then(response => response.json())
-          .then(result => {
-            setRenterDeatilsPopUp(false)
-            setRenterDeatils(result)
-            serJobTitle("")
-            setBudget("")
-            setFavoriteCountry("")
-          });
-      }
-
+    }, [cookies.user.id,user])
+    
     const logout = () => {
         fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`, {credentials: 'include'})
         .then(result => {
@@ -67,26 +31,11 @@ export default function App(props) {
         .catch(err => console.log(err))
     }
 
-    const setPosition = () => {
-        console.log(renter)
-        const body = {IsRenter:renter,IsOwner:owner};
-        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-        })
-        .then(response => response.json())
-        .then(result => {
-            setPositionUser(result);
-        })
-    }
-
-      const chooseHomePage = () => {
+    const chooseHomePage = () => {
         if(renter === true) {
             return (
                 <div className={"buttons"}>
-                    {renterDeatilsExistFunc()}
-                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button onClick={() => addRenterDeatils()}><p>I want to rent asset</p></Button></Link>
+                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button><p>I want to rent asset</p></Button></Link>
                     <Link to={{ pathname: "/Renter" , user:user, isRenter:true }}><Button type={"submit"}><p>My renter page</p></Button></Link>
                 </div>
                 )
@@ -98,35 +47,18 @@ export default function App(props) {
                 </div>
                 )
             }
-        }
-      const chooesPosition = () => {
-        // if(props.location.fromLogin) {
-            return (
-                <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
-                    <div className={"buttonsChoose"} >
-                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setOwner(false); setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
-                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
-                    </div>
-                </PopUp>
-                
-            )
-        // }
-      }
-      
-    
-      const renterDeatilsExistFunc = () => {
-          if(renterDeatilsExist == null) {
-              return (
-                <PopUp open={renterDeatilsPopUp} onSubmit={() => addRenterDeatils()} title={"Insert deatils on your current position"} closePopup={() => setRenterDeatilsPopUp(false)} showBt={true}>
-                    <TextField className="input" label="Country" size="large" onChange={ (event) => serJobTitle(event.target.value) } value={ jobTitle } fullWidth required/>   
-                    <TextField className="input" label="jobTitle" size="large" onChange={ (event) => setBudget(event.target.value) } value={ budget } fullWidth required/>   
-                    <TextField className="input" label="budget" size="large" onChange={ (event) => setFavoriteCountry(event.target.value) } value={ favoriteCountry } fullWidth required/>   
-                </PopUp> 
-              )
-          }
-      }
-
-
+    }
+    const chooesPosition = () => {
+        return (
+            <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
+                <div className={"buttonsChoose"} >
+                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false);}}><p>I want to rent asset</p></Button>
+                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false);}}><p>I want to post asset</p></Button>
+                </div>
+            </PopUp>
+            
+        )
+    } 
     return (
         <div>
             <div className={"background"}> 
@@ -137,7 +69,7 @@ export default function App(props) {
                         <h3><Link to={{ pathname: '/HomePage'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/RenterSearch' , user:user, renter:true }}>Search</Link></h3>
                         <h3>Hello {user.FirstName} {user.LastName} </h3>
-                        <h3><Button onClick={logout} >LOGOUT</Button></h3>
+                        <h3><Button onClick={logout}><h3>LOGOUT</h3></Button></h3>
                     </div>
                 </div>
                 <div className={"homePageContainer"}>
@@ -145,8 +77,8 @@ export default function App(props) {
                     <div className={"explain"}>
                         <h1>Looking for apartment?</h1>
                         <p> 
-                            Lorem Ipsum is simply dummy text of the  printing and typesetting industry. \n
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                        Welcome to InstaRent the web app that will 
+                        accompany you throughout the process of renting or advertising your dream apartment!
                         </p>
                     </div>
                     {chooseHomePage()}
@@ -154,6 +86,5 @@ export default function App(props) {
             </div>
         </div>
     )
-
 }
 

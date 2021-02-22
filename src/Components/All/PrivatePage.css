@@ -10,46 +10,8 @@
     width: 30%;
     height: 80%;
     margin-left: 10%;
-    /* margin-top: 3%;   */
     margin-bottom: 100px;
 }
-/* .containerRenter{
-    width: 100%;
-    margin-left: 5%;
-    margin-top: 3%;
-
-} */
-/* .currentContainer {
-    display: flex;
-    flex-direction: row;
-}
-.curStatus{
-    width: 50%;
-    background-color: #FFFFFF;
-    margin-right: 2%;
-}
-.curStatus h1{
-    color: #5D6D7E;
-    margin: 5%;
-}
-.curStatus p{
-    margin: 5%;
-    font-size: 20px;
-}
-.curBud{
-    width: 40%;
-    height: 20%;
-    background-color: #FFFFFF;
-}
-.curBud h1{
-    color: #5D6D7E;
-    margin: 5%;
-}
-.curBud p{
-    margin: 5%;
-    font-size: 20px;
-    margin-bottom: 15%;
-} */
 .litMenu {
     width:77%;
     height: 10%;

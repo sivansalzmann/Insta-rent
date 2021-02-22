@@ -1,8 +1,6 @@
-import React, {useEffect, useState,useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SignInDeatils.css';
 import Footer from '../All/Footer';
-import AddDeatils from './addDeatils';
-import {useHistory} from "react-router-dom";
 import {useCookies} from "react-cookie";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -16,17 +14,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
         margin: theme.spacing(1),
-        width: '25ch',
-        marginLeft: '30%',
+        width: '20ch',
+        marginLeft: '10%',
     },
 
 }}));
 
 export default function SignInDeatils (props) { 
-  const history = useHistory();
   const classes = useStyles();
-
-  const [userId] = useState(props.location.userId)
   const [user,setUser] = useState("");
   const [cookies] = useCookies(['user']);
   const [gender,setGender] = useState("")
@@ -36,7 +31,6 @@ export default function SignInDeatils (props) {
   const [favoriteCountry,setFavoriteCountry] = useState("")
   const [budget,setBudget] = useState("")
   const [jobTitle,serJobTitle] = useState("")
-  const [userDeatils,setUserDeatils] = useState("")
 
   useEffect(() => {
     fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
@@ -44,8 +38,7 @@ export default function SignInDeatils (props) {
       .then(result =>  {
         setUser(result)
       })    
-  }, [])
-
+  }, [cookies.user.id])
    const addAdditionalInformation = () => {
       const body = { Phone: phone,Gender: gender,Country: country,Age:age};
       fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}` ,{
@@ -56,8 +49,6 @@ export default function SignInDeatils (props) {
       })
       .then(response => response.json())
       .then(result => {
-          console.log(result)
-          setUserDeatils(result)
           setGender("")
           setPhone("")
           setCountry("")
@@ -67,8 +58,7 @@ export default function SignInDeatils (props) {
           serJobTitle("")
           window.location = '/HomePage';
       });
-  }
-
+    }
     return (
       <div className={'background'}>
         <h1 className={"headSignIn"}>InstaRent</h1>
@@ -76,7 +66,7 @@ export default function SignInDeatils (props) {
           <p>Additional Information</p>
           <form className={classes.root} autoComplete="off"> 
         <div className={"colForm"}>
-          <div>
+        <div className={"rowForm"}>
           <TextField 
               id="Country" 
               label="Country" 
@@ -93,6 +83,7 @@ export default function SignInDeatils (props) {
               value={phone} 
               onChange={e => setPhone(e.target.value)}
               fullWidth
+              required
           />
           </div>
           <div className={"rowForm"}>
@@ -109,43 +100,47 @@ export default function SignInDeatils (props) {
                 label="Budget" 
                 name="Budget"
                 value={budget} 
-                onChange={e => setAge(e.target.value)}
+                onChange={e => setBudget(e.target.value)}
                 required
             />
-            <TextField 
-                id="FavoriteCountry" 
-                label="FavoriteCountry" 
-                name="FavoriteCountry"
-                value={favoriteCountry} 
-                onChange={e => setAge(e.target.value)}
-                required
-            />
-            <TextField 
-                id="JobTitle" 
-                label="JobTitle" 
-                name="JobTitle"
-                value={jobTitle} 
-                onChange={e => setAge(e.target.value)}
-                required
-            />
-            <FormControl >
-              <InputLabel id="Gender">Gender</InputLabel>
-              <Select 
-                labelId="Gender" 
-                id="Gender"
-                value={gender} 
-                onChange={e => setGender(e.target.value)}
-                fullWidth
-                required
-                >
-                <MenuItem value={"Male"}>Male</MenuItem>
-                <MenuItem value={"Female"}>Female</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+            </div>
+            <div className={"rowForm"}>
+              <TextField 
+                  id="FavoriteCountry" 
+                  label="FavoriteCountry" 
+                  name="FavoriteCountry"
+                  value={favoriteCountry} 
+                  onChange={e => setFavoriteCountry(e.target.value)}
+                  required
+              />
+              <TextField 
+                  id="JobTitle" 
+                  label="JobTitle" 
+                  name="JobTitle"
+                  value={jobTitle} 
+                  onChange={e => serJobTitle(e.target.value)}
+                  required
+              />
+            </div>
+            <div className={"rowForm"}>
+              <FormControl style={{marginLeft: "10%" ,width:"20%"}} required>
+                <InputLabel id="Gender">Gender</InputLabel>
+                <Select 
+                  labelId="Gender" 
+                  id="Gender"
+                  value={gender} 
+                  onChange={e => setGender(e.target.value)}
+                  fullWidth
+                  required
+                  >
+                  <MenuItem value={"Male"}>Male</MenuItem>
+                  <MenuItem value={"Female"}>Female</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
         </div>
         </form>
-        <Button variant="contained" color="primary" onClick={addAdditionalInformation}>SEND</Button>
+        <Button variant="contained" color="primary" onClick={addAdditionalInformation}><p>SEND</p></Button>
         </div>
         <Footer/>
       </div>

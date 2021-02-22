@@ -1,5 +1,5 @@
 import {Route} from 'react-router-dom';
-import RenterSearch from "../Components/Renter/RenterSearch";
+import RenterSearch from "../Components/AssetSearch/RenterSearch";
 import SignIn from '../Components/Register/SignIn';
 import SignInDeatils from '../Components/Register/SignInDeatils';
 import OwnerPage from '../Components/Owner/OwnerPage';

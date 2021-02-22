@@ -33,7 +33,6 @@ export default function Message (props) {
             setAnswer(result);
         })
     }
-    
     const answerBtn = () => {
         if(!props.renter) {
             return (
