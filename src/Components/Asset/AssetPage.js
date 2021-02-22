@@ -38,19 +38,19 @@ export default function AssetPage(props) {
     const haveAsset = () => {
       if(asset.length < 0) {
         return (
-          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()} disabled>I wnat this asset</Button>
+          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()} disabled>I want this asset</Button>
         )
       }
       else {
         return (
-          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I wnat this asset</Button>
+          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I want this asset</Button>
         )
       }
     }
   return (
     <div>
       <div className={"buttonsAssets"}>
-        <Button variant="outlined" color="primary" onClick={() => setOpen(true)} style={{margin:'2%'}}>Show deatils</Button>
+        <Button variant="outlined" color="primary" onClick={() => setOpen(true)} style={{margin:'2%'}}>Show details</Button>
         {haveAsset()}
       </div>
         <PopUp onSubmit={() => setOpen(false)} WantAsset={true} title={props.item.Country} open={open} closePopup={() => setOpen(false)} showBt={true}>

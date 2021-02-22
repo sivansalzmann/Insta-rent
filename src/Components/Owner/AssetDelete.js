@@ -21,7 +21,7 @@ export default function AssetDelete(props) {
 	}
 	return (
 		<div className={"deleteAssetContainer"}>
-			<Button variant="contained" color="primary" className={"but"} onClick={deleteAsset}>DELETE</Button>
+			<Button variant="contained" color="primary" className={"but"} onClick={deleteAsset}>Delete</Button>
 	</div>
   );
 }

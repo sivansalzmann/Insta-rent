@@ -58,7 +58,7 @@ export default function Login (props) {
     <div className={'background'}>
       <h1 className={"headSignIn"}>InstaRent</h1>
       <div className={"signInContainer"}>
-        <p>SIGN IN WITH GOOGLE</p>
+        <p>Sign In With Google</p>
         <div className={"googleLogIn"}> 
             <GoogleLogin
             className={classes.google}

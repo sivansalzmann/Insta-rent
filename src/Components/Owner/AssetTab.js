@@ -64,7 +64,7 @@ export default function AssetTab (props) {
       else {
         return (
           <>
-            <Typography className={classes.secondaryHeading}>Nobody interst yet</Typography>
+            <Typography className={classes.secondaryHeading}>Nobody showed an interest yet</Typography>
           </>
         );
       }

@@ -7,14 +7,14 @@ export default function PopUp(props) {
     const sendBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p>SEND</p>
+                <p>Send</p>
             </ButtonBase>
         )
     }
     const okBtn = () => {
         return (
             <ButtonBase className={'okBtn'} centerRipple={true} onClick={props.onSubmit}>
-                <p>OK</p>
+                <p>Ok</p>
             </ButtonBase>
         )
     }
