@@ -81,16 +81,12 @@ export default function App(props) {
         })
     }
 
-    // const renterDeatils = () => {
-    //     if(renterDeatilsExist)
-    // }
-
       const chooseHomePage = () => {
         if(renter === true) {
             return (
                 <div className={"buttons"}>
                     {renterDeatilsExistFunc()}
-                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button onClick={() => setRenterDeatilsPopUp(true)}><p>I want to rent asset</p></Button></Link>
+                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button onClick={() => addRenterDeatils()}><p>I want to rent asset</p></Button></Link>
                     <Link to={{ pathname: "/Renter" , user:user, isRenter:true }}><Button type={"submit"}><p>My renter page</p></Button></Link>
                 </div>
                 )
@@ -98,7 +94,6 @@ export default function App(props) {
         if(owner === true) {
             return (
                 <div className={"buttons"}>
-                    <Button type={"submit"}><p>post asset</p></Button>
                     <Link to={{ pathname: "/OwnerPage" , user:user, isRenter:false }}><Button type={"submit"}><p>My owner page</p></Button></Link>
                 </div>
                 )
@@ -110,7 +105,7 @@ export default function App(props) {
                 <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                     <div className={"buttonsChoose"} >
                         <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setOwner(false); setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
-                        <Button variant="contained" color="primary" onClick={() => {renterDeatils(); setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
                     </div>
                 </PopUp>
                 
@@ -131,11 +126,6 @@ export default function App(props) {
           }
       }
 
-    //   const insertDeatils = () => {
-    //       return (
-    //         <AddDeatils user={user}/>
-    //       )
-    //   }
 
     return (
         <div>

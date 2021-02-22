@@ -43,14 +43,14 @@ export default function Login (props) {
       cookiePromise.then(() => {
         console.log(result)
         if (result) {
-          // if(result.Gender === null || result.Contry === null || result.Age === null || result.Phone === null) {
-          //   return (
-          //       history.push('/SignInDeatils')
-          //   )
-          // }
-          // else {
+          if(result.Gender === null || result.Contry === null || result.Age === null || result.Phone === null || result.Budget === null || result.JobTitle === null || result.FavoriteCountry === null) {
+            return (
+                history.push('/SignInDeatils')
+            )
+          }
+          else {
             history.push('/HomePage')
-          // }
+          }
         }
       })
     });

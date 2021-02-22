@@ -33,6 +33,9 @@ export default function SignInDeatils (props) {
   const [phone,setPhone] = useState("")
   const [country,setCountry] = useState("")
   const [age,setAge] = useState("")
+  const [favoriteCountry,setFavoriteCountry] = useState("")
+  const [budget,setBudget] = useState("")
+  const [jobTitle,serJobTitle] = useState("")
   const [userDeatils,setUserDeatils] = useState("")
 
   useEffect(() => {
@@ -59,6 +62,9 @@ export default function SignInDeatils (props) {
           setPhone("")
           setCountry("")
           setAge("")
+          setFavoriteCountry("")
+          setBudget("")
+          serJobTitle("")
           window.location = '/HomePage';
       });
   }
@@ -95,6 +101,30 @@ export default function SignInDeatils (props) {
                 label="Age" 
                 name="Age"
                 value={age} 
+                onChange={e => setAge(e.target.value)}
+                required
+            />
+            <TextField 
+                id="Budget" 
+                label="Budget" 
+                name="Budget"
+                value={budget} 
+                onChange={e => setAge(e.target.value)}
+                required
+            />
+            <TextField 
+                id="FavoriteCountry" 
+                label="FavoriteCountry" 
+                name="FavoriteCountry"
+                value={favoriteCountry} 
+                onChange={e => setAge(e.target.value)}
+                required
+            />
+            <TextField 
+                id="JobTitle" 
+                label="JobTitle" 
+                name="JobTitle"
+                value={jobTitle} 
                 onChange={e => setAge(e.target.value)}
                 required
             />

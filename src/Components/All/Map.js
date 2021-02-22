@@ -9,7 +9,7 @@ const containerStyle = {
 const SimpleMap = (props) => {
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyA3M9jeCdMvyitFKwBaFGhdWMTdcIOuNPc"
+        googleMapsApiKey: "AIzaSyDMG4PK6UUbGd1LT6je4pa34KwqhXOpkvs"
     })
 
     const [center, setCenter] = useState("")

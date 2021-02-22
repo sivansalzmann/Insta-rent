@@ -53,7 +53,7 @@ export default function RenterPage(props) {
   return (
       <div className={"renterMainPage"}>
         <PrivatePage label1={"In progress"} label2={"Asset place deatils"} label3={"Messages to my owner"} 
-        user={user} firstHead={"Prsonal deatils"} renterDeatils={renterDeatils} isRenter={true} messages={renterMessages} wantedAsset={wantedAsset[0]} />
+        user={user} firstHead={"Prsonal deatils"} isRenter={true} messages={renterMessages} wantedAsset={wantedAsset[0]} />
     </div>
 );
 }

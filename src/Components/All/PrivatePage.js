@@ -69,10 +69,6 @@ export default function PrivatePage(props) {
   };
 
   const addMessage = () => {
-    let today = new Date();
-    console.log(today)
-    setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
-    console.log(timestamp);
     const body = { Message: message, RenterId: props.user.id, OwnerId: props.wantedAsset.OwnerId, Timestamp: timestamp };
     fetch(`https://instarent-1st.herokuapp.com/api/messages`, {
       method: 'POST',
@@ -84,6 +80,7 @@ export default function PrivatePage(props) {
         setOpenMessage(false)
         setMessage(result)
         setMessage("")
+        setTimestamp("")
       });
   }
 
@@ -110,11 +107,11 @@ export default function PrivatePage(props) {
         <div className={"currentContainer"}>
           <div className={"curStatus"}>
             <h1>Current status</h1>
-            <p>Looking for rent appetmant in {props.renterDeatils.FavoriteCountry} </p>
+            <p>Looking for rent appetmant in {props.user.FavoriteCountry} </p>
           </div>
           <div className={"curBud"}>
             <h1>Cuurent budget</h1>
-            <p>{props.renterDeatils.Budget} $</p>
+            <p>{props.user.Budget} $</p>
           </div>
         </div>
       )
@@ -127,7 +124,6 @@ export default function PrivatePage(props) {
       )
     }
   }
-  // {console.log(props.wantedAsset)}
   const wantedAsset = () => {
     if (props.wantedAsset == null) {
       return (
@@ -166,7 +162,8 @@ export default function PrivatePage(props) {
               <Typography style={{ fontFamily: 'Lato' }}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
               <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
-                <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required />
+                <TextField type="date" value={timestamp} onChange={e => setTimestamp(e.target.value)} variant="outlined" fullWidth required />
+                <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required style={{marginTop:"1%"}}/>
               </PopUp>
               <Contract isRenter={true} />
               <Button variant="contained" color="primary" size="small" onClick={() => giveUpOnAsset()}>give up on this asset</Button>
@@ -183,32 +180,6 @@ export default function PrivatePage(props) {
         </Stepper>
       )
     }
-  }
-  const disableTabs = () => {
-    if (props.wantedAsset && props.isRenter) {
-      return (
-        <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
-        <Tab label={props.label1} {...a11yProps(0)} />
-        <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
-        <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
-      </Tabs>
-      )
-    }
-    if (!props.wantedAsset && props.isRenter){
-      <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
-          <Tab label={props.label1} {...a11yProps(0)} />
-          <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} disabled/>
-          <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} disabled/>
-        </Tabs>
-    }
-  }
-
-  const ownerTabs = () => {
-    <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
-        <Tab label={props.label1} {...a11yProps(0)} />
-        <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
-        <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
-      </Tabs> 
   }
   const label1 = () => {
     if (props.isRenter) {
@@ -253,7 +224,7 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
-          {/* <Map address={props.Country}/> */}
+        {/* {props.wantedAsset ? <Map address={props.Country}/> : <div><p>There is not map yet, find your next asset to see one</p></div>} */}
         </>
       )
     }
@@ -272,9 +243,10 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
-          <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button>
+        {props.wantedAsset ? <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button> : <div></div>}
           <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
-            <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" fullWidth required />
+            <TextField type="date" value={timestamp} onChange={e => setTimestamp(e.target.value)} variant="outlined" fullWidth required />
+            <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" style={{marginTop:"1%"}} fullWidth required />
           </PopUp>
           <MessageList messageList={props.messages} renter={true} />
         </>
@@ -292,14 +264,12 @@ export default function PrivatePage(props) {
       <NavBar />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          {/* {console.log(props.user.id)} */}
-          <PrsonalDeatils renterDeatilsId={props.renterDeatils.id} userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} />
+          <PrsonalDeatils userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} />
         </div>
         <div className={"containerOptions"}>
           {tabs()}
           <div className={"progressOwner"}>
             <AppBar position="static" color="default">
-              {/* {props.isOwnerPage ? ownerTabs() : disableTabs()} */}
               <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label={props.label1} {...a11yProps(0)} />
                 <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />

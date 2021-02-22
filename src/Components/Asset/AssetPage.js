@@ -20,8 +20,6 @@ export default function AssetPage(props) {
       })    
   },[asset])
 
-  // console.log(asset)
-
   const wantIt = () => {
     console.log(cookies.user.id)
     const body={RenterId: cookies.user.id}
@@ -42,7 +40,7 @@ export default function AssetPage(props) {
     };
 
     const haveAsset = () => {
-      if(asset === "[]") {
+      if(asset) {
         return (
           <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()} disabled>I wnat this asset</Button>
         )
