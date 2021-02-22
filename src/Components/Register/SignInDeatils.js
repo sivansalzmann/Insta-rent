@@ -27,7 +27,7 @@ export default function SignInDeatils (props) {
   const classes = useStyles();
 
   const [userId] = useState(props.location.userId)
-  const [user,setByUserId] = useState("");
+  const [user,setUser] = useState("");
   const [cookies] = useCookies(['user']);
   const [gender,setGender] = useState("")
   const [phone,setPhone] = useState("")
@@ -39,13 +39,13 @@ export default function SignInDeatils (props) {
     fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
-          setByUserId(result)
+        setUser(result)
       })    
   }, [])
 
    const addAdditionalInformation = () => {
       const body = { Phone: phone,Gender: gender,Country: country,Age:age};
-      fetch(`http://localhost:3000/api/users` ,{
+      fetch(`http://localhost:3000/api/users/${user.id}` ,{
           method: 'PUT',
           credentials: 'include',
           headers: {'Content-Type': 'application/json'},

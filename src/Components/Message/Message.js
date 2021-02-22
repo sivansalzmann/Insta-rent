@@ -80,7 +80,7 @@ export default function Message (props) {
                 <div>
                    {haveAnswer()}
                 </div>
-                <PopUp onSubmit={addAnswer} title={"Send answer"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true}>
+                <PopUp onSubmit={addAnswer} title={"Send answer"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
                     <TextField id="outlined-multiline-static" label="Answer"  multiline rows={4} onChange={(event) => setAnswer(event.target.value)} value={answer} variant="outlined" fullWidth/>
                 </PopUp>
             </CardContent>

@@ -21,8 +21,9 @@ export default function App(props) {
     const [renter,setRenter] = useState(false)
     const [owner,setOwner] = useState(false)
     const [renterDeatilsExist,setRenterDeatilsExist] = useState("")
-    const [cookies] = useCookies(['user']);
+    const [cookies,setCookie] = useCookies(['user']);
     const [user,setUser] = useState("")
+
 
     useEffect(() => {
         fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
@@ -57,6 +58,15 @@ export default function App(props) {
           });
       }
 
+    const logout = () => {
+        fetch(`http://localhost:3000/api/auth/logout`, {credentials: 'include'})
+        .then(result => {
+            setCookie('user', '')
+            history.push('/')
+        })
+        .catch(err => console.log(err))
+    }
+
     const setPosition = () => {
         console.log(renter)
         const body = {IsRenter:renter,IsOwner:owner};
@@ -70,6 +80,10 @@ export default function App(props) {
             setPositionUser(result);
         })
     }
+
+    // const renterDeatils = () => {
+    //     if(renterDeatilsExist)
+    // }
 
       const chooseHomePage = () => {
         if(renter === true) {
@@ -87,7 +101,7 @@ export default function App(props) {
                     <Button type={"submit"}><p>post asset</p></Button>
                     <Link to={{ pathname: "/OwnerPage" , user:user, isRenter:false }}><Button type={"submit"}><p>My owner page</p></Button></Link>
                 </div>
-            )
+                )
             }
         }
       const chooesPosition = () => {
@@ -96,7 +110,7 @@ export default function App(props) {
                 <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                     <div className={"buttonsChoose"} >
                         <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setOwner(false); setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
-                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {renterDeatils(); setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
                     </div>
                 </PopUp>
                 
@@ -133,6 +147,7 @@ export default function App(props) {
                         <h3><Link to={{ pathname: '/HomePage'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/RenterSearch' , user:user, renter:true }}>Search</Link></h3>
                         <h3>Hello {user.FirstName} {user.LastName} </h3>
+                        <h3><Button onClick={logout} >LOGOUT</Button></h3>
                     </div>
                 </div>
                 <div className={"homePageContainer"}>

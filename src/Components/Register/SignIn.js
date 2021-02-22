@@ -5,6 +5,7 @@ import Footer from '../All/Footer';
 import GoogleLogin from 'react-google-login';
 import {useHistory} from "react-router-dom";
 import {useCookies} from "react-cookie";
+import userEvent from '@testing-library/user-event';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,8 +40,16 @@ export default function Login (props) {
         resolve()
       });
       cookiePromise.then(() => {
-        if (result)
-          history.push('/HomePage')
+        if (result) {
+          if(result.Gender === null || result.Contry === null || result.Age === null || result.Phone === null) {
+            return (
+                history.push('/SignInDeatils')
+            )
+          }
+          else {
+            history.push('/HomePage')
+          }
+        }
       })
     });
   }
@@ -48,6 +57,7 @@ export default function Login (props) {
   const googleFailure = (response) => {
     console.log(response);
   }
+
     return (
       <div className={'background'}>
         <h1 className={"headSignIn"}>InstaRent</h1>
