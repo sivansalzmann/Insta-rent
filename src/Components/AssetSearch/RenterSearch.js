@@ -19,7 +19,7 @@ export default function RenterSearch(props) {
 	return (
 		<div className={"renterMainPage"}>
 			<NavBar/>
-			<p className={"renterMainPgeHeadline"}>FIND YOUR NEXT ASSET</p>
+			<p className={"renterMainPgeHeadline"}>Find You'r Next Asset</p>
 			<AssetSearchForm user={user}/>
 			<Footer />
 		</div>

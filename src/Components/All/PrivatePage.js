@@ -100,10 +100,10 @@ export default function PrivatePage(props) {
         <div className={"currentContainer"}>
           <div className={"curStatus"}>
             <h1>Current status</h1>
-            <p>Looking for rent appetmant in {props.user.FavoriteCountry} </p>
+            <p>Looking to rent an appetmant in {props.user.FavoriteCountry} </p>
           </div>
           <div className={"curBud"}>
-            <h1>Cuurent budget</h1>
+            <h1>Current budget</h1>
             <p>{props.user.Budget} $</p>
           </div>
         </div>
@@ -124,14 +124,14 @@ export default function PrivatePage(props) {
           <Step >
             <StepLabel style={{ fontFamily: 'Lato' }}></StepLabel>
             <StepContent>
-              <Typography style={{ fontFamily: 'Lato' }}>You don't in proccess with owner yet, choose asset and start soon!</Typography>
+              <Typography style={{ fontFamily: 'Lato' }}>You don't have any proccess with a owner yet, choose an asset and start one!</Typography>
             </StepContent>
           </Step>
           <Step>
             <StepLabel style={{ fontFamily: 'Lato' }}>Asset rentering in proccess</StepLabel>
           </Step>
           <Step >
-            <StepLabel style={{ fontFamily: 'Lato' }}>Enjoy in your new journey!</StepLabel>
+            <StepLabel style={{ fontFamily: 'Lato' }}>Enjoy you'r new journey!</StepLabel>
           </Step>
         </Stepper>
       )
@@ -140,10 +140,10 @@ export default function PrivatePage(props) {
       return (
         <Stepper active orientation="vertical">
           <Step >
-            <StepLabel style={{ fontFamily: 'Lato' }}>Request recived</StepLabel>
+            <StepLabel style={{ fontFamily: 'Lato' }}>Requests recived</StepLabel>
             <StepContent>
-              <Typography style={{ fontFamily: 'Lato' }}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
-              <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
+              <Typography style={{ fontFamily: 'Lato' }}>The owner of the asset you intrested in saw your reques and will contact with you soon</Typography>
+              <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset details</Button>
               <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
                 <AssetDeatils item={props.wantedAsset} />
               </PopUp>
@@ -152,7 +152,7 @@ export default function PrivatePage(props) {
           <Step active>
             <StepLabel style={{ fontFamily: 'Lato' }}>Asset rentering in proccess</StepLabel>
             <StepContent>
-              <Typography style={{ fontFamily: 'Lato' }}>You can talk anytime you want with the owner in the chat and review on tour contract now</Typography>
+              <Typography style={{ fontFamily: 'Lato' }}>You can talk with the owner anytime you want and review your contract now</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenMessage(true)}>message to owner</Button>
               <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
                 <TextField type="date" value={timestamp} onChange={e => setTimestamp(e.target.value)} variant="outlined" fullWidth required />
@@ -163,7 +163,7 @@ export default function PrivatePage(props) {
             </StepContent>
           </Step>
           <Step >
-            <StepLabel style={{ fontFamily: 'Lato' }}>Enjoy in your new journey!</StepLabel>
+            <StepLabel style={{ fontFamily: 'Lato' }}>Enjoy you'r new journey!</StepLabel>
             <StepContent>
               <Typography style={{ fontFamily: 'Lato' }}></Typography>
               <Button variant="contained" color="primary" size="small">Chat</Button>
@@ -195,7 +195,7 @@ export default function PrivatePage(props) {
               <p>{props.user.Phone}</p>
             </div>
           </div>
-          <h1>Assets deatils</h1>
+          <h1>Assets details</h1>
           <div className={"currentContainerRow"}>
             <div className={"prsonalDetOwner"}>
               <HouseIcon style={{ width: '20%', height: '20%', margin: '5%' }} />
@@ -235,7 +235,7 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
-        {props.wantedAsset ? <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button> : <div></div>}
+        {props.wantedAsset ? <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send a message to the owner</Button> : <div></div>}
           <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
             <TextField type="date" value={timestamp} onChange={e => setTimestamp(e.target.value)} variant="outlined" fullWidth required />
             <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" style={{marginTop:"1%"}} fullWidth required />

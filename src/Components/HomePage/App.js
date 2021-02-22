@@ -35,7 +35,7 @@ export default function App(props) {
         if(renter === true) {
             return (
                 <div className={"buttons"}>
-                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button><p>I want to rent asset</p></Button></Link>
+                    <Link to={{ pathname: "/RenterSearch" , user:user, isRenter:true }}><Button><p>I want to rent an asset</p></Button></Link>
                     <Link to={{ pathname: "/Renter" , user:user, isRenter:true }}><Button type={"submit"}><p>My renter page</p></Button></Link>
                 </div>
                 )
@@ -52,8 +52,8 @@ export default function App(props) {
         return (
             <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                 <div className={"buttonsChoose"} >
-                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false);}}><p>I want to rent asset</p></Button>
-                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false);}}><p>I want to post asset</p></Button>
+                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false);}}><p>I want to rent an asset</p></Button>
+                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false);}}><p>I want to post an asset</p></Button>
                 </div>
             </PopUp>
             
