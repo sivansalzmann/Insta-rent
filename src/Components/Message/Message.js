@@ -42,7 +42,6 @@ export default function Message (props) {
             )
         }
     }
-
     const haveAnswer = () => {
         if(props.item.Answer != null){
             return (
@@ -63,7 +62,6 @@ export default function Message (props) {
         }
 
     }
-
     return (
         <Card className={classes.card}>
             <CardContent>

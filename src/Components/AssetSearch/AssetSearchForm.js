@@ -44,8 +44,8 @@ export default function AssetSearchForm(props) {
     return (
         <div className={ 'assetSearchForm' }>
             <form noValidate autoComplete="off">
-                <div><TextField className="input" label="Country" size="large" onChange={ (event) => setCountry(event.target.value) } value={ country } /></div>
-                <div><TextField className="input" label="city" size="large" onChange={ (event) => setCity(event.target.value) } value={ city } /></div>
+                <div><TextField className="input" label="Country" onChange={ (event) => setCountry(event.target.value) } value={ country } /></div>
+                <div><TextField className="input" label="city" onChange={ (event) => setCity(event.target.value) } value={ city } /></div>
                 <div><Button variant="contained" color="primary" onClick={onSubmit} value="search" >search</Button> </div>
             </form>
             <Button variant="outlined" color="primary" onClick={() => setOpenEdit(true)} className={"filterBut"} style={{marginBottom:'2%'}}>

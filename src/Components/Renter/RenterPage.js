@@ -30,6 +30,7 @@ export default function RenterPage(props) {
         setRenterMessages(result)
       })
   }, [cookies.user.id,renterMessages])
+  
   return (
       <div className={"renterMainPage"}>
         <PrivatePage label1={"In progress"} label2={"Asset place deatils"} label3={"Messages to my owner"} 

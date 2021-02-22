@@ -4,7 +4,7 @@ import './SignIn.css';
 import Footer from '../All/Footer';
 import GoogleLogin from 'react-google-login';
 import {useHistory} from "react-router-dom";
-// import {useCookies} from "react-cookie";
+import {useCookies} from "react-cookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login (props) { 
   let history = useHistory();
-  // const [setCookie] = useCookies(['user']);
+  const [cookie,setCookie] = useCookies(['user']);
   const classes = useStyles();
 
   const googleSuccess = async (response) => {
@@ -34,7 +34,7 @@ export default function Login (props) {
     .then(response => response.json())
     .then(result => {
       const cookiePromise = new Promise((resolve, reject) => {
-        // setCookie('user', result)
+        setCookie('user', result)
         resolve()
       });
       cookiePromise.then(() => {

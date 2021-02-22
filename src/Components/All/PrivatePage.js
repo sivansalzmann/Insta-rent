@@ -26,7 +26,7 @@ import HouseIcon from '@material-ui/icons/House';
 import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
-import Map from '../All/Map';
+import PlaceDeatils from './PlaceDeatils';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,9 +58,8 @@ export default function PrivatePage(props) {
   const [openMessage, setOpenMessage] = useState(false);
   const [openAsset, setOpenAsset] = useState(false);
   const [timestamp, setTimestamp] = useState("");
-  const [setAsset] = useState("");
-
   const [value, setValue] = useState(0);
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -88,9 +87,7 @@ export default function PrivatePage(props) {
     })
       .then(response => response.json())
       .then(result => {
-        setAsset(result)
         alert("Tha asset is deletd from your proccess successfully!")
-        console.log(result)
         window.location.reload()
       })
   };
@@ -216,7 +213,7 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
-        {/* {props.wantedAsset ? <Map address={props.wantedAsset.Country}/> : <div><p>There is not map yet, find your next asset to see one</p></div>} */}
+        {/* {props.wantedAsset ? <PlaceDeatils country={props.wantedAsset.Country}/> : <div><p>There is not map yet, find your next asset to see one</p></div>} */}
         </>
       )
     }
@@ -224,7 +221,7 @@ export default function PrivatePage(props) {
       return (
         <>
           <h2>My assets</h2>
-          <AssetTable assetsList={props.assets} idOwner={props.user.id} googleIdRenter={props.user.id}/>
+          <AssetTable assetsList={props.assets} idOwner={props.user.id}/>
           <AddAsset idOwner={props.user.id} />
         </>
       )
@@ -235,7 +232,7 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
-        {props.wantedAsset ? <Button variant="contained" color="primary" size="large" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button> : <div></div>}
+        {props.wantedAsset ? <Button variant="contained" color="primary" style={{ width: "100%" }} onClick={() => setOpenMessage(true)}>send message to owner</Button> : <div></div>}
           <PopUp onSubmit={addMessage} title={"Send Message"} open={openMessage} closePopup={() => setOpenMessage(false)} sendBtn={true} showBt={true}>
             <TextField type="date" value={timestamp} onChange={e => setTimestamp(e.target.value)} variant="outlined" fullWidth required />
             <TextField label="Message" value={message} multiline rows={4} onChange={e => setMessage(e.target.value)} variant="outlined" style={{marginTop:"1%"}} fullWidth required />
@@ -255,7 +252,7 @@ export default function PrivatePage(props) {
       <NavBar />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} isRenter={props.isRenter}/>
+          <PrsonalDeatils user={props.user} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} Gender={props.user.Gender} idOwner={props.user.id} idRenter={props.user.id} isRenter={props.isRenter}/>
         </div>
         <div className={"containerOptions"}>
           {tabs()}

@@ -9,7 +9,6 @@ export default function RenterPage(props) {
     const [jobTitle,setJob] = useState("");
     const [budget,setBudget] = useState("");
     const [favoriteCountry,setFavoriteCountry] = useState("");
-    const [setUser] = useState("");
 
     const validateBudget = () => {        
         let errors = [];
@@ -34,7 +33,6 @@ export default function RenterPage(props) {
             .then(response => response.json())
             .then(result => {
                 setOpenEdit(false);
-                setUser(result)
                 setJob("")
                 setBudget("")
                 setFavoriteCountry("")

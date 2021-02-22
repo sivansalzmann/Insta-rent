@@ -40,7 +40,7 @@ export default function SignInDeatils (props) {
       })    
   }, [cookies.user.id])
    const addAdditionalInformation = () => {
-      const body = { Phone: phone,Gender: gender,Country: country,Age:age};
+      const body = { Phone: phone,Gender: gender,Country: country,Age:age, Budget:budget, FavoriteCountry: favoriteCountry, JobTitle:jobTitle};
       fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}` ,{
           method: 'PUT',
           credentials: 'include',
