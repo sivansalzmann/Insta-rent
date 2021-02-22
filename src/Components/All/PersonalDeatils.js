@@ -17,7 +17,7 @@ export default function RenterPage(props) {
 
     const validatePhone = () => {        
         let errors = [];
-        if(phone != "") {
+        if(phone !== "") {
             if(isNaN(phone)) {
                 errors.push("You have entered an invalid phone number, please insert another one \n")
             }
@@ -30,7 +30,7 @@ export default function RenterPage(props) {
 
     const validateBudget = () => {        
         let errors = [];
-        if(budget != "") {
+        if(budget !== "") {
             if(isNaN(budget)) {
                 errors.push("You have entered an invalid budget, please insert another one \n")
             }

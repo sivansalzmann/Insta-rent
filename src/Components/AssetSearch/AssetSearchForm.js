@@ -41,6 +41,8 @@ export default function AssetSearchForm(props) {
             }
         )
     }
+    // console.log(props.location.renter)
+
     return (
         <div className={ 'assetSearchForm' }>
             <form noValidate autoComplete="off">
@@ -105,7 +107,8 @@ export default function AssetSearchForm(props) {
                     </div>
                 </div>
                 </PopUp>
-            <AssetList assetsList={assetsList} renterId={props.user.id}/>
+            <AssetList assetsList={assetsList}/>
+            {/* <AssetList assetsList={assetsList} renterId={props.location.user}/> */}
         </div>
     )
 }

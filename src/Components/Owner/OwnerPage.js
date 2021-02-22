@@ -17,7 +17,7 @@ export default function OwnerPage1(props) {
         .then(result =>  {
             setUser(result)
         })
-    }, [user])
+    }, [cookies.user])
 
     useEffect(() => {
       fetch(`http://localhost:3000/api/assets?OwnerId=${cookies.user.id}`, {credentials: 'include'})

@@ -1,5 +1,5 @@
 import {Route} from 'react-router-dom';
-import RenterSearch from "../Components/AssetSearch/RenterSearch";
+import RenterSearch from "../Components/Renter/RenterSearch";
 import SignIn from '../Components/Register/SignIn';
 import SignInDeatils from '../Components/Register/SignInDeatils';
 import OwnerPage from '../Components/Owner/OwnerPage';
@@ -11,7 +11,7 @@ import UserRouter from "./userRouter";
 const ReactRouter = () => {
     return (
         <>
-            <UserRouter exact path="/" component={SignIn}/>
+            <Route exact path="/" component={SignIn}/>
             <UserRouter exact path="/HomePage" component={App}/>
             <UserRouter exact path="/RenterSearch" component={RenterSearch}/>
             <UserRouter path="/SignInDeatils" component={SignInDeatils} />

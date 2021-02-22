@@ -4,6 +4,7 @@ import './SignIn.css';
 import Footer from '../All/Footer';
 import GoogleLogin from 'react-google-login';
 import {useHistory} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,8 +18,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Login (props) { 
   let history = useHistory();
+  const [cookies, setCookie] = useCookies(['user']);
   const classes = useStyles();
 
   const googleSuccess = async (response) => {
@@ -31,14 +34,45 @@ export default function Login (props) {
     })
         .then(response => response.json())
         .then(result => {
-            let path = '/HomePage'
-            history.push(path)
+            const cookiePromise = new Promise((resolve, reject) => {
+                setCookie('user', result)
+                resolve()
+            });
+            cookiePromise.then(() => {
+                if (result)
+                  history.push('/HomePage')
+            })
         });
   }
 
+
+  // const googleSuccess = async googleData => {
+  //   const res = await fetch("http://localhost:3000/api/auth/login", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //       token: googleData.tokenId,
+  //     }),
+  //     credentials: 'include',
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //   const data = await res.json()
+  //   if(res.status === 200){
+  //     if(data === "the user does NOT exist"){
+  //       window.location = '/SignInDeatils';  
+  //     } else {
+  //       let path = '/HomePage'
+  //       history.push(path)
+  //     }
+  //   } else {
+  //     alert("Some error occurred");
+  //   }
+  // }
+
   const googleFailure = (response) => {
     console.log(response);
-}
+  }
 
     return (
       <div className={'background'}>
@@ -48,7 +82,7 @@ export default function Login (props) {
           <div className={"googleLogIn"}> 
               <GoogleLogin
               className={classes.google}
-              clientId="521754477823-1e3s41qrtptk8tl2rg6a6nks18al6286.apps.googleusercontent.com"
+              clientId="455770929949-rknvnltjkidooak44tu8jbt49372itkn.apps.googleusercontent.com"
               onSuccess={googleSuccess}
               onFailure={googleFailure}
               />

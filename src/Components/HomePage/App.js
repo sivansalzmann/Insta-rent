@@ -3,31 +3,21 @@ import { Link } from 'react-router-dom';
 import './App.css';
 import PopUp from '../All/PopUp';
 import {useHistory} from "react-router-dom";
-import AddDeatils from '../Register/addDeatils';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import AddAsset from '../Owner/AddAsset';
 import { makeStyles } from '@material-ui/core/styles';
 import {useCookies} from "react-cookie";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      '& > *': {
-        margin: theme.spacing(0),
-      },
-    },
-  }));
 
 export default function App(props) {
-    // const [user] = useState(props.location.userId)
     let history = useHistory()
     const [renterDeatilsPopUp,setRenterDeatilsPopUp] = useState(false)
     const [favoriteCountry,setFavoriteCountry] = useState("")
     const [budget,setBudget] = useState("")
     const [jobTitle,serJobTitle] = useState("")
     const [renterDeatils,setRenterDeatils] = useState("")
-    const [position,setPosition] = useState(true)
+    const [positionPopUp,setPositionPopUp] = useState(true)
+    const [position,setPositionUser] = useState("")
     const [renter,setRenter] = useState(false)
     const [owner,setOwner] = useState(false)
     const [renterDeatilsExist,setRenterDeatilsExist] = useState("")
@@ -35,12 +25,12 @@ export default function App(props) {
     const [user,setUser] = useState("")
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
+        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.googleID}`, {credentials: 'include'})
           .then(response => response.json())
           .then(result =>  {
             setRenterDeatilsExist(result)
         })
-      }, [cookies.user.id])
+      }, [renterDeatilsExist])
 
     useEffect(() => {
     fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
@@ -48,7 +38,7 @@ export default function App(props) {
         .then(result =>  {
             setUser(result)
     })
-    }, [cookies.user.id])
+    }, [cookies.user])
 
     const addRenterDeatils = () => {
         const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
@@ -67,8 +57,24 @@ export default function App(props) {
           });
       }
 
+    const setPosition = () => {
+        console.log(renter)
+        const body = {IsRenter:renter,IsOwner:owner};
+        fetch(`http://localhost:3000/api/additionalInformation/${user.googleID}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(user.googleID)
+            console.log(renter)
+            // setPositionUser(result);
+        })
+    }
+
       const chooseHomePage = () => {
-        if(renter == true) {
+        if(renter === true) {
             return (
                 <div className={"buttons"}>
                     {renterDeatilsExistFunc()}
@@ -77,7 +83,7 @@ export default function App(props) {
                 </div>
                 )
             }
-        if(owner == true) {
+        if(owner === true) {
             return (
                 <div className={"buttons"}>
                     <Button type={"submit"}><p>post asset</p></Button>
@@ -89,10 +95,10 @@ export default function App(props) {
       const chooesPosition = () => {
         // if(props.location.fromLogin) {
             return (
-                <PopUp open={position} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
+                <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                     <div className={"buttonsChoose"} >
-                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPosition(false)}}><p>I want to rent asset</p></Button>
-                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPosition(false)}}><p>I want to post asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
                     </div>
                 </PopUp>
                 
@@ -113,11 +119,11 @@ export default function App(props) {
           }
       }
 
-      const insertDeatils = () => {
-          return (
-            <AddDeatils user={user}/>
-          )
-      }
+    //   const insertDeatils = () => {
+    //       return (
+    //         <AddDeatils user={user}/>
+    //       )
+    //   }
 
     return (
         <div>
@@ -126,7 +132,6 @@ export default function App(props) {
                     {chooesPosition()}
                     <h1><a href="/">InstaRent</a></h1>
                     <div className={"options"}>
-                        {console.log(user)}
                         <h3><Link to={{ pathname: '/HomePage'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/RenterSearch' , user:user, renter:true }}>Search</Link></h3>
                         <h3>Hello {user.FirstName} {user.LastName} </h3>

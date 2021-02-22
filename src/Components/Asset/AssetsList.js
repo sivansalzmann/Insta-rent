@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 export default function AssetList(props) {
 
     const assetWanted = (item) => {
-        if(item.RenterId==0) {
+        if(item.RenterId === 0) {
             return (
             <AssetCard key={item.id} id={item.id} item={item} renterId={props.renterId}> 
                 {props.children}

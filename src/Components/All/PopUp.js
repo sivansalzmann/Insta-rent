@@ -19,7 +19,7 @@ export default function PopUp(props) {
         )
     }
     const showBt = () => {
-        if(props.showBt == true) {
+        if(props.showBt === true) {
             return (
                 <div className={'divBtn'}>
                     {props.sendBtn ? sendBtn() : okBtn()}

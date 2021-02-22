@@ -1,4 +1,4 @@
-import React, { useState,useContext } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -27,7 +27,6 @@ import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
 import Map from '../All/Map';
-import {UserContext} from '../../UserContext';
 import {useCookies} from "react-cookie";
 
 function TabPanel(props) {
@@ -55,8 +54,6 @@ function a11yProps(index) {
 }
 
 export default function PrivatePage(props) {
-  const { user} = useContext(UserContext);
-
   const theme = useTheme();
   const [message, setMessage] = useState("");
   const [openMessage, setOpenMessage] = useState(false);
@@ -90,9 +87,9 @@ export default function PrivatePage(props) {
       });
   }
 
-
   const giveUpOnAsset = () => {
     console.log(props.wantedAsset[0].id)
+    console.log("here")
     const body = { RenterId: 0 }
     fetch(`http://localhost:3000/api/assets/${props.wantedAsset[0].id}`, {
         method: 'PUT',
@@ -132,7 +129,7 @@ export default function PrivatePage(props) {
   }
 
   const wantedAsset = () => {
-    if (props.wantedAsset == "") {
+    if (props.wantedAsset === "") {
       return (
         <Stepper active orientation="vertical">
           <Step >
@@ -158,7 +155,7 @@ export default function PrivatePage(props) {
             <StepContent>
               <Typography style={{ fontFamily: 'Lato' }}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
-              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
+              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset[0].Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
                 <AssetDeatils item={props.wantedAsset[0]} />
               </PopUp>
             </StepContent>
@@ -189,7 +186,7 @@ export default function PrivatePage(props) {
   }
 
   const disableTabs = () => {
-    if (props.wantedAsset == "") {
+    if (props.wantedAsset === "") {
       return (
         <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
           <Tab label={props.label1} {...a11yProps(0)} />
@@ -198,7 +195,7 @@ export default function PrivatePage(props) {
         </Tabs>
       )
     }
-    if(props.wantedAsset == "" || props.isRenter == true) {
+    if(props.wantedAsset === "" || props.isRenter === true) {
       <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
         <Tab label={props.label1} {...a11yProps(0)} />
         <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />

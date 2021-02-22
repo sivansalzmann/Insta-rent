@@ -9,20 +9,20 @@ export default function UserDeatils(props) {
 
     useEffect(() => {
         console.log(renterDeatils.googleID)
-        fetch(`http://localhost:3000/api/users/${props.googleIdRenter.googleID}`)
+        fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
             .then(response => response.json())
             .then(result =>  {
                 setRenter(result)
         })
-    },[] )
+    }, )
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${props.googleIdRenter.id}`)
+        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.googleID}`, {credentials: 'include'})
             .then(response => response.json())
             .then(result =>  {
                 setRenterDeatils(result)
             })
-    }, [])
+    }, )
 
     console.log(props.userId)
 

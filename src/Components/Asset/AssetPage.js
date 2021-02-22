@@ -3,15 +3,17 @@ import Button from '@material-ui/core/Button';
 import AssetDeatils from '../Asset/AssetDeatils';
 import PopUp from '../All/PopUp';
 import {useHistory} from "react-router-dom";
+import {useCookies} from "react-cookie";
 
 export default function AssetPage(props) {
   let history = useHistory();
 
   const [open, setOpen] = useState(false);
   const [asset, setAsset] = useState("");
+  const [cookies] = useCookies(['user']);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?RenterId=${props.renterId}`)
+    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.googleID}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setAsset(result)
@@ -37,7 +39,7 @@ export default function AssetPage(props) {
     };
 
     const haveAsset = () => {
-      if(asset == "") {
+      if(asset === "") {
         return (
           <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I wnat this asset</Button>
         )

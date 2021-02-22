@@ -1,8 +1,7 @@
-import React, {useState,} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {useHistory} from "react-router-dom";
-import {Avatar,Button} from "@material-ui/core";
-import {UserContext} from '../../UserContext';
+import {Button} from "@material-ui/core";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import './NavBar.css';
@@ -10,7 +9,7 @@ import {useCookies} from "react-cookie";
 
 export default function NavBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [cookies] = useCookies(['user']);
+  const [cookies, setCookie] = useCookies(['user']);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -19,15 +18,15 @@ export default function NavBar(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-    const [open, setOpen] = useState(false);
-
     let history = useHistory();
 
     const logout = () => {
         fetch(`http://localhost:3000/api/auth/logout`, {credentials: 'include'})
-            .then(result => history.push('/'))
-            .catch(err => console.log(err))
+        .then(result => {
+            setCookie('user', '')
+            history.push('/')
+        })
+        .catch(err => console.log(err))
     }
 
     const changePosition = () => {
@@ -37,13 +36,12 @@ export default function NavBar(props) {
     }
 
     const navBarPosition = () => {
-        if(props.isRenter == true) {
             return ( 
                 <>
                     <div className={"rowOptionsNavBar"}>
                         <h3><Link to={{ pathname: "/"}}>AboutUs</Link></h3>
                         <h3><Link to={{ pathname: "/RenterSearch",user:props.userId}}>Searchasset</Link></h3>
-                    </div>
+                    </div> : 
                     <div className={"menu"}>
                     <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{color:'white', fontFamily: 'Lato',fontWeight: 'bold', fontSize: '100%'}}>
                         Hello {cookies.user.FirstName} {cookies.user.LastName}
@@ -61,8 +59,8 @@ export default function NavBar(props) {
                     </div>
                 </>
             )
-        }
-        if(props.isRenter == false) {
+        // }
+        // if(props.isRenter == false) {
             return ( 
                 <>
                     <div className={"rowOptionsNavBar"}>
@@ -87,7 +85,7 @@ export default function NavBar(props) {
                     </div>
                 </>
             )
-        }
+        // }
     }
 
     return (
