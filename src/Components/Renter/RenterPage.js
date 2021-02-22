@@ -17,12 +17,12 @@ export default function RenterPage(props) {
 
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+    fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
           setUser(result)
       })    
-  }, [])
+  }, [user])
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
@@ -39,7 +39,7 @@ export default function RenterPage(props) {
       .then(result => {
         setWantedAsset(result)
     })
-  }, [])
+  }, [wantedAsset])
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/messages?RenterId=${cookies.user.id}`, {credentials: 'include'})
@@ -47,15 +47,13 @@ export default function RenterPage(props) {
       .then(result =>  {
         setRenterMessages(result)
       })
-  }, [])
+  }, [renterMessages])
 
 
   return (
       <div className={"renterMainPage"}>
         <PrivatePage label1={"In progress"} label2={"Asset place deatils"} label3={"Messages to my owner"} 
-        FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idRenter={user.id}
-        FavoriteCountry={renterDeatils.FavoriteCountry} Budget={renterDeatils.Budget} JobTitle={renterDeatils.JobTitle} userId={user}
-        firstHead={"Prsonal deatils"} isRenter={true} user={user} messages={renterMessages} wantedAsset={wantedAsset} renterDeatilsId={renterDeatilsId} />
+        user={user} firstHead={"Prsonal deatils"} renterDeatils={renterDeatils} isRenter={true} messages={renterMessages} wantedAsset={wantedAsset[0]} />
     </div>
 );
 }

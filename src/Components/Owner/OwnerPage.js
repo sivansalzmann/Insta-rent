@@ -12,12 +12,12 @@ export default function OwnerPage1(props) {
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
-      fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+      fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
-        })
-    }, [cookies.user])
+        })    
+    }, [user])
 
     useEffect(() => {
       fetch(`http://localhost:3000/api/assets?OwnerId=${cookies.user.id}`, {credentials: 'include'})
@@ -38,8 +38,7 @@ export default function OwnerPage1(props) {
   return (
     <div className={"ownerMainPage"}>
       <PrivatePage label1={"General"} label2={"My assets"} label3={"Messages"} 
-      FirstName={user.FirstName} LastName={user.LastName} Gender={user.Gender} Age={user.Age} Country={user.Country} ImageUrl={user.ImageUrl} idOwner={user.id}
-      firstHead={"Prsonal deatils"} renter={false} user={user} assets={assets} messages={messages} userId={user}
+      firstHead={"Prsonal deatils"} user={user} assets={assets} messages={messages} isOwner={true} renterDeatils={-1}
       />
     </div>
   );

@@ -36,7 +36,7 @@ export default function SignInDeatils (props) {
   const [userDeatils,setUserDeatils] = useState("")
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+    fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
           setByUserId(result)
@@ -44,9 +44,9 @@ export default function SignInDeatils (props) {
   }, [])
 
    const addAdditionalInformation = () => {
-      const body = { googleID:user.googleID,Phone: phone,Gender:gender,Country: country,Age:age};
-      fetch(`http://localhost:3000/api/additionalInformation` ,{
-          method: 'POST',
+      const body = { Phone: phone,Gender: gender,Country: country,Age:age};
+      fetch(`http://localhost:3000/api/users` ,{
+          method: 'PUT',
           credentials: 'include',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(body),

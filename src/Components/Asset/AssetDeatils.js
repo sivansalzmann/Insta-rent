@@ -5,8 +5,6 @@ import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import './AssetDeatils.css';
 
 export default function AssetPage(props) {
-
-    console.log(props.item)
   return (
     <div>
         <div className={"firstRow"}>

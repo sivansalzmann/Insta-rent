@@ -41,7 +41,6 @@ export default function AssetSearchForm(props) {
             }
         )
     }
-    // console.log(props.location.renter)
 
     return (
         <div className={ 'assetSearchForm' }>
@@ -108,7 +107,6 @@ export default function AssetSearchForm(props) {
                 </div>
                 </PopUp>
             <AssetList assetsList={assetsList}/>
-            {/* <AssetList assetsList={assetsList} renterId={props.location.user}/> */}
         </div>
     )
 }

@@ -32,7 +32,7 @@ export default function AssetCard (props) {
                 Avilable from {props.item.Avilability} 
                 </Typography>
             </CardContent>
-            <AssetPage item={props.item} renterId={props.renterId}/>
+            <AssetPage item={props.item}/>
         </Card> 
     );
 }

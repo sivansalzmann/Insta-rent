@@ -27,53 +27,27 @@ export default function Login (props) {
   const googleSuccess = async (response) => {
     const body = {token: response.tokenId}
     fetch(`http://localhost:3000/api/auth/login`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(body),
+      method: 'POST',
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body),
     })
-        .then(response => response.json())
-        .then(result => {
-            const cookiePromise = new Promise((resolve, reject) => {
-                setCookie('user', result)
-                resolve()
-            });
-            cookiePromise.then(() => {
-                if (result)
-                  history.push('/HomePage')
-            })
-        });
+    .then(response => response.json())
+    .then(result => {
+      const cookiePromise = new Promise((resolve, reject) => {
+        setCookie('user', result)
+        resolve()
+      });
+      cookiePromise.then(() => {
+        if (result)
+          history.push('/HomePage')
+      })
+    });
   }
-
-
-  // const googleSuccess = async googleData => {
-  //   const res = await fetch("http://localhost:3000/api/auth/login", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //       token: googleData.tokenId,
-  //     }),
-  //     credentials: 'include',
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //   const data = await res.json()
-  //   if(res.status === 200){
-  //     if(data === "the user does NOT exist"){
-  //       window.location = '/SignInDeatils';  
-  //     } else {
-  //       let path = '/HomePage'
-  //       history.push(path)
-  //     }
-  //   } else {
-  //     alert("Some error occurred");
-  //   }
-  // }
 
   const googleFailure = (response) => {
     console.log(response);
   }
-
     return (
       <div className={'background'}>
         <h1 className={"headSignIn"}>InstaRent</h1>

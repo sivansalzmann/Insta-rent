@@ -47,9 +47,8 @@ export default function AssetTab (props) {
           <>
             <Button variant="contained" color="primary" size="small" onClick={() => setOpenRenter(true)} className={"but"}>See renter</Button>
             <Contract isRenter={false}/>
-            <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false}>
+            <PopUp onSubmit={() => setOpenRenter(false)} title={"Renter deatils"} open={openRenter} closePopup={() => setOpenRenter(false)} sendBtn={false} showBt={true}>
                 <UserDeatils userId={props.item} googleIdRenter={props.googleIdRenter}/> 
-                {console.log(props.googleIdRenter)}
                 {/* item=asset */}
             </PopUp>
           </>

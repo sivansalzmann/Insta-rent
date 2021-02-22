@@ -25,7 +25,7 @@ export default function App(props) {
     const [user,setUser] = useState("")
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.googleID}`, {credentials: 'include'})
+        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
           .then(response => response.json())
           .then(result =>  {
             setRenterDeatilsExist(result)
@@ -33,12 +33,12 @@ export default function App(props) {
       }, [renterDeatilsExist])
 
     useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+    fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
     })
-    }, [cookies.user])
+    }, [user])
 
     const addRenterDeatils = () => {
         const body = { JobTitle: jobTitle, Budget: budget, FavoriteCountry: favoriteCountry,RenterId: user.id ,googleID: user.googleID};
@@ -60,16 +60,14 @@ export default function App(props) {
     const setPosition = () => {
         console.log(renter)
         const body = {IsRenter:renter,IsOwner:owner};
-        fetch(`http://localhost:3000/api/additionalInformation/${user.googleID}`, {
+        fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
         })
         .then(response => response.json())
         .then(result => {
-            console.log(user.googleID)
-            console.log(renter)
-            // setPositionUser(result);
+            setPositionUser(result);
         })
     }
 
@@ -97,8 +95,8 @@ export default function App(props) {
             return (
                 <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                     <div className={"buttonsChoose"} >
-                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
-                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setOwner(false); setPositionPopUp(false); setPosition()}}><p>I want to rent asset</p></Button>
+                        <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setRenter(false); setPositionPopUp(false); setPosition()}}><p>I want to post asset</p></Button>
                     </div>
                 </PopUp>
                 
@@ -130,7 +128,7 @@ export default function App(props) {
             <div className={"background"}> 
                 <div className={'navBarHomePage'}>
                     {chooesPosition()}
-                    <h1><a href="/">InstaRent</a></h1>
+                    <h1><a href="/HomePage">InstaRent</a></h1>
                     <div className={"options"}>
                         <h3><Link to={{ pathname: '/HomePage'}}>About</Link></h3>
                         <h3><Link to={{ pathname: '/RenterSearch' , user:user, renter:true }}>Search</Link></h3>

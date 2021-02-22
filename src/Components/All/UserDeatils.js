@@ -8,8 +8,7 @@ export default function UserDeatils(props) {
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
-        console.log(renterDeatils.googleID)
-        fetch(`http://localhost:3000/api/users/${cookies.user.googleID}`, {credentials: 'include'})
+        fetch(`http://localhost:3000/api/users/${cookies.user.id}`, {credentials: 'include'})
             .then(response => response.json())
             .then(result =>  {
                 setRenter(result)
@@ -17,15 +16,12 @@ export default function UserDeatils(props) {
     }, )
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.googleID}`, {credentials: 'include'})
+        fetch(`http://localhost:3000/api/renterDeatils/${cookies.user.id}`, {credentials: 'include'})
             .then(response => response.json())
             .then(result =>  {
                 setRenterDeatils(result)
             })
     }, )
-
-    console.log(props.userId)
-
 
     return (
         <div>

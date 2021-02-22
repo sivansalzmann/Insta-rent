@@ -96,14 +96,7 @@ export default function RenterPage(props) {
       const isOwner = () => {
         return (
             <>
-              <div>
-                  <Button style={{marginBottom:'5%'}} variant="contained" color="primary" onClick={() => setOpenEdit(true)}>EDIT</Button>
-                </div>   
-              <PopUp onSubmit={editOwner} title={"Edit User"} open={openEdit} closePopup={() => setOpenEdit(false)} sendBtn={true} showBt={true}>
-                  <TextField label="Country" value={country} onChange={e => setCountry(e.target.value)} fullWidth required/>
-                  <TextField label="Email" value={email} onChange={e => setEmail(e.target.value)} fullWidth required/>
-                  <TextField label="Phone" value={phone} onChange={e => setPhone(e.target.value)} fullWidth required/>
-              </PopUp>
+              
           </>
         )
     }

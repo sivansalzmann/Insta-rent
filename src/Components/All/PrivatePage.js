@@ -73,7 +73,7 @@ export default function PrivatePage(props) {
     console.log(today)
     setTimestamp(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
     console.log(timestamp);
-    const body = { Message: message, RenterId: props.userId.id, OwnerId: props.wantedAsset[0].OwnerId, Timestamp: timestamp };
+    const body = { Message: message, RenterId: props.user.id, OwnerId: props.wantedAsset.OwnerId, Timestamp: timestamp };
     fetch(`http://localhost:3000/api/messages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -88,10 +88,9 @@ export default function PrivatePage(props) {
   }
 
   const giveUpOnAsset = () => {
-    console.log(props.wantedAsset[0].id)
-    console.log("here")
-    const body = { RenterId: 0 }
-    fetch(`http://localhost:3000/api/assets/${props.wantedAsset[0].id}`, {
+    console.log(props.wantedAsset)
+    const body = { RenterId: -1 }
+    fetch(`http://localhost:3000/api/assets/${props.wantedAsset.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -100,6 +99,7 @@ export default function PrivatePage(props) {
       .then(result => {
         setAsset(result)
         alert("Tha asset is deletd from your proccess successfully!")
+        console.log(result)
         window.location.reload()
       })
   };
@@ -110,11 +110,11 @@ export default function PrivatePage(props) {
         <div className={"currentContainer"}>
           <div className={"curStatus"}>
             <h1>Current status</h1>
-            <p>Looking for rent appetmant in {props.FavoriteCountry} </p>
+            <p>Looking for rent appetmant in {props.renterDeatils.FavoriteCountry} </p>
           </div>
           <div className={"curBud"}>
             <h1>Cuurent budget</h1>
-            <p>{props.Budget} $</p>
+            <p>{props.renterDeatils.Budget} $</p>
           </div>
         </div>
       )
@@ -122,14 +122,14 @@ export default function PrivatePage(props) {
     else {
       return (
         <div>
-          <AddAsset idOwner={props.userId.id} className={"addAssetBig"} />
+          <AddAsset idOwner={props.user.id} className={"addAssetBig"} />
         </div>
       )
     }
   }
-
+  // {console.log(props.wantedAsset)}
   const wantedAsset = () => {
-    if (props.wantedAsset === "") {
+    if (props.wantedAsset == null) {
       return (
         <Stepper active orientation="vertical">
           <Step >
@@ -155,8 +155,8 @@ export default function PrivatePage(props) {
             <StepContent>
               <Typography style={{ fontFamily: 'Lato' }}>The owner of your wantes asset saw your reques and will be in touch soon</Typography>
               <Button variant="contained" color="primary" size="small" onClick={() => setOpenAsset(true)}>Asset deatils</Button>
-              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset[0].Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
-                <AssetDeatils item={props.wantedAsset[0]} />
+              <PopUp onSubmit={() => setOpenAsset(false)} wantAssetBtn={false} title={props.wantedAsset.Country} open={openAsset} closePopup={() => setOpenAsset(false)} sendBtn={false} showBt={true}>
+                <AssetDeatils item={props.wantedAsset} />
               </PopUp>
             </StepContent>
           </Step>
@@ -184,26 +184,32 @@ export default function PrivatePage(props) {
       )
     }
   }
-
   const disableTabs = () => {
-    if (props.wantedAsset === "") {
+    if (props.wantedAsset && props.isRenter) {
       return (
         <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
-          <Tab label={props.label1} {...a11yProps(0)} />
-          <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} disabled/>
-          <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} disabled/>
-        </Tabs>
-      )
-    }
-    if(props.wantedAsset === "" || props.isRenter === true) {
-      <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
         <Tab label={props.label1} {...a11yProps(0)} />
         <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
         <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
       </Tabs>
+      )
+    }
+    if (!props.wantedAsset && props.isRenter){
+      <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+          <Tab label={props.label1} {...a11yProps(0)} />
+          <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} disabled/>
+          <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} disabled/>
+        </Tabs>
     }
   }
 
+  const ownerTabs = () => {
+    <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
+        <Tab label={props.label1} {...a11yProps(0)} />
+        <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
+        <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
+      </Tabs> 
+  }
   const label1 = () => {
     if (props.isRenter) {
       return (
@@ -255,8 +261,8 @@ export default function PrivatePage(props) {
       return (
         <>
           <h2>My assets</h2>
-          <AssetTable assetsList={props.assets} idOwner={props.userId.id} googleIdRenter={props.userId}/>
-          <AddAsset idOwner={props.userId.id} />
+          <AssetTable assetsList={props.assets} idOwner={props.user.id} googleIdRenter={props.user.id}/>
+          <AddAsset idOwner={props.user.id} />
         </>
       )
     }
@@ -283,22 +289,22 @@ export default function PrivatePage(props) {
   
   return (
     <div className={"privatePage"}>
-      <NavBar userId={props.userId}/>
-      {/* <NavBar userId={props.userId} isRenter={props.renter}/> */}
+      <NavBar />
       <div className={"privatePageConatiner"}>
         <div className={"personalDeatilsContainer"}>
-          <PrsonalDeatils renterDeatilsId={props.renterDeatilsId} userId={props.userId} FirstName={props.FirstName} LastName={props.LastName} JobTitle={props.JobTitle} Gender={props.Gender} Age={props.Age} Country={props.Country} ImageUrl={props.ImageUrl} idOwner={props.idOwner} idRenter={props.idRenter} renter={props.isRenter} />
+          {/* {console.log(props.user.id)} */}
+          <PrsonalDeatils renterDeatilsId={props.renterDeatils.id} userId={props.user.id} FirstName={props.user.FirstName} LastName={props.user.LastName} JobTitle={props.user.JobTitle} Gender={props.Gender} Age={props.user.Age} Country={props.user.Country} ImageUrl={props.user.ImageUrl} idOwner={props.user.id} idRenter={props.user.id} />
         </div>
         <div className={"containerOptions"}>
           {tabs()}
           <div className={"progressOwner"}>
             <AppBar position="static" color="default">
-              {/* {disableTabs()} */}
+              {/* {props.isOwnerPage ? ownerTabs() : disableTabs()} */}
               <Tabs value={value} onChange={handleChange} indicatorColor="primary" textColor="primary" variant="fullWidth" aria-label="full width tabs example">
                 <Tab label={props.label1} {...a11yProps(0)} />
                 <Tab label={props.label2} {...a11yProps(1)} style={{ marginLeft: '8%' }} />
                 <Tab label={props.label3} {...a11yProps(2)} style={{ marginLeft: '6%' }} />
-              </Tabs>
+              </Tabs> 
             </AppBar>
             <TabPanel value={value} index={0}>
               <h1>{props.firstHead}</h1>

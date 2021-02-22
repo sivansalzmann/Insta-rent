@@ -40,52 +40,15 @@ export default function NavBar(props) {
                 <>
                     <div className={"rowOptionsNavBar"}>
                         <h3><Link to={{ pathname: "/"}}>AboutUs</Link></h3>
-                        <h3><Link to={{ pathname: "/RenterSearch",user:props.userId}}>Searchasset</Link></h3>
-                    </div> : 
+                        <h3><Link to={{ pathname: "/Renter",user:props.userId}}>Hello {cookies.user.FirstName} {cookies.user.LastName}</Link></h3>
+                    </div> 
                     <div className={"menu"}>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{color:'white', fontFamily: 'Lato',fontWeight: 'bold', fontSize: '100%'}}>
-                        Hello {cookies.user.FirstName} {cookies.user.LastName}
+                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={logout} style={{color:'white', fontFamily: 'Lato',fontWeight: 'bold', fontSize: '100%'}}>
+                        LOGOUT
                     </Button>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={changePosition()} style={{fontFamily: 'Lato'}} >Change position to owner</MenuItem>
-                        <MenuItem onClick={logout} style={{fontFamily: 'Lato'}}>Logout</MenuItem>
-                    </Menu>
                     </div>
                 </>
             )
-        // }
-        // if(props.isRenter == false) {
-            return ( 
-                <>
-                    <div className={"rowOptionsNavBar"}>
-                        {console.log(props.renter)}
-                        <h3><Link to={{ pathname: "/"}}>AboutUs</Link></h3>
-                        <h3><Link to={{ pathname: "/RenterSearch",user:props.userId}}>Searchasset</Link></h3>
-                    </div>
-                    <div className={"menu"}>
-                    <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} style={{color:'white', fontFamily: 'Lato',fontWeight: 'bold', fontSize: '100%'}}>
-                        Hello {props.userId.FirstName} {props.userId.LastName}
-                    </Button>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem onClick={changePosition()} style={{fontFamily: 'Lato'}} >Change position to owner</MenuItem>
-                        <MenuItem onClick={logout} style={{fontFamily: 'Lato'}}>Logout</MenuItem>
-                    </Menu>
-                    </div>
-                </>
-            )
-        // }
     }
 
     return (

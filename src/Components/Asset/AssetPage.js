@@ -13,16 +13,19 @@ export default function AssetPage(props) {
   const [cookies] = useCookies(['user']);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.googleID}`, {credentials: 'include'})
+    fetch(`http://localhost:3000/api/assets?RenterId=${cookies.user.id}`, {credentials: 'include'})
       .then(response => response.json())
       .then(result =>  {
         setAsset(result)
       })    
-  },)
+  },[asset])
+
+  // console.log(asset)
 
   const wantIt = () => {
-    const body={RenterId: props.renterId}
-    fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {
+    console.log(cookies.user.id)
+    const body={RenterId: cookies.user.id}
+    fetch(`http://localhost:3000/api/assets/${props.item.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -39,14 +42,14 @@ export default function AssetPage(props) {
     };
 
     const haveAsset = () => {
-      if(asset === "") {
+      if(asset === "[]") {
         return (
-          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I wnat this asset</Button>
+          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()} disabled>I wnat this asset</Button>
         )
       }
       else {
         return (
-          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()} disabled>I wnat this asset</Button>
+          <Button variant="outlined" color="primary" style={{margin:'2%'}} onClick={() => wantIt()}>I wnat this asset</Button>
         )
       }
     }
