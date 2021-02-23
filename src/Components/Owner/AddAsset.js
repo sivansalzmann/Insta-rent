@@ -49,7 +49,7 @@ export default function AddAsset(props) {
     }
   const addAsset = () => {
     if(assetValidation()) {
-      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl,RenterId:0};
+      const body = {City: city, Street: street, Zip: zip, Country: country, Neighborhood: neighborhood, Rooms: rooms, SquareFeet: squareFeet,  Parking: parking, Elevator: elevator, PetsAllowed: petsAllowed, Condition: condition, Price: price, Avilability: avilability, Description: description,OwnerId: props.idOwner,UrlPicture:imageUrl,RenterId:-1};
       fetch(`https://instarent-1st.herokuapp.com/api/assets`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
