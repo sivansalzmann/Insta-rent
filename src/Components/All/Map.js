@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 
+
 const containerStyle = {
     width: 'auto',
     height: '400px'
@@ -11,11 +12,11 @@ const SimpleMap = (props) => {
 
     const [center, setCenter] = useState("")
     const [load, setLoad] = useState(false)
-    const [address, setAddress] = useState("")
+    
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyDMG4PK6UUbGd1LT6je4pa34KwqhXOpkvs"
+        googleMapsApiKey: 'AIzaSyDMG4PK6UUbGd1LT6je4pa34KwqhXOpkvs'
     })
     useEffect(() => {
       
@@ -24,7 +25,6 @@ const SimpleMap = (props) => {
     },[center])
 
     useEffect(() => {
-        // toPlus()
         let tmp = `${props.asset.Street} ${props.asset.City}`
         let res = tmp.replace(/\s+/g, "+");
         console.log(res)
@@ -37,10 +37,6 @@ const SimpleMap = (props) => {
             })
     },[])
 
-    // const toPlus = () => {
-       
-    //     setAddress(res)
-    // }
 
     return load ? (
         <GoogleMap
