@@ -15,7 +15,7 @@ export default function App(props) {
     const [user,setUser] = useState("")
 
     useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`,  { withCredentials: true, credentials: 'include' })
             .then(response => response.json())
             .then(result =>  {
                 setUser(result)
@@ -23,7 +23,7 @@ export default function App(props) {
     }, [cookies.user.id,user])
     
     const logout = () => {
-        fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`,  { withCredentials: true, credentials: 'include' })
         .then(result => {
             setCookie('user', '')
             history.push('/')

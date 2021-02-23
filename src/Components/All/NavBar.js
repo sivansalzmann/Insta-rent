@@ -10,7 +10,7 @@ export default function NavBar(props) {
     let history = useHistory();
 
     const logout = () => {
-        fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`, {credentials: 'include'})
+        fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`, { withCredentials: true, credentials: 'include' })
         .then(result => {
             setCookie('user', '')
             history.push('/')

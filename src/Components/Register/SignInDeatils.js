@@ -56,7 +56,7 @@ export default function SignInDeatils (props) {
           setFavoriteCountry("")
           setBudget("")
           serJobTitle("")
-          window.location = '/HomePage';
+          window.location = '/';
       });
     }
     return (

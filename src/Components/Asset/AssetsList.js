@@ -2,11 +2,10 @@ import AssetCard from './AssetCard';
 import Grid from '@material-ui/core/Grid';
 
 export default function AssetList(props) {
-
     const assetWanted = (item) => {
         if(item.RenterId === -1) {
             return (
-            <AssetCard id={item.id} item={item} renterId={props.renterId}> 
+            <AssetCard key={item.id} id={item.id} item={item} renterId={props.renterId}> 
                 {props.children}
             </AssetCard>
             )

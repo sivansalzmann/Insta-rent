@@ -11,21 +11,21 @@ export default function OwnerPage1(props) {
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
-      fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, {credentials: 'include'})
+      fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
         .then(response => response.json())
         .then(result =>  {
             setUser(result)
         })    
     }, [cookies.user.id,user])
     useEffect(() => {
-      fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${cookies.user.id}`, {credentials: 'include'})
+      fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
         .then(response => response.json())
         .then(result =>  {
             setAssets(result)
         })     
     }, [cookies.user.id,assets])
     useEffect(() => {
-      fetch(`https://instarent-1st.herokuapp.com/api/messages?OwnerId=${cookies.user.id}`, {credentials: 'include'})
+      fetch(`https://instarent-1st.herokuapp.com/api/messages?OwnerId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
         .then(response => response.json())
         .then(result =>  {
             setOwnerMessages(result)
