@@ -87,7 +87,9 @@ export default function PrivatePage(props) {
     })
       .then(response => response.json())
       .then(result => {
+        let path = '/Renter'
         alert("Tha asset is deletd from your proccess successfully!")
+        window.location.reload();
       })
   };
   const tabs = () => {
