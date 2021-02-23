@@ -52,8 +52,8 @@ export default function App(props) {
         return (
             <PopUp open={positionPopUp} title={"Choose your position"} closePopup={() => alert("you have to choose position to continue")} showBt={false}>
                 <div className={"buttonsChoose"} >
-                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false);}}><p>I want to rent an asset</p></Button>
-                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false);}}><p>I want to post an asset</p></Button>
+                    <Button variant="contained" color="primary" onClick={() => {setRenter(true) ; setPositionPopUp(false);}}><p>I'm a Renter</p></Button>
+                    <Button variant="contained" color="primary" onClick={() => {setOwner(true) ; setPositionPopUp(false);}}><p>I'm a Owner</p></Button>
                 </div>
             </PopUp>
             
@@ -78,7 +78,7 @@ export default function App(props) {
                         <h1>Looking for apartment?</h1>
                         <p> 
                         Welcome to InstaRent the web app that will 
-                        accompany you throughout the process of renting or advertising your dream apartment!
+                        accompany you throughout the process of renting or advertising your dreamy apartment!
                         </p>
                     </div>
                     {chooseHomePage()}
