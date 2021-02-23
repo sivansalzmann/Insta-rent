@@ -11,6 +11,7 @@ export default function UserDeatils(props) {
             .then(response => response.json())
             .then(result =>  {
                 setRenter(result)
+                console.log(renter)
         })
     }, [renter])
 
