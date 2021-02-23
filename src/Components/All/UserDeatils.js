@@ -7,12 +7,12 @@ export default function UserDeatils(props) {
     const [cookies] = useCookies(['user']);
 
     useEffect(() => {
-        fetch(`https://instarent-1st.herokuapp.com/api/users/${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${props.asset.RenterId}`, { withCredentials: true, credentials: 'include' })
             .then(response => response.json())
             .then(result =>  {
                 setRenter(result)
         })
-    }, )
+    }, [renter])
 
     return (
         <div>

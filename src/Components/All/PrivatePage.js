@@ -219,7 +219,7 @@ export default function PrivatePage(props) {
       return (
         <>
           <h2>My assets</h2>
-          <AssetTable assetsList={props.assets} idOwner={props.user.id} idRenter={props.wantedAsset.id}/>
+          <AssetTable assetsList={props.assets} idOwner={props.user.id}/>
           <AddAsset idOwner={props.user.id} />
         </>
       )
