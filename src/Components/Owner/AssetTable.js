@@ -5,7 +5,7 @@ import './AssetTable.css';
 export default function AssetTable(props) {
     const eachItem = (item) => {
         return (
-            <AssetTab id={item.id} item={item} idOwner={props.idOwner} googleIdRenter={props.googleIdRenter}> 
+            <AssetTab id={item.id} item={item} idOwner={props.idOwner} idRenter={props.idRenter}> 
                 {props.children}
             </AssetTab>
         )
