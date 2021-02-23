@@ -41,7 +41,7 @@ export default function AssetTab (props) {
     };
     const classes = useStyles();
     const isRenterExist = () => {
-      if(props.item.RenterId !== 0) {
+      if(props.item.RenterId !== -1) {
         return  (
           <>
             <Button variant="contained" color="primary" size="small" onClick={() => setOpenRenter(true)} className={"but"}>See renter</Button>
@@ -54,7 +54,7 @@ export default function AssetTab (props) {
         }
       }
     const isRenterExistTop = () => {
-      if(props.item.RenterId !== 0) {
+      if(props.item.RenterId !== -1) {
         return (
           <>
             <Typography className={classes.secondaryHeading}>In proccess</Typography>
