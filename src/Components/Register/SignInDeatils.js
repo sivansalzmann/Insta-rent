@@ -39,25 +39,46 @@ export default function SignInDeatils (props) {
         setUser(result)
       })    
   }, [cookies.user.id])
+  const userValidation = () => {
+    let errors = [];
+    if (gender === "")
+      errors.push("Gender is requierd, please make sure the field is full. \n")
+    if (jobTitle === "")
+      errors.push("Job title is requierd, please make sure the field is full. \n")
+    if(favoriteCountry === "" )
+      errors.push("Favorite country is requierd, please make sure the field is full. \n")
+    if(isNaN(phone))
+      errors.push("Phone must to be numbers. \n")
+    if(isNaN(budget))
+      errors.push("Budget must to be numbers. \n")
+    if(isNaN(age))
+      errors.push("Age must to be numbers. \n")
+    if (errors.length > 0)
+        alert(errors)
+    else
+        return true
+  }
    const addAdditionalInformation = () => {
-      const body = { Phone: phone,Gender: gender,Country: country,Age:age, Budget:budget, FavoriteCountry: favoriteCountry, JobTitle:jobTitle};
-      fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}` ,{
-          method: 'PUT',
-          credentials: 'include',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(body),
-      })
-      .then(response => response.json())
-      .then(result => {
-          setGender("")
-          setPhone("")
-          setCountry("")
-          setAge("")
-          setFavoriteCountry("")
-          setBudget("")
-          serJobTitle("")
-          window.location = '/';
-      });
+    if(userValidation()) {
+        const body = { Phone: phone,Gender: gender,Country: country,Age:age, Budget:budget, FavoriteCountry: favoriteCountry, JobTitle:jobTitle};
+        fetch(`https://instarent-1st.herokuapp.com/api/users/${user.id}` ,{
+            method: 'PUT',
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(body),
+        })
+        .then(response => response.json())
+        .then(result => {
+            setGender("")
+            setPhone("")
+            setCountry("")
+            setAge("")
+            setFavoriteCountry("")
+            setBudget("")
+            serJobTitle("")
+            window.location = '/';
+        });
+      }
     }
     return (
       <div className={'background'}>
