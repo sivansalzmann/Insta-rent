@@ -17,7 +17,7 @@ export default function AssetPage(props) {
       .then(result =>  {
         setAsset(result)
       })    
-  },[cookies.user.id,asset])
+  },[cookies.user.id])
   const wantIt = () => {
     const body={RenterId: cookies.user.id}
     fetch(`https://instarent-1st.herokuapp.com/api/assets/${props.item.id}`, {

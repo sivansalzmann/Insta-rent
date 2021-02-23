@@ -20,7 +20,7 @@ export default function App(props) {
             .then(result =>  {
                 setUser(result)
         })
-    }, [cookies.user.id,user])
+    }, [cookies.user.id])
     
     const logout = () => {
         fetch(`https://instarent-1st.herokuapp.com/api/auth/logout`,  { withCredentials: true, credentials: 'include' })

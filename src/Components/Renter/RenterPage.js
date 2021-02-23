@@ -15,21 +15,21 @@ export default function RenterPage(props) {
       .then(result =>  {
           setUser(result)
       })    
-  }, [cookies.user.id,user])
+  }, [cookies.user.id])
   useEffect(() => {
     fetch(`https://instarent-1st.herokuapp.com/api/assets?RenterId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
       .then(response => response.json())
       .then(result => {
         setWantedAsset(result)
     })
-  }, [cookies.user.id,wantedAsset])
+  }, [cookies.user.id])
   useEffect(() => {
     fetch(`https://instarent-1st.herokuapp.com/api/messages?RenterId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
       .then(response => response.json())
       .then(result =>  {
         setRenterMessages(result)
       })
-  }, [cookies.user.id,renterMessages])
+  }, [cookies.user.id])
   
   return (
       <div className={"renterMainPage"}>

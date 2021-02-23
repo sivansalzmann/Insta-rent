@@ -26,6 +26,7 @@ import HouseIcon from '@material-ui/icons/House';
 import AddAsset from '../Owner/AddAsset';
 import AssetTable from '../Owner/AssetTable';
 import './PrivatePage.css';
+import Map from '../All/Map';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -211,6 +212,7 @@ export default function PrivatePage(props) {
     if (props.isRenter) {
       return (
         <>
+        <Map asset = {props.wantedAsset} />
         {props.wantedAsset ? <div><p>Here you can see map of your wanted country, enjoy!</p></div> : <div><p>There is not map yet, find your next asset to see one</p></div>}
         </>
       )
@@ -219,7 +221,7 @@ export default function PrivatePage(props) {
       return (
         <>
           <h2>My assets</h2>
-          <AssetTable assetsList={props.assets} idOwner={props.user.id} idRenter={props.wantedAsset.id}/>
+          <AssetTable assetsList={props.assets} idOwner={props.user.id}/>
           <AddAsset idOwner={props.user.id} />
         </>
       )

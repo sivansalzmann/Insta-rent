@@ -16,21 +16,21 @@ export default function OwnerPage1(props) {
         .then(result =>  {
             setUser(result)
         })    
-    }, [cookies.user.id,user])
+    }, [cookies.user.id])
     useEffect(() => {
       fetch(`https://instarent-1st.herokuapp.com/api/assets?OwnerId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
         .then(response => response.json())
         .then(result =>  {
             setAssets(result)
         })     
-    }, [cookies.user.id,assets])
+    }, [cookies.user.id])
     useEffect(() => {
       fetch(`https://instarent-1st.herokuapp.com/api/messages?OwnerId=${cookies.user.id}`, { withCredentials: true, credentials: 'include' })
         .then(response => response.json())
         .then(result =>  {
             setOwnerMessages(result)
         }) 
-    }, [cookies.user.id,messages])
+    }, [cookies.user.id])
     return (
     <div className={"ownerMainPage"}>
       <PrivatePage label1={"General"} label2={"My assets"} label3={"Messages"} 
